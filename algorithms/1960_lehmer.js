@@ -1,11 +1,12 @@
+// Lehmer Constant Difference Method (1960)
 const moduloAdd = (array, amount, modulo, size) => array.reduce((outputArray, currentValue, index) => {
   const amountToAdd = array.length - index <= size ? amount : 0;
   outputArray.push((currentValue + amountToAdd) % modulo);
   return outputArray;
 }, []);
 
-function lehmerWrapper(originalInputArray) {
-  function lehmer(array, modulo, size, cb) {
+function lehmer(originalInputArray) {
+  function lehmerPermutations(array, modulo, size, cb) {
     while (size > 2) {
       if (size === array.length) {
         for (let i = 0; i < inputArray.length; i++) {
@@ -16,7 +17,7 @@ function lehmerWrapper(originalInputArray) {
       array = moduloAdd(array, -1, array.length, size - 1);
       array = moduloAdd(array, 1, modulo - 1, size - 1);
       if (array[array.length - (size - 1)] === 0) {
-        array = lehmer(array, modulo - 1, size - 1, cb);
+        array = lehmerPermutations(array, modulo - 1, size - 1, cb);
       }
       array = moduloAdd(array, 1, modulo, size - 1);
       if (size !== array.length) return array;
@@ -30,17 +31,9 @@ function lehmerWrapper(originalInputArray) {
   const lehmerArrays = [];
   const callback = permutation => lehmerArrays.push(permutation);
   const startingModulo = inputArray.length;
-  lehmer(inputArray, startingModulo, startingModulo, callback);
+  lehmerPermutations(inputArray, startingModulo, startingModulo, callback);
   const readjustedLehmerArrays = lehmerArrays.map(array => array.map(num => num + 1));
   return readjustedLehmerArrays;
 }
 
-module.exports = {
-  algorithm: lehmerWrapper,
-  code: '1960_lehmer.js',
-  year: 1960,
-  arguments: 1,
-  name: 'Lehmer Constant Difference Method',
-  info: 'This is a permutation algorithm referred to by D.H. Lehmer as the Constant Difference Method.  As described in his 1958 (published in 1960) paper "Teaching Combinatorial Tricks To A Computer".',
-  references: ['1960Lehmer'],
-};
+module.exports = { lehmer };

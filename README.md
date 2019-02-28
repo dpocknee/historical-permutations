@@ -178,11 +178,50 @@ permutations.tompkinsPaige(["one", 2, 3, "4"], -1);
 
 This algorithm was originally proposed in D.H. Lehmer's 1960 paper <i>Teaching Combinatorial Tricks To A Computer</i>. In the paper, only a verbal description of the method is given, and there appears to be no easily-accessible implementation of it in modern languages.
 
+> "We pass on to what may be called the Constant Difference Method. Given a permutation like
+>
+> 2 3 1 5 4 0 7 6 8
+>
+> one can obtain immediately another one by increasing every mark by unity, replacing 9 by 0 rather than by 10; thus
+>
+> 3 4 2 6 5 1 8 0 7 9
+>
+> In fact, we get in this way 10 permutations all with the same set o differences modulo 10 between consecutive marks, namely
+>
+> 1 8 4 9 6 7 2 5 2
+>
+> One may take as representative of these 10 permutation whose first element
+> is zero, namely
+>
+> 0 1 9 3 2 8 5 7 4 6.
+>
+> Similarly the permutation
+>
+> 1 0 3 2 8 5 7 4 6
+>
+> in which we have taken the marks modulo 9, is one of 9 represented by
+>
+> 0 8 2 1 7 4 6 3 5.
+>
+> This continues on down to the case of only two marks 0 1. This suggests the following method exemplified by the case of n = 5. We begin with the permutation 0 1 2 3 4. Adding 1 1 1 1 1 modulo 5 five times to return to 0 1 2 3 4. We now subtract 1 1 1 1 and then add it back again, this time modulo 4, obtaining 0 1 2 3 0. Once more we add 1 1 1 1, this time modulo 5, obtaining 0 2 3 4 1. This is our next permutation and there are four others it represents. Continuing we come to 0 4 1 2 3 which, after giving 1 0 2 3 4, 2 1 3 4 0, 3 2 4 0 1, 4 3 0 1 2, 0 4 1 2 3 gives rise in turn to
+>
+> 0 3 0 1 2, 0 0 1 2 3, 0 0 0 1 2, 0 0 1 2 0, 0 0 2 3 1
+>
+> and finally 0 1 3 4 2, our next permutation. The process finally returns to 0 1 2 3 4.
+>
+> This process has been coded for the SWAC and for the 701. It is about as fast as the Walker method. If permutations with specified properties of the differences between consecutive marks are required the process is very much faster than any previous one. An example of such a property is the requirement of the differences themselves forming a permutation as in cable splicing and other management problems. The method lends itself to fractional precision representation. For n = 8, for example, one permutation can be made from its predecessor in 128 microseconds on the SWAC."
+>
+> Lehmer, D.H. "Teaching combinatorial tricks to a computer".
+> In: Proceedings of Symposium Applied Mathematics: Combinatorial Analysis.
+> 5.6 (June 1962), Vol. 10. Providence, R.I.:
+> American Mathematical Society, 1960, pp. 179-193
+
+### Usage
+
+```javaScript
+const permutations = require('historical-permutations');
+
+permutations.lehmerConstantDifference(["one", 2, 3, "4"], -1);
 ```
-We pass on to what may be called the Constant Difference Method.  Given a permutation like
 
-2 3 1 5 4 0 7 6 8
-
-one can obtain immediately another one by increasing every mark by unity, replacing 9 by 0 rather than by 10; thus
-
-```
+---
