@@ -1,4 +1,4 @@
-# historical-permutations
+# historical-permutations (WORK-IN-PROGRESS - DO NOT USE!)
 
 A JavaScript library of historical permutation algorithms from 1956 onwards.  
 I originally started collecting these algorithms together as I was doing some research on early permutation algorithms as part of an ongoing project about the "Permutation Poems" of the poet and artist Brion Gysin. However, I soon found that many of these algorithms were in hard-to-find papers and little documented, often because they were superseded by more efficient algorithms only years later.
@@ -123,6 +123,8 @@ NOTE: In the algorithm above, rotate() is a function that does a cyclic left-rot
   P[<i>i</i>]:=<i>t</i>;
 </code>
 </pre>
+
+This is an implementation in `ALGOL` by Peck and Schrack from 1962:
 
 <pre>
 <code>
