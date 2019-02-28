@@ -7,17 +7,32 @@ I thought that this library might be of interest to those looking to learn about
 
 Due to the focus of my own research, nearly all of these algorithms are from the period 1956-65.
 
+I have tried to collect as many of the original papers as possible, and these now reside in the `papers` folder of this repository - this addition does make this repo very large.
+
 Along with the algorithms themselves, now translated from ALGOL into JavaScript, there are a series of utilities, designed to make the use of the algorithms easier. These include a small program that allows the easy replacement of the elements within an array of permutations·
 
 ## Permutation Algorithms Implemented
 
-- 1956 - Tompkins-Paige / 1962 - Peck-Schrack (ACM 86: PERMUTE)
-- 1960 - Lehmer Constant Difference Method
-- 1960 - Wells
-- 1962 - Shen Lexicographic
-- 1962 - Schrack-Shimrat Reverse Lexicographic
-- 1962/63 - Steinhaus-Trotter-Johnson
+(Ticks indicate algorithm works and has been tested)
+
+- 1956 - Tompkins-Paige &#9989;
+- 1960 - Lehmer [Constant Difference Method] &#9989;
+- 1961 - Coveyou-Sullivan (ACM71: PERMUTATION)
+- 1961 - Wells [Transposition Method] &#9989;
+- 1962 - Peck-Schrack (ACM86: PERMUTE)
+- 1962 - Howell (ACM87: PERMUTATION)
+- 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic]
+- 1962 - Eaves (ACM130: Permute)
+- 1962/63 - Shen (ACM202: PERLE) [lexicographic]
+- 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM)
 - 1963 - Heap
+- 1968 - Ord-Smith (ACM323: ???) [pseudo-lexicographic]
+
+## Ordering Functions Implements
+
+- 1947 - Gray Code
+- 19?? - Lehmer Linear Congruential Generator [random number generator]
+- 1964 - Durstenfeld (ACM235: SHUFFLE) [random permutation algorithm ]
 
 ---
 
@@ -130,7 +145,7 @@ NOTE: In the algorithm above, rotate() is a function that does a cyclic left-rot
 </code>
 </pre>
 
-In my implementation, an extra parameter can be used to define whether the rotation command rotates parts of the array forwards or backwards, resulting in different outputs - this is done by specifying either `1` or `-1` as the second parameter. Other numbers can be used, but results will vary in success depending on the length of the array.
+In my implementation, an extra parameter can be used to define whether the rotation command rotates parts of the array left or right, resulting in different outputs - this is done by specifying either `1` or `-1` as the second parameter. Other numbers can be used, but results will vary in success depending on the length of the array.
 
 ### Usage
 
@@ -199,21 +214,23 @@ This algorithm, named `PERMUTATION`, was originally published by R. R. Coveyou a
 <b>procedure</b> PERMUTATION (I, P, N);
     <b>value</b> I, N; <b>integer</b> N; <b>integer array</b> P; <b>boolean</b> I;
     <b>comment</b> This <b>procedure</b> produces all permutations of the integers from 0 through N.  
-      Upon entrywith I = <b>false</b> the <b>procedure</b> initializes itself producing no permutation.  
-      Upon each successive entry into the <b>procedure</b> with I = <b>true</b> a new permutation is stored in P[0] through P[N].  
+      Upon entry with I = <b>false</b> the <b>procedure</b> initializes itself producing no permutation.  
+      Upon each successive entry into the <b>procedure</b> with I = <b>true</b> 
+      a new permutation is stored in P[0] through P[N].  
       When the process has been exhausted a sentinel is set:
       P[0]: -1,
       N &ge; 0;
     <b>begin</b>
       <b>integer</b> i; <b>own integer array</b> x[0:N];
       <b>if</b> ¬ I <b>then</b>
-      <b>begin for</b> i := 0 <b>step</b> 1 <b>until</b> N-1 <b>do</b> x[N] := -1;
+      <b>begin for</b> i := 0 <b>step</b> 1 <b>until</b> N-1 <b>do</b> x[i] := 0; x[N] := -1;
         <b>go to</b> E <b>end</b>;
-      <b>for</b> i := 0 <b>end</b>;
+      <b>for</b> i := N <b>step</b> -1 <b>until</b> 0 <b>do begin if</b> x[i]&ne;i <b>then go to</b> A;     
+        i := 0 <b>end</b>;
     P[0] := -1; <b>go to</b> E;
 A:  x[i] := x[i]+1; P[0] := 0;
     <b>for</b> i:= 1 <b>step</b> 1 <b>until</b> N <b>do</b>
-      <b>begin</b> P[i] := P[i-c[i]]; P[i-x[i]] := i <b>end</b>
+      <b>begin</b> P[i] := P[i-x[i]]; P[i-x[i]] := i <b>end</b>
 E:  <b>end</b> PERMUTATION
 </code>
 Coveyou, R. R. and J. G. Sullivan. "Algorithm 71: permutation". 
@@ -221,11 +238,46 @@ In: Communications of the ACM 4.11
 (Nov. 1961), p. 497.
 </pre>
 
+## NOT FINISHED!!!!
+
 ---
 
 ## Wells (1961)
 
-This algorithm was originally described in the 15th issue of the journal _Mathematics of Computation_ in the article "Generation of permutations by transposition". This implementation is based on the following version taken from Sedgewick's paper:
+This algorithm, by M. B. Wells, was originally described in the 15th issue of the journal _Mathematics of Computation_ in the article "Generation of permutations by transposition". This implementation is based Boothroyd's 1965 improvement, and taken from Sedgewick's paper:
+
+<pre>
+<code>
+<b>procedure</b> <i>permutations</i>(<i>N</i>)
+  <b>begin</b> <i>c</i>:=1;
+    <b>loop</b>:
+      <b>if</b> <i>N</i>>2 <b>then</b> <i>permutations</i>(<i>N</i>-1)
+      <b>endif</b>;
+    <b>while</b> <i>c</i><</i>N</i>;
+      P[B[<i>N</i>,<i>c</i>]]:=:P[<i>N</i>];
+      <i>c</i>:=<i>c</i>+1
+    <b>repeat</b>
+  <b>end</b>;
+</code>
+</pre>
+
+in which `P[B[N,c]]:=:P[N];` is:
+
+<pre>
+<code>
+<b>if</b> (N <i>even</i>) and (<i>c</i>>2)
+  <b>then</b> P[<i>N</i>]:=:P[<i>N</i>-<i>c</i>]
+  <b>else</b> P[<i>N</i>]:=:P[<i>N</i>-1] <b>endif</b>
+</code>
+</pre>
+
+Wells, M. B. "Generation of permutations by transposition". In: _Mathematics of Computation_ 15 (1961) pp. 192-195.
+
+NOTE: Because of the fact the original algorithm is based on an array in which the indexes start from 1 rather than 0, and that it will not work otherwise, the algorithm inserts a meaningless placeholder element in the first position (e.g. the \'0\' in [0,1,2,3,4,5]), then removes it for the output.'. This algorithm also only takes in
+
+```javaScript
+wells(["one", 2, 3, "4"]);
+```
 
 ---
 

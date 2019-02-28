@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint ./src/*",
-    "test": "mocha ./spec/lehmer.spec.js"
+    "test": "mocha ./spec/wells.spec.js"
   },
   "keywords": [
     "historical",
