@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { uniq, uniqWith, isEqual } = require('lodash');
 
-const { tompkinsPaige, tompkinsRotate } = require('../algorithms/1956_tompkinsPaige');
+const { tompkinsPaige, tompkinsRotate } = require('../algorithms/1956_tompkins-paige');
 
 describe('Tompkins-Paige Algorithm (1956)', () => {
   describe('Tompkins rotation function', () => {
