@@ -520,33 +520,31 @@ At that time z is restored to its original order and ‘first’ is made
 <b>true</b>.
 
 The excuse for adding PERM to the growing pile of permuta-
-tion generators is that, at the expense of some extra own storage,
+tion generators is that, at the expense of some extra <b>own</b> storage,
 it cuts the manipulation of z to the theoretical minimum of n!
 transpositions, and appears to offer an advantage in speed. It
 also has the (probably useless) property that the permutations
 it generates are alternately odd and even;
 
-<b>begin own integer array</b> p, d(2:n]; integerk,q; real t;
-if first then initialize:
-begin for & := 2 step 1 until n do
-begin pik] := 0; dk] := 1 end;
-
-first := false
-end initialize;
-k := 0;
-INDEX: pln] := ¢ := pln] + d[n];
-if ¢ = n then
-begin din] := —1; go to LOOP end;
-
-if q+ Othen goto TRANSPOSE;
-din] := 1; k:=k+1;
-LOOP: if n > 2 then begin
-comment Note that » was called by value;
-n:=n— 1; go to INDEX end LOOP;
-Final exit: q := 1; first := true;
-TRANSPOSE: ¢:=q+k; ¢:= alg];
-siq]:=2l¢+1; s+ cst
-end PERM;
+<b>begin own integer array</b> <i>p, d</i>[2:<i>n</i>]; <b>integer</b> <i>k,q</i>; <b>real</b> <i>t</i>;
+  <b>if</b> <i>first</i> <b>then</b> <i>initialize</i>:
+  <b>begin for</b> <i>k</i> := 2 <b>step</b> 1 <b>until</b> <i>n</i> <b>do</b> 
+    <b>begin</b> <i>p</i>[<i>k</i>] := 0; <i>d</i>[<i>k</i>] := 1 <b>end</b>;
+    <i>first</i> := <b>false</b>
+  <b>end</b> initialize;
+  <i>k</i> := 0;
+  <i>INDEX</i>: <i>p</i>[<i>n</i>] := <i>q</i> := <i>p</i>[<i>n</i>] + <i>d</i>[<i>n</i>];
+    <b>if</b> <i>q</i> = <i>n</i> <b>then</b>
+    <b>begin</b> <i>d</i>[<i>n</i>] := —1; <b>go to</b> <i>LOOP</i> <b>end</b>;
+    <b>if</b> q &ne; O <b>then go to</b> <i>TRANSPOSE</i>;
+    <i>d</i>[<i>n</i>] := 1; <i>k</i> := <i>k</i> + 1;
+    <i>LOOP</i>: <b>if</b> <i>n</i> > 2 <b>then begin</b>
+      <b>comment</b> Note that <i>n</i> was called by value;
+      <i>n</i> := <i>n</i>— 1; <b>go to</b> <i>INDEX</i> <b>end</b> <i>LOOP</i>;
+  <i>Final exit</i>: <i>q</i> := 1; <i>first</i> := <b>true</b>;
+  <i>TRANSPOSE</i>: <i>q</i> := <i>q</i> + <i>k</i>; <i>t</i> := <i>x</i>[<i>q</i>];
+    <i>x</i>[<i>q</i>] := <i>x</i>[<i>q</i> + 1]; := <i>t</i>
+<b>end</b> PERM;
 </code>
 Trotter, H. F. "Algorithm 115: Perm". In:
 <i>Communications of the ACM</i> 5.8 (Aug. 1962), pp. 434-435.
@@ -555,3 +553,21 @@ Trotter, H. F. "Algorithm 115: Perm". In:
 ---
 
 ## Heap (1963)
+
+The following implementation comes from Sedgewick's paper:
+
+<pre>
+<code>
+<i>i</i>:=<i>N</i>; <b>loop</b>: <i>c</i>[<i>i</i>]:=1 <b>while</b> <i>i</i>>2: <i>i</i>:=<i>i</i>-1 <b>repeat</b>;
+<i>process</i>;
+<b>loop</b>
+    <b>if</b> <i>c</i>[<i>i</i>]<<i>i</i>
+    <b>then if</b> <i>i odd</i> <b>then</b> <i>k</i> := 1 <b>else</b> <i>k</i>:=<i>c</i>[<i>i</i>] <b>endif</b>;
+    P[<i>i</i>]:=:P[<i>k</i>];
+    <i>c</i>[<i>i</i>]:=<i>c</i>[<i>i</i>] + 1; <i>i</i>:=2;
+    <i>process</i>,
+  <b>else</b> <i>c</i>[<i>i</i>]:=1; <i>i</i>:=+1
+  <b>endif</b>;
+<b>while</b> <i>i</i>&le;<i>N</i> <b>repeat</b>;
+</code>
+</pre>
