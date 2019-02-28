@@ -30,7 +30,6 @@ describe('Tompkins-Paige Algorithm (1956)', () => {
     describe('5 Elements', () => {
       const startArray = [1, 2, 3, 4, 5];
       const testArrays = tompkinsPaige(startArray, 1);
-      // console.log(testArrays);
       it('checks an array of 5 elements outputs 120 permutations', () => {
         expect(testArrays.length).to.equal(120);
       });
@@ -50,7 +49,6 @@ describe('Tompkins-Paige Algorithm (1956)', () => {
     describe('4 Elements', () => {
       const startArray = [1, 2, 3, 4];
       const testArrays = tompkinsPaige(startArray, 1);
-      console.log(testArrays);
       it('checks an array of 4 elements outputs 24 permutations', () => {
         expect(testArrays.length).to.equal(24);
       });
@@ -91,7 +89,6 @@ describe('Tompkins-Paige Algorithm (1956)', () => {
     describe('5 Elements', () => {
       const startArray = [1, 2, 3, 4, 5];
       const testArrays = tompkinsPaige(startArray, -1);
-      // console.log(testArrays);
       it('checks an array of 5 elements outputs 120 permutations', () => {
         expect(testArrays.length).to.equal(120);
       });
@@ -111,7 +108,6 @@ describe('Tompkins-Paige Algorithm (1956)', () => {
     describe('4 Elements', () => {
       const startArray = [1, 2, 3, 4];
       const testArrays = tompkinsPaige(startArray, -1);
-      console.log(testArrays);
       it('checks an array of 4 elements outputs 24 permutations', () => {
         expect(testArrays.length).to.equal(24);
       });

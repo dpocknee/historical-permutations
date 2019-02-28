@@ -1,21 +1,5 @@
 // 1956: Tompkins-Paige Algorithm
 
-// function rotate(arrayIn, rotation) {
-//   return arrayIn.slice(rotation).concat(arrayIn.slice(0, rotation));
-// }
-
-// function rotate(array, i) {
-//   const t = array[0];
-//   let k = 1;
-//   const outputArray = array.map(element => element);
-//   while (k < i) {
-//     outputArray[k - 1] = array[k];
-//     k += 1;
-//   }
-//   outputArray[i] = t;
-//   return outputArray;
-// }
-
 function tompkinsRotate(array, rotationSection, rotationAmount) {
   const rotatedSection = array.slice(0, rotationSection);
   const rotationApplied = rotatedSection
@@ -25,8 +9,8 @@ function tompkinsRotate(array, rotationSection, rotationAmount) {
 }
 
 function tompkinsPermutations(n, array, rotationDirection, cb) {
-  const c = [0];
-  let outputArray = array;
+  const c = [1, 1, 1];
+  let outputArray = array.map(x => x);
   let i = n;
   while (i > 2) {
     c[i] = 1;
@@ -46,28 +30,6 @@ function tompkinsPermutations(n, array, rotationDirection, cb) {
     }
   }
 }
-
-// function permute(x, n) {
-//   let first = false;
-//   const p = [];
-//   if (first) {
-//     for (let i = 2; i < n; i++) {
-//       p[i] = i;
-//       first = false;
-//     }
-//   }
-//   for (let k = 2; k < n; k++) {
-//     t = x[1];
-//     const km = k - 1;
-//     for (let i = 1; i < km; i++) {
-//       x[i] = x[i + 1];
-//     }
-//     x[k] = t;
-//     if (p[k] !== 0) break;
-//     p[k] = k;
-//   }
-//   first = true;
-// }
 
 function tompkinsPaige(inputArray, rotationDirection) {
   const tompkinsArray = [];
