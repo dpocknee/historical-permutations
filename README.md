@@ -7,11 +7,11 @@ I thought that this library might be of interest to those looking to learn about
 
 Due to the focus of my own research, nearly all of these algorithms are from the period 1956-65.
 
-Along with the algorithms themselve, now translated from ALGOL into JavaScript, there are a series of utilities, designed to make the use of the algorithms easier. These include a small program that allows the easy replacement of the elements within an array of permutations·
+Along with the algorithms themselves, now translated from ALGOL into JavaScript, there are a series of utilities, designed to make the use of the algorithms easier. These include a small program that allows the easy replacement of the elements within an array of permutations·
 
 ## Permutation Algorithms Implemented
 
-- 1956 - Tompkins-Paige
+- 1956 - Tompkins-Paige / 1962 - Peck-Schrack (ACM 86: PERMUTE)
 - 1960 - Lehmer Constant Difference Method
 - 1960 - Wells
 - 1962 - Shen Lexicographic
@@ -162,7 +162,7 @@ Peck, J. E. L. and G. F. Schrack. "Algorithm 86: Permute".
 In: Communications of the ACM 5.4 (Apr. 1962), pp. 208-209
 </pre>
 
-In my implementation, an extra parameter can be used to define whether the rotation command rotates parts of the array forwards or backwards, resulting in different outputs.
+In my implementation, an extra parameter can be used to define whether the rotation command rotates parts of the array forwards or backwards, resulting in different outputs - this is done by specifying either `1` or `-1` as the second parameter. Other numbers can be used, but results will vary in success depending on the length of the array.
 
 ### Usage
 
@@ -170,4 +170,19 @@ In my implementation, an extra parameter can be used to define whether the rotat
 const permutations = require('historical-permutations');
 
 permutations.tompkinsPaige(["one", 2, 3, "4"], -1);
+```
+
+---
+
+## D.H. Lehmer Constant Difference Method (1960)
+
+This algorithm was originally proposed in D.H. Lehmer's 1960 paper <i>Teaching Combinatorial Tricks To A Computer</i>. In the paper, only a verbal description of the method is given, and there appears to be no easily-accessible implementation of it in modern languages.
+
+```
+We pass on to what may be called the Constant Difference Method.  Given a permutation like
+
+2 3 1 5 4 0 7 6 8
+
+one can obtain immediately another one by increasing every mark by unity, replacing 9 by 0 rather than by 10; thus
+
 ```
