@@ -93,13 +93,13 @@ Most of the algorithms below are taken from journals and articles from the 1950s
 
 Additionally, unlike many languages today, it was common not to use zero-based numbering for array elements; meaning that arrays are numbered starting from 1, not from 0. This means that for several of the modern JavaScript implementations an initial dummy element is added to the beginning of the arrays before feeding them into the algorithm and then removed upon termination.
 
+For those algorithms from Sedgewick's paper, `process` is where each resultant permutation is output. Any filtering of results can happen here. In the JavaScript implementations, this is replaced by the callback function `cb()`.
+
 ---
 
 ## Tompkins-Paige Algorithm (1956)
 
 Below is the ALGOL pseudo-code for the Tompkins-Paige Algorithm, as published in Robert Sedgewick's 1977 paper "Permutation Generation Methods" (Algorithm 5 in that paper on page 150).
-
-`process` is where each resultant permutation is output. Any filtering of results can happen here. In the JavaScript implementations, this is replaced by the callback function `cb()`.
 
 <pre>
 <code>
@@ -114,9 +114,15 @@ Below is the ALGOL pseudo-code for the Tompkins-Paige Algorithm, as published in
 <b>while</b> <i>i</i>&le;<i>N</i> <b>repeat</b>;
 </code>
 
-Sedgewick, Robert. "Permutation Generation Methods". In: ACM Comput. Surv. 9.2 (1977), pp. 137-164. issn : 0360-0300. doi : 10.1145/356689.356692 . url : http://doi.acm.org/10.1145/356689.356692.
+Sedgewick, Robert. "Permutation Generation Methods". 
+In: ACM Comput. Surv. 9.2 (1977), pp. 137-164. 
+issn : 0360-0300. doi : 10.1145/356689.356692. 
+url : http://doi.acm.org/10.1145/356689.356692.
+</pre>
 
 NOTE: In the algorithm above, rotate() is a function that does a cyclic left-rotation of the first <i>i</i> elments of the array:
+
+<pre>
 <code>
   <i>t</i>:=P[1]; <i>k</i>:=2;
   <b>loop while</b> <i>k</i>&le;<i>i</i>: P[<i>k</i>-1]:=P[<i>k</i>] <b>repeat</b>;
@@ -124,13 +130,16 @@ NOTE: In the algorithm above, rotate() is a function that does a cyclic left-rot
 </code>
 </pre>
 
-This is an implementation in `ALGOL` by Peck and Schrack from 1962:
+This algorithm was implemented in `ALGOL` by Peck and Schrack in 1962:
 
 <pre>
 <code>
   <b>procedure</b> PERMUTE (x,n);
   <b>array</b> x; <b>integer</b> n;
-  <b>comment</b> Each call of PERMUTE executes a permutation of the first n components of x.  It assumes a nonlocal Boolean variable 'first', which when true causes the procedure to initialise the signature vector p.  Thereafter 'first' remains false until after n! calls;
+  <b>comment</b> Each call of PERMUTE executes a permutation of the first n components of x.  
+    It assumes a nonlocal Boolean variable 'first', 
+    which when true causes the procedure to initialise the signature vector p.  
+      Thereafter 'first' remains false until after n! calls;
   <b>begin own integer array</b> p[2:n]; <b>integer</b> i k;
     <b>if</b> first <b>then</b>
     <b>begin for</b> i := 2 <b>step</b> 1 <b>until</b> n <b>do</b>
@@ -149,7 +158,8 @@ This is an implementation in `ALGOL` by Peck and Schrack from 1962:
   EXIT: <b>end</b> PERMUTE
 </code>
 
-Peck, J. E. L. and G. F. Schrack. "Algorithm 86: Permute". In: Communications of the ACM 5.4 (Apr. 1962), pp. 208-209
+Peck, J. E. L. and G. F. Schrack. "Algorithm 86: Permute". 
+In: Communications of the ACM 5.4 (Apr. 1962), pp. 208-209
 </pre>
 
 In my implementation, an extra parameter can be used to define whether the rotation command rotates parts of the array forwards or backwards, resulting in different outputs.
