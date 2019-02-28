@@ -29,7 +29,9 @@ Ticks indicate the algorithm works and has been tested. Information on all of th
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic]
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM)
 - 1963 - Heap
+- 1967 - Langdon
 - 1968 - Ord-Smith (ACM323: ???) [pseudo-lexicographic]
+- 1976 - Ives
 - **ALSO - Remainder and Cool-lex?**
 
 ## Ordering Functions Implemented
@@ -288,10 +290,10 @@ Wells, M. B. "Generation of permutations by transposition". In: _Mathematics of 
 NOTE: Because of the fact the original algorithm is based on an array in which the indexes start from 1 rather than 0, and that it will not work otherwise, the algorithm inserts a meaningless placeholder element in the first position (e.g. the \'0\' in [0,1,2,3,4,5]), then removes it for the output.'. This algorithm also only takes in
 
 ```javaScript
-wells([1, 2, 3, 4]);
+wells(["1", 2, "3", 4]);
 ```
 
-Use arrays containing: **only numbers**
+Use arrays containing: **anything**
 
 ---
 
@@ -331,6 +333,94 @@ In: Communications of the ACM 5.4 (Apr. 1962), pp. 208-209
 
 ---
 
+## Howell (1962) [ACM87: PERMUTATION]
+
+---
+
+## Schrack-Shimrat (1962) [ACM102: PERMULEX / reverse lexicographic]
+
+The algorithm below is also known as the <i>Fischer-Krause</i> algorithm, and has been known since 1812. This is how it is presented in Sedgewick's paper:
+
+<pre>
+<code>
+P[<i>N</i> + 1] = &infin;;
+<i>process</i>;
+<b>loop</b>.
+  <i>i</i>:=2; <b>loop while</b> P[<i>i</i>] < P[<i>i</i>-1]; <i>i</i>:=<i>i</i>+1 <b>repeat</b>;
+<b>while</b> <i>i</i><<i>N</i>;
+  <i>j</i>:=1; <b>loop while</b> P[<i>j</i>]>P[<i>i</i>]; <i>j</i>:=<i>j</i>+1 <b>repeat</b>;
+  P[<i>i</i>]:=:P[<i>j</i>]
+    <i>reverse</i>(<i>i</i>-1);
+    <i>process;</i>
+  <b>repeat</b>;
+</code>
+</pre>
+
+where `reverse()` "inverts the order of the elements in `P[1],....,P[i]`:
+
+<pre>
+<code>
+  <i>i</i>:=1;
+  <b>loop while</b> <i>i</i><<i>N</i>+1-<i>i</i>;
+        P[<i>i</i>]:=:P[<i>N</i>+1-<i>i</i>]; <i>i</i>:=<i>i</i>+1 <b>repeat</b>;
+</code>
+</pre>
+
+Schrack and Shimrat later implemented this code as ACM Algorithm 102:
+
+<pre>
+<code>
+<b>procedure</b> PERMULEX(n,p);
+<b>integer</b> n; <b>integer array</b> p;
+<b>comment</b> Successive calls of the procedure will generate all
+permutations p of 1,2,3,---,n in lexicographical order. Before the
+first call, the non-local Boolean variable ‘flag’ must be set to
+<b>true</b>. If after an execution of PERMULEX ‘flag’ is <b>false</b>,
+additional calls will generate further permutations—if true, all
+permutations have been obtained ;
+
+<b>begin integer array</b> q[1:n]; <b>integer</b> i, k, t; <b>Boolean</b> flag2;
+<b>if</b> flag <b>then</b>
+  <b>begin for</b> i := 1 <b>step</b> 1 <b>until</b> n <b>do</b>
+  p[i] := i; flag2 := <b>true</b>; flag := <b>false</b>;
+  <b>go to</b> EXIT
+  <b>end</b> initialize;
+<b>if</b> flag2 <b>then</b>
+  <b>begin</b> t := p[n]; p[n] := p[n—1]; p[n—1] := t;
+  flag2 := <b>false</b>; <b>go to</b> EXIT
+  <b>end</b> bypass;
+flag2 := <b>true</b>; <b>for</b> i := n—2 <b>step</b> —1 <b>until</b> 1 <b>do</b>
+  <b>if</b> p[i] < p[i+1] <b>then go to</b> A;
+  flag := <b>true</b>; <b>go to</b> EXIT;
+A:  <b>for</b> k := 1 <b>step</b> 1 <b>until</b> n <b>do</b> q[k] := 0;
+    <b>for</b> k := 1 <b>step</b> 1 <b>until</b> n <b>do</b> q[p[k]] := p[k];
+    <b>for</b> k := p[i] + 1 <b>step</b> 1 <b>until</b> n <b>do</b>
+    <b>if</b> q[k] &ne; 0 <b>then go to</b> B;
+B:  p[i] := k; q[k] := 0;
+    <b>for</b> k := 1 <b>step</b> 1 <b>until</b> n <b>do</b>
+    if q[k] &ne; 0 <b>then begin</b> i := i + 1; p[i] := q[k] <b>end</b>
+    <b>else if</b> i &ge; n <b>then go to</b> EXIT;
+EXIT:
+<b>end</b> PERMULEX
+</code>
+G. F. Schrack and M. Shimrat. "Algorithm 102: Permutation in lexicographical order". 
+In: Communications of the ACM 5.6 (June 1962), p. 346.
+</pre>
+
+### Usage
+
+```javaScript
+schrackShimrat([1, 2, 3, 4]);
+```
+
+Use arrays containing: **only numbers**
+
+---
+
+## Eaves (1962) [ACM130: Permute]
+
+---
+
 ## Shen (1962/63) [lexicographic order]
 
 Mok-Kong Shen's method of enumerating permutations in lexicographic order was first proposed in their 1962 paper _On the Generation of Permutations and Combinations_ and later formalized in the September 1963 issue of _Communications of the ACM_, in the form of Algorithm 202: PERLE:
@@ -338,7 +428,7 @@ Mok-Kong Shen's method of enumerating permutations in lexicographic order was fi
 <pre>
 <code>
 <b>procedure</b> <i>PERLE</i> (<i>S</i>, <i>N</i>, <i>I</i>, <i>E</i>)
-<b>integer array</b> <i>S</i>; <b>integer</b> <i>N</i>; >b?Boolean</b> <i>I</i>; <b>label</b> <i>E</i>;
+<b>integer array</b> <i>S</i>; <b>integer</b> <i>N</i>; <b>Boolean</b> <i>I</i>; <b>label</b> <i>E</i>;
 <b>comment</b> If the array <i>S</i> contains a certain permutation of the
   <i>N</i> digits <i>1, 2,..., N</i> before call, the procedure will replace
   this with the lexicographically next permutation. If initializa-
@@ -374,8 +464,94 @@ Mok-Kong Shen's method of enumerating permutations in lexicographic order was fi
 </code>
 </pre>
 
+### Usage
+
 ```javaScript
 shen([1, 2, 3, 4]);
 ```
 
 Use arrays containing: **only numbers**
+
+---
+
+## Steinhaus-Trotter-Johnson (1962/63) [ACM115: PERM]
+
+This technique was "discovered" almost simultaneously by Steinhaus, Johnson and Trotter, although it has actually been in use in English bell-ringing since at least the 18th Century. Sedgewick formulates it as:
+
+<pre>
+<code>
+<i>i</i>:=1;
+<b>loop while</b> <i>i</i>&le;<i>N</i>; <i>i</i>:=<i>i</i>+1; <i>c[i]</i>:=1;
+                <i>d[i]</i>:= <b>true</b>; <b>repeat</b>;
+<i>c[1]</i>:=0;
+<i>process</i>;
+<b>loop</b>:
+  <i>i</i>:=<i>N</i>; <i>x</i>:=0;
+  <b>loop while</b> <i>c[i]</i>=<i>i</i>;
+    <b>if not</b> <i>d[i]</i> <b>then</b> <i>x</i>:=<i>x</i>+1 <b>endif</b>;
+    <i>d[i]</i>:=<b>not</b> <i>d[i]</i>; <i>c[i]</i>:=1; <i>i</i>= <i>i</i>-1;
+  <b>repeat</b>;
+<b>while</b> <i>i</i>>1;
+  <b>if</b> <i>d[i]</i> <b>then</b> <i>k</i>:=<i>c[i]</i>+<i>x</i>
+        <b>else</b> <i>k</i>:=<i>i</i>-<i>c[i]</i>+<i>x</i> <b>endif</b>;
+  P[<i>k</i>]:=:P[<i>k</i>+1];
+  <i>process</i>;
+  <i>c[i]</i>:=:<i>c[i]</i>+1;
+<b>repeat</b>;
+</code>
+</pre>
+
+Trotter's version of this algorithm was published as PERM: ACM Algorithm 115, in 1962:
+
+<pre>
+<code>
+<b>procedure</b> <i>PERM</i> (<i>x</i>, <i>n</i>); <b>value</b> <i>n</i>;
+<b>integer</b> <i>n</i>; <b>array</b> <i>x</i>;
+<b>comment</b> This algorithm was inspired by the procedure 
+PERMUTE of Peck and Schrack (Algorithm 86, <i>Comm. ACM</i>
+Apr. 1962) and performs the same function. Each call of PERM
+changes the order of the first » components of z, and n! succes-
+sive calls will generate all n! permutations. A nonlocal Boolean
+variable ‘first’? is assumed, which must be true when PERM is
+first called, to cause proper initialization. The first call of PERM
+makes ‘first’? <b>false</b>, and it remains so (unless changed by the
+external program) until the exit from the (n!)th call of PERM.
+At that time z is restored to its original order and ‘first’ is made
+<b>true</b>.
+
+The excuse for adding PERM to the growing pile of permuta-
+tion generators is that, at the expense of some extra own storage,
+it cuts the manipulation of z to the theoretical minimum of n!
+transpositions, and appears to offer an advantage in speed. It
+also has the (probably useless) property that the permutations
+it generates are alternately odd and even;
+
+<b>begin own integer array</b> p, d(2:n]; integerk,q; real t;
+if first then initialize:
+begin for & := 2 step 1 until n do
+begin pik] := 0; dk] := 1 end;
+
+first := false
+end initialize;
+k := 0;
+INDEX: pln] := ¢ := pln] + d[n];
+if ¢ = n then
+begin din] := —1; go to LOOP end;
+
+if q+ Othen goto TRANSPOSE;
+din] := 1; k:=k+1;
+LOOP: if n > 2 then begin
+comment Note that » was called by value;
+n:=n— 1; go to INDEX end LOOP;
+Final exit: q := 1; first := true;
+TRANSPOSE: ¢:=q+k; ¢:= alg];
+siq]:=2l¢+1; s+ cst
+end PERM;
+</code>
+Trotter, H. F. "Algorithm 115: Perm". In:
+<i>Communications of the ACM</i> 5.8 (Aug. 1962), pp. 434-435.
+</pre>
+
+---
+
+## Heap (1963)

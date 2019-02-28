@@ -1,20 +1,52 @@
-
-const steinhaus = (n, cb) => {
-  let i = n
-  let c;
-  
-  while (i>1) {
+const steinhaus = (array, cb) => {
+  const p = array;
+  let i = 1;
+  const c = [];
+  const d = [];
+  let k;
+  const n = p.length - 1;
+  while (i < n) {
+    i += 1;
     c[i] = 1;
     d[i] = true;
-    if (i>1) break;
-    i-=1;
-    }
-    cb()
-
-    while (i<=n) {
-      if(c[i] < n+1-i) {
-        if(d[i])
-      }
-    }
-
   }
+  c[1] = 0;
+  cb(p);
+
+  while (i > 1) {
+    i = n;
+    let x = 0;
+    while (c[i] === i) {
+      if (d[i] === false) {
+        x += 1;
+      }
+      d[i] = false;
+      c[i] = 1;
+      i -= 1;
+    }
+    if (i <= 1) break;
+    if (d[i]) {
+      k = c[i] + x;
+    } else {
+      k = i - c[i] + x;
+    }
+    const swap1 = p[k];
+    const swap2 = p[k + 1];
+    p[k + 1] = swap1;
+    p[k] = swap2;
+    cb(p);
+    c[i] = c[i] + 1;
+  }
+};
+
+function trotter(array) {
+  const outputArrays = [];
+  const callback = permutation => outputArrays.push(permutation);
+  steinhaus(array, callback);
+  console.log(outputArrays);
+  return outputArrays;
+}
+
+trotter([1, 2, 3, 4, 5]);
+
+// module.exports = steinhaus;
