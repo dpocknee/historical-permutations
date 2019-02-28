@@ -36,4 +36,4 @@ function lehmer(originalInputArray) {
   return readjustedLehmerArrays;
 }
 
-module.exports = { lehmer };
+module.exports = lehmer;

@@ -9,16 +9,19 @@ Due to the focus of my own research, nearly all of these algorithms are from the
 
 I have tried to collect as many of the original papers as possible, and these now reside in the `papers` folder of this repository - this addition does make this repo very large.
 
+Many of these algorithms are taken from Robert Sedgewick's 1977 paper _Permutation Generation Methods_.
+
 Along with the algorithms themselves, now translated from ALGOL into JavaScript, there are a series of utilities, designed to make the use of the algorithms easier. These include a small program that allows the easy replacement of the elements within an array of permutations·
 
 ## Permutation Algorithms Implemented
 
-(Ticks indicate algorithm works and has been tested)
+Ticks indicate the algorithm works and has been tested. Information on all of these algorithms
 
 - 1956 - Tompkins-Paige &#9989;
 - 1960 - Lehmer [Constant Difference Method] &#9989;
+- **1960? - Walker Backtrack and Hall Methods?**
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION)
-- 1961 - Wells [Transposition Method] &#9989;
+- 1961 - Wells-Boothroyd **(BCJ29, BCJ30??)** [Transposition Method] &#9989;
 - 1962 - Peck-Schrack (ACM86: PERMUTE)
 - 1962 - Howell (ACM87: PERMUTATION)
 - 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic] &#9989;
@@ -27,8 +30,9 @@ Along with the algorithms themselves, now translated from ALGOL into JavaScript,
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM)
 - 1963 - Heap
 - 1968 - Ord-Smith (ACM323: ???) [pseudo-lexicographic]
+- **ALSO - Remainder and Cool-lex?**
 
-## Ordering Functions Implements
+## Ordering Functions Implemented
 
 - 1947 - Gray Code
 - 19?? - Lehmer Linear Congruential Generator [random number generator]
@@ -83,6 +87,8 @@ const { tompkinsPaige } = require('historical-permutations');
 
 tompkinsPaige([1,2,3,4], 1);
 ```
+
+Some of these algorithms can work with an array of any type of object, as their algorithm is based on the position of the object in the array, but others will only work with arrays of numbers, as they are dependent upon evaluating the value of each element, not just its position. See the **Usage** section at the bottom of each algorithm description for more information.
 
 ## Built With
 
@@ -153,6 +159,8 @@ In my implementation, an extra parameter can be used to define whether the rotat
 tompkinsPaige(["one", 2, 3, "4"], -1);
 ```
 
+Use arrays containing: **anything**
+
 ---
 
 ## D.H. Lehmer Constant Difference Method (1960)
@@ -200,12 +208,14 @@ This algorithm was originally proposed in D.H. Lehmer's 1960 paper <i>Teaching C
 ### Usage
 
 ```javaScript
-lehmer(["one", 2, 3, "4"]);
+lehmer([1, 2, 3, 4]);
 ```
+
+Use arrays containing: **only numbers**
 
 ---
 
-## Coveyou and Sullivan (1961) [Algorithm ACM71]
+## Coveyou-Sullivan (1961) [Algorithm ACM71]
 
 This algorithm, named `PERMUTATION`, was originally published by R. R. Coveyou and J. G. Sullivan in the November 1961 issue of _Communications of the ACM_ as algorithm ACM71.
 
@@ -242,7 +252,7 @@ In: Communications of the ACM 4.11
 
 ---
 
-## Wells (1961)
+## Wells-Boothroyd (1961)
 
 This algorithm, by M. B. Wells, was originally described in the 15th issue of the journal _Mathematics of Computation_ in the article "Generation of permutations by transposition". This implementation is based Boothroyd's 1965 improvement, and taken from Sedgewick's paper:
 
@@ -273,15 +283,19 @@ in which `P[B[N,c]]:=:P[N];` is:
 
 Wells, M. B. "Generation of permutations by transposition". In: _Mathematics of Computation_ 15 (1961) pp. 192-195.
 
+**ADD IN BOOTHROYD REFERENCES**
+
 NOTE: Because of the fact the original algorithm is based on an array in which the indexes start from 1 rather than 0, and that it will not work otherwise, the algorithm inserts a meaningless placeholder element in the first position (e.g. the \'0\' in [0,1,2,3,4,5]), then removes it for the output.'. This algorithm also only takes in
 
 ```javaScript
-wells(["one", 2, 3, "4"]);
+wells([1, 2, 3, 4]);
 ```
+
+Use arrays containing: **only numbers**
 
 ---
 
-## Peck and Schrack (1962)
+## Peck-Schrack (1962)
 
 This algorithm was implemented in `ALGOL` by Peck and Schrack in 1962:
 
@@ -314,3 +328,54 @@ This algorithm was implemented in `ALGOL` by Peck and Schrack in 1962:
 Peck, J. E. L. and G. F. Schrack. "Algorithm 86: Permute". 
 In: Communications of the ACM 5.4 (Apr. 1962), pp. 208-209
 </pre>
+
+---
+
+## Shen (1962/63) [lexicographic order]
+
+Mok-Kong Shen's method of enumerating permutations in lexicographic order was first proposed in their 1962 paper _On the Generation of Permutations and Combinations_ and later formalized in the September 1963 issue of _Communications of the ACM_, in the form of Algorithm 202: PERLE:
+
+<pre>
+<code>
+<b>procedure</b> <i>PERLE</i> (<i>S</i>, <i>N</i>, <i>I</i>, <i>E</i>)
+<b>integer array</b> <i>S</i>; <b>integer</b> <i>N</i>; >b?Boolean</b> <i>I</i>; <b>label</b> <i>E</i>;
+<b>comment</b> If the array <i>S</i> contains a certain permutation of the
+  <i>N</i> digits <i>1, 2,..., N</i> before call, the procedure will replace
+  this with the lexicographically next permutation. If initializa-
+  tion is required set the Boolean variable <i>I</i> equal <b>true</b>, which
+  will be changed automatically to <b>false</b> through the first call,
+  otherwise set <i>I</i> equal <b>false</b>. If no further permutation can be
+  generated, exit will be made to <i>E</i>. For reference see <i>BIT 2</i> (1962) , 228-231;
+<b>begin integer</b> <i>j, u, w</i>;
+<b>if</b> <i>I</i> <b>then begin for</b> <i>j</i> = 1 <b>step</b> 1 <b>until</b> <i>N</i> <b>do</b> <i>S</i>[<i>j</i>] := <i>j</i>;
+             <i>I</i> := <b>false</b>; <b>go to</b> <i>Rose</i>
+          <b>end</b>;
+<i>w</i> :=  <i>N</i>;
+<i>Lilie</i>:   <b>if</b> <i>S</i>[<i>w</i>] < <i>S</i>[<i>w</i>—1] <b>then</b>
+          <b>begin if</b> <i>w</i> = 2 <b>then go to</b> <i>E</i>;
+             <i>w</i> := <i>w</i> — 1; <b>go to</b> Lilie
+          <b>end</b>;
+<i>u</i> := <i>S</i>[<i>w</i>—1];
+<b>for</b> <i>j</i> := <i>N</i> <b>step</b> —1 <b>until</b> <i>w</i> <b>do</b>
+<b>begin if</b> <i>S</i>[<i>j</i>] > <i>u</i> <b>then</b>
+      <b>begin</b> <i>S</i>[<i>w</i>—1] := <i>S</i>[<i>j</i>];
+        <i>S</i>[<i>j</i>] := <i>u</i>; <b>go to</b> <i>Tulpe</i>
+      <b>end</b>
+  <b>end</b>;
+<i>Tulpe</i>:   <b>for</b> <i>j</i> := 0 <b>step</b> 1 <b>until</b> (<i>N</i>—<i>w</i>—1)/2 + 0.1 <b>do</b>
+          <b>begin</b> <i>u</i> := <i>S</i>[<i>N</i>—<i>j</i>];
+           <i>S</i>[<i>N—j</i>] := <i>S</i>[<i>w</i>+<i>j</i>]; <i>S</i>[<i>w</i>+<i>j</i>] := <i>u</i>
+          <b>end</b>;
+<i>Rose</i>:
+<b>end</b> <i>PERLE</i>
+
+
+<b>begin</b> 
+</code>
+</pre>
+
+```javaScript
+shen([1, 2, 3, 4]);
+```
+
+Use arrays containing: **only numbers**

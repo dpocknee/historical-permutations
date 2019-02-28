@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { uniq, uniqWith, isEqual } = require('lodash');
 
-const { lehmer } = require('../algorithms/1960_lehmer');
+const lehmer = require('../algorithms/1960_lehmer');
 
 describe('Lehmer Constant Difference (1960)', () => {
   describe('5 Elements', () => {

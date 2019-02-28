@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { uniq, uniqWith, isEqual } = require('lodash');
 
-const schrackShimrat = require('../algorithms/1962_schrackShimrat');
+const schrackShimrat = require('../algorithms/1962_schrack-shimrat');
 
 describe('Schrack-Shimrat Reverse Lexicographic Order (1962)', () => {
   describe('5 Elements', () => {
