@@ -21,7 +21,7 @@ Along with the algorithms themselves, now translated from ALGOL into JavaScript,
 - 1961 - Wells [Transposition Method] &#9989;
 - 1962 - Peck-Schrack (ACM86: PERMUTE)
 - 1962 - Howell (ACM87: PERMUTATION)
-- 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic]
+- 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic] &#9989;
 - 1962 - Eaves (ACM130: Permute)
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic]
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM)
