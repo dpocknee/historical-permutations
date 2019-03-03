@@ -13,19 +13,19 @@ const steinhaus = (array, cb) => {
   c[1] = 0;
   cb(p);
 
+  i = n;
+  let x = 0;
   while (i > 1) {
     i = n;
-    let x = 0;
+    x = 0;
     while (c[i] === i) {
-      if (d[i] === false) {
-        x += 1;
-      }
+      if (d[i] === false) x += 1;
       d[i] = false;
       c[i] = 1;
       i -= 1;
     }
     if (i <= 1) break;
-    if (d[i]) {
+    if (d[i] === true) {
       k = c[i] + x;
     } else {
       k = i - c[i] + x;

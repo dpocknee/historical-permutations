@@ -19,19 +19,23 @@ Ticks indicate the algorithm works and has been tested. Information on all of th
 
 - 1956 - Tompkins-Paige &#9989;
 - 1960 - Lehmer [Constant Difference Method] &#9989;
-- **1960? - Walker Backtrack and Hall Methods?**
+- 1960 - Hall
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION)
-- 1961 - Wells-Boothroyd **(BCJ29, BCJ30??)** [Transposition Method] &#9989;
+- 1961 - Wells (ACM115) [Transposition Method] &#9989;
 - 1962 - Peck-Schrack (ACM86: PERMUTE)
 - 1962 - Howell (ACM87: PERMUTATION)
 - 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic] &#9989;
 - 1962 - Eaves (ACM130: Permute)
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic]
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM)
-- 1963 - Heap
+- 1963 - Heap &#9989;
 - 1967 - Langdon
-- 1968 - Ord-Smith (ACM323: ???) [pseudo-lexicographic]
+- 1967 - Phillips (BCJ28)
+- 1967 - Boothroyd (BCJ29/30)
+- 1968 - Ord-Smith (ACM308: perm) [pseudo-lexicographic]
 - 1976 - Ives
+- 2001 - Myrvold and Ruskey [remainder order] **?**
+-
 - **ALSO - Remainder and Cool-lex?**
 
 ## Ordering Functions Implemented
@@ -217,6 +221,41 @@ Use arrays containing: **only numbers**
 
 ---
 
+## Hall (1960) [Method of Derangements]
+
+> "We turn now to a second way of making a permutation correspond to its
+> factorial digits. This method was suggested by Marshall Hall and may be
+> called the Method of Derangements. In the previous method the objects
+> being permuted can be any computer words. In the Hall method the
+> objects must be the numbers 0(1)_n_ — 1. In any such permutation we may,
+> for each mark _k_ > 0, ask how many of the _k_ marks less than k actually
+> follow k. Denoting this number by Sx we see at once that
+>
+> _S_<sub>_n_-1</sub>, _S_<sub>_n_-2</sub>, ... _S_<sub>2</sub>, _S_<sub>1</sub>
+>
+> is a set of factorial digits of a number which corresponds to the given
+> permutation and which, conversely, characterizes this permutation. We
+> have for example the following correspondencies when n = 7.
+>
+> | _S_<sub>6</sub> | _S_<sub>5</sub> | _S_<sub>4</sub> | _S_<sub>3</sub> | _S_<sub>2</sub> | _S_<sub>1</sub> |     | <td colspan=7>permutations</td> |     |     |     |     |     |     |
+> | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- | --- | ------------------------------- | --- | --- | --- | --- | --- | --- |
+> | 0               | 0               | 0               | 0               | 0               | 0               |     | 0                               | 1   | 2   | 3   | 4   | 5   | 6   |
+> | 3               | 1               | 4               | 1               | 2               | 1               |     | 4                               | 2   | 1   | 6   | 3   | 5   | 0   |
+> | 1               | 2               | 2               | 3               | 1               | 1               |     | 3                               | 1   | 4   | 5   | 2   | 6   | 0   |
+> | 6               | 5               | 4               | 3               | 2               | 1               |     | 6                               | 5   | 4   | 3   | 2   | 1   | 0   |
+>
+> The coding of this method is fairly straightforward. The resulting routine
+> is a good deal slower than the Tompkins-Paige method. The parities of
+> successive permutations strictly alternate. The method is well suited to
+> requirement (c) [in the paper]."
+>
+> Lehmer, D.H. "Teaching combinatorial tricks to a computer".
+> In: Proceedings of Symposium Applied Mathematics: Combinatorial Analysis.
+> 5.6 (June 1962), Vol. 10. Providence, R.I.:
+> American Mathematical Society, 1960, pp. 179-193
+
+---
+
 ## Coveyou-Sullivan (1961) [Algorithm ACM71]
 
 This algorithm, named `PERMUTATION`, was originally published by R. R. Coveyou and J. G. Sullivan in the November 1961 issue of _Communications of the ACM_ as algorithm ACM71.
@@ -250,11 +289,9 @@ In: Communications of the ACM 4.11
 (Nov. 1961), p. 497.
 </pre>
 
-## NOT FINISHED!!!!
-
 ---
 
-## Wells-Boothroyd (1961)
+## Wells (1961)
 
 This algorithm, by M. B. Wells, was originally described in the 15th issue of the journal _Mathematics of Computation_ in the article "Generation of permutations by transposition". This implementation is based Boothroyd's 1965 improvement, and taken from Sedgewick's paper:
 
@@ -284,8 +321,6 @@ in which `P[B[N,c]]:=:P[N];` is:
 </pre>
 
 Wells, M. B. "Generation of permutations by transposition". In: _Mathematics of Computation_ 15 (1961) pp. 192-195.
-
-**ADD IN BOOTHROYD REFERENCES**
 
 NOTE: Because of the fact the original algorithm is based on an array in which the indexes start from 1 rather than 0, and that it will not work otherwise, the algorithm inserts a meaningless placeholder element in the first position (e.g. the \'0\' in [0,1,2,3,4,5]), then removes it for the output.'. This algorithm also only takes in
 
@@ -334,6 +369,48 @@ In: Communications of the ACM 5.4 (Apr. 1962), pp. 208-209
 ---
 
 ## Howell (1962) [ACM87: PERMUTATION]
+
+<pre>
+<code>
+<b>procedure</b> PERMUTATION (N, K);
+<b>value</b> K, N; <b>integer</b> K; <b>integer array</b> N;
+<b>comment</b> This procedure generates the next permutation in
+  lexicographic order from a given permutation of the K marks
+  0, 1, ---, (K-—1) by the repeaicd addition of (K—1) radix K.
+  The radix K arithmetic is simulated by the addition of 9 radix
+  1O and a test to determine if the sum consists of only the original
+  K digits. Before each entry into the <b>procedure</b> the K marks
+  are assumed to have been previously specified either by input
+  data or as the result of a previous entry. Upon each such entry a
+  new permutation is stored in N[1] through N[K]. In case the
+  given permutation Is (K—1), (K—2), ... , 1, 0, then the next
+  permutation is taken to be 0, 1, ..., (K — 1). A FORTRAN
+  subroutine for the IBM 7090 has been written and tested for
+  several examples;
+<b>begin integer</b> i, j, carry;
+  <b>for</b> := 1 <b>step</b> 1 <b>until</b> K <b>do</b>
+    <b>if</b> N[i] — K + i &ne; 0 <b>then go to</b> add;
+  <b>for</b> i := 1 <b>step</b> 1 <b>until</b> K <b>do</b> N[i] := i — 1;
+  <b>go to</b> exit;
+add:  N[K] := N[K] + 9;
+    <b>for</b> i := 1 <b>step</b> 1 <b>until</b> K—1 <b>do</b>
+      <b>begin if</b> K > 10 <b>then go to</b> B;
+          carry := N[K-i+1]&#247;10; <b>go to</b> C;
+      B:  carry := N[K-i+1]&#247;K;
+      C:  <b>if</b> carry = 0 <b>then go to</b> test;
+          N[K-i] := N[K—i] + carry;
+          N[K—i+1] := N[K—i+1] —10  &#215; carry
+      <b>end</b> i;
+test: <b>for</b> i := 1 <b>step</b> 1 <b>until</b> K <b>do if</b> N[i]- (K-1) > 0
+    <b>then go to</b> add;
+    <b>for</b> i := 1 <b>step</b> 1 <b>until</b> K-1 <b>do</b>
+      <b>for</b> j := i+1 <b>step</b> 1 <b>until</b> K <b>do</b>
+        <b>if</b> N[i]-N[j] = 0 <b>then go to</b> add;
+exit: <b>end</b> PERMUTATION GENERATOR
+</code>
+Howell, John R. "Algorithm 87: Permutation generator". In:
+Communications of the ACM 5.4 (Apr. 1962), p. 209.
+</pre>
 
 ---
 
@@ -418,6 +495,60 @@ Use arrays containing: **only numbers**
 ---
 
 ## Eaves (1962) [ACM130: Permute]
+
+<pre>
+<code>
+<b>procedure</b> PERMUTE (A, n, x)
+<b>array</b> <i>A</i>; <b>integer</b> <i>n</i>, <i>x</i>;
+<b>comment</b> Each entry into <i>PERMUTE</i> generates the next per-
+  mutation of the first n elements of A. If A is read as a number
+  (<i>A</i>[1]<i>A</i>[2] ... <i>A</i>[n]), each generation is larger than the last:
+  <i>n</i> := 4, <i>x</i> := 1
+    <i>A</i>[l] 1 1 1 8 8 8
+    <i>A</i>[2] 1 8 8 1 1 8
+    <i>A</i>[3] 8 1 8 1 8 1
+    <i>A</i>[4] 8 8 1 8 1 1 end
+    Permutations = 4!/2!2!
+  Identical elements in <i>A</i> reduce the number of permutations. The
+  array should be ordered before the first call on PERMUTE.
+  Integer x specifies the first elements whose order should be pre-
+  served: <i>n</i> := 4, <i>x</i> := 3
+    <i>A</i>[1] 1 1 1 4
+    <i>A</i>[2] 2 2 4 1
+    <i>A</i>[3] 3 4 2 2
+    <i>A</i>[4] 4 3 3 3 end
+    Permutations = 4!/3!
+  Before the first call on PERMUTE for a given array, first
+  should be made true. If more is true, then PERMUTE was able
+  to give another permutation;
+<b>begin array</b> B[1:<i>n</i>]; <b>integer</b> <i>f,i,k,m,p</i>; <b>real</b> <i>r</i>; <b>own real</b> <i>t</i>;
+  <b>if</b> <i>first</i> <b>then</b> <i>t</i> := <i>A</i>[<i>x</i>]; <i>first</i> := <b>false</b>;
+  <b>for</b> <i>i</i> := 1 <b>step</b> 1 <b>until</b> <i>n</i> <b>do</b> <i>B</i>[<i>i</i>] := 0;
+  <b>for</b> <i>i</i> := <i>n</i> <b>step</b> —1 <b>until</b> 2 <b>do</b>
+    <b>begin if</b> <i>A</i>[<i>i</i>] > t&and;<i>A</i>[<i>i</i>] > <i>A</i>[<i>i</i> — 1] <b>then go to</b> <i>find</i>; <b>end</b>;
+  <i>more</i> := <b>false</b>; <b>go to</b> <i>exit</i>;
+<i>find</i>:  <b>for</b> <i>k</i> := <i>n</i> <b>step</b> —1 <b>until</b> <i>i</i> <b>do</b>
+        <b>begin if</b> <i>A</i>[<i>k</i>] > <i>t</i>&and;<i>A</i>[<i>k</i>] > <i>A</i>[<i>i</i>—1] <b>then</b>
+          <b>begin</b> <i>B</i>[<i>k</i>] := <i>A</i>[<i>k</i>]; <i>m</i> := <i>k</i>; <b>end</b>; <b>end</b>;
+      <b>for</b> <i>k</i> := <i>n</i> <b>step</b> —1 <b>until</b> <i>i</i> <b>do</b>
+        <b>begin if</b> <i>B</i>[<i>k</i>] > 0 <i>A</i>&and;<i>B</i>[<i>k</i>] < <i>B</i>[<i>m</i>] <b>then</b>
+          <b>begin</b> <i>B</i>[<i>m</i>] := <i>B</i>[<i>k</i>]; <i>f</i> := <i>k</i>; <b>end</b>; <b>end</b>;
+      <i>r</i> := <i>A</i>[<i>i</i>—1]; <i>A</i>[<i>i</i>—1]:= <i>B</i>[<i>m</i>]; <i>A</i>[<i>f</i>]] := <i>r</i>;
+<i>schell</i>:  <i>p</i> := <i>i</i>—1; <i>m</i> := <i>n</i> — <i>p</i>;
+        <b>for</b> <i>m</i> := <i>m</i>/2 — <i>A</i> <b>while</b> <i>m</i> > 0 <b>do</b>
+          <b>begin</b> <i>k</i> := <i>n</i> — <i>m</i>;
+            <b>for</b> <i>f</i> := <i>p</i> + 1 <b>step</b> 1 <b>until</b> <i>k</i> <b>do</b>
+              <b>begin</b> <i>i</i> := <i>f</i>;
+<i>comp</i>:  <b>if</b> <i>A</i>[<i>i</i>] > <i>A</i>[<i>i</i> + <i>m</i>] <b>then</b>
+        <b>begin</b> <i>r</i> := <i>A</i>[<i>i</i> + <i>m</i>]; <i>A</i>[<i>i</i> + <i>m</i>] := <i>A</i>[<i>i</i>];
+        <i>A</i>[<i>i</i>] := <i>r</i>; <i>i</i> := <i>i</i> — <i>m</i>;
+        <b>if</b> <i>i</i> &#2267; <i>p</i> + 1 <b>then go to</b> <i>comp</i>;
+        <b>end end end</b> <i>schell</i>;
+<i>exit</i>:  <b>end</b> <i>PERMUTE</i>
+</code>
+Eaves, B. C. "Algorithm 130: Permute". In:
+Communications of the ACM 5.11 (Nov. 1962), p. 551.
+</pre>
 
 ---
 
@@ -571,3 +702,103 @@ The following implementation comes from Sedgewick's paper:
 <b>while</b> <i>i</i>&le;<i>N</i> <b>repeat</b>;
 </code>
 </pre>
+
+---
+
+## Langdon (1967)
+
+The following version of Langdon's algorithm is taken from Sedgewick's paper:
+
+<pre>
+<code>
+<i>i</i> := 1; <b>loop</b>: Q[<i>i</i>]:=P[<i>i</i>] <b>while</b> <i>i</i><</i>N</i> <i>i</i>:=<i>i</i>+1 <b>repeat</b>,
+<i>process</i>;
+<b>loop</b>:
+    <i>rotate(i)</i>l
+    <b>if</b> P[<i>i</i>] = Q[<i>i</i>] <b>then</b> <i>i</i>:=<i>N</i> <b>else</b> <i>i</i>:=<i>i</i>-1 <b>endif</b>;
+    <i>process</i>;
+<b>while</b> <i>i</i>&le;1 <b>repeat</b>;
+</code>
+
+</pre>
+
+---
+
+## Phillips (1967) [BCJ28]
+
+---
+
+## Boothroyd (1967) [BCJ29/30]
+
+---
+
+## Ord-Smith (1968) [ACM308][pseudo-lexicographic]
+
+<pre>
+<code>
+<b>procedure</b> <i>perm</i> (<i>x</i>, <i>n</i>); <b>value</b> <i>n</i>; <b>integer</b> <i>n</i>; <b>array</b> <i>x</i>;
+<b>begin own integer array</b> <i>q</i>[3:10]; <b>integer</b> <i>k, m</i>;
+    <b>real</b> <i>t</i>; <b>own boolean</b> <i>odd</i>;
+    <b>if</b> <i>first</i> <b>then begin</b> <i>odd</i> := <b>true</b>;
+          <b>if</b> <i>n</i>> 2 <b>then begin</b> <i>first</i> := <b>false</b>;
+          <b>for</b> <i>m</i> := 3 <b>step</b> 1 <b>until</b> 2 <b>do</b>
+          <i>q</i>[<i>m</i>] := 1   <b>end</b>
+        <b>end</b>
+    <b>if</b> <i>odd</i> <b>then begin</b> <i>odd</i> := <b>false</b>;
+          <i>t</i> := <i>x</i>[1]; <i>x</i>[1] := <i>x</i>[2]; <i>x</i>[2] := <i>t</i>;
+          <b>goto</b> <i>finish</i>
+        <b>end</b>;
+    <i>odd</i> := <b>true</b>; <i>k</i> := 3;
+<i>oop</i>:   <i>m</i> := <i>q</i>[<i>k</i>]; <b>if</b> <i>m</i> = <i>k</i> <b>then</b>
+    <b>begin if</b> <i>k</i> < <i>n</i> <b>then begin</b> <i>q</i>[<i>k</i>] := 1;
+              <i>k</i> := <i>k</i> + 1;
+              <b>goto</b> <i>loop</i>
+            <b>end</b>
+        <b>else begin</b> <i>first</i> := <b>true</b>; <b>goto</b> <i>trinit</i> <b>end</b>
+    <b>end</b>;
+  <i>q</i>[<i>k</i>] := <i>m</i> + 1;
+  <i>trinit</i>: <i>m</i> := 1;
+  <i>transpose</i>: <i>t</i> = <i>x</i>[<i>m</i>]; <i>x</i>[<i>m</i>] := <i>x</i>[<i>k</i>]; <i>x</i>[<i>k</i>] := <i>t</i>;
+      <i>m</i> := <i>m</i> + 1; <i>k</i> := <i>k</i> — 1;
+      <b>if</b> <i>m</i> < <i>k</i> <b>then goto</b> <i>transpose</i>;
+<i>finish</i>:  <b>end</b> <i>of procedure perm</i>;
+</code>
+R. J. Ord-Smith "Generation of permutation sequences: Part 1", <i>The Computer Journal</i>,
+  (1970), 13.2, pp. 152-155
+</pre>
+
+---
+
+## Ives (1976)
+
+This is an alternate implementation of Ives' algorithm, given in Sedgewick's paper:
+
+<pre>
+<code>
+<i>i</i>=<i>N</i>; <b>loop</b>: <i>c</i>[<i>i</i>]:=1; <b>while</b> <i>i</i>>1: <i>i</i>:=<i>i</i>-1 <b>repeat</b>
+<i>process</i>;
+<b>loop</b>
+  <b>if</b> <i>c</i>[<i>i</i>]<<i>N</i>+1-<i>i</i>
+  <b>then if</b> <i>odd</i> <b>then</b> P[<i>c</i>[<i>i</i>]]:=:P[<i>c</i>[<i>i</i>]+1]
+        <b>else</b> P[<i>i</i>]:=:P[<i>N</i>+1-<i>i</i>] <b>endif</b>,
+    <i>c</i>[<i>i</i>]:=<i>c</i>[<i>i</i>]+1, <i>i</i>=1;
+    <i>process</i>
+  <b>else</b> <i>c</i>[<i>i</i>]:=1; <i>i</i>=<i>i</i>+1;
+  <b>endif</b>
+<b>while</b> <i>i</i>&le;<i>N</i> <b>repeat</b>;
+</code>
+</pre>
+
+---
+
+## Myrvold and Ruskey (2001) [remainder order]
+
+> "The second order, which we call remainder order, was used by Myrvold and Ruskey [15]. Informally, let ( x , y ) denote the swap of the xth and yth symbol of a string. For example, applying ( 4 , 2 ) to 456123 gives 416523. Swaps are also called transpositions. In remainder order, the ith permutation is obtained from the identity permutation by a series of _n_ − 1 transpositions. The first indices of the transpositions are _n_, _n_ − 1 , ... , 2. The second indices are remainders when _i_ is successively divided by _n_, *n*− 1 , ... , 2, plus one. For example, here are the calculations for _i_ = 92 and _n_ = 5
+>
+> | 92 ÷ 5 = 18 | 18 ÷ 4 = 4  | 4 ÷ 3 = 1   | 1 ÷ 2 = 0     |
+> | ----------- | ----------- | ----------- | ------------- |
+> | remainder 2 | remainder 2 | remainder 1 | remainder 1 . |
+>
+> In this calculation, each successive quotient is used in the next division, and the divisors are in turn 5, 4, 3, 2. The underlined remainders (plus one) imply that the 92nd permutation for n = 5 is obtained from 12345 by successively applying the following transpositions: ( 5 , 3 ), ( 4 , 3 ), ( 3 , 2 ), ( 2 , 2 ) . The resulting permutation is 14253... [the first object has rank 0]... Although this description is somewhat unorthodox, it directly translates into a simple unranking algorithm, which converts an integer _i_ into the object of rank _i_. In remainder order, the unranking and ranking algorithms use O(_n_) arithmetic operations on values that can be as large as _n!_ ."
+>
+> Stephane Durocher, Pak Ching Li, Debajyoti Mondal, Frank Ruskey, Aaron Williams "Cool-lex order and k-ary Catalan structures", _Journal of Discrete Algorithms_, Volume 16, 2012, Pages 287-307,
