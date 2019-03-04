@@ -237,12 +237,12 @@ Use arrays containing: **only numbers**
 > permutation and which, conversely, characterizes this permutation. We
 > have for example the following correspondencies when n = 7.
 >
-> | _S_<sub>6</sub> | _S_<sub>5</sub> | _S_<sub>4</sub> | _S_<sub>3</sub> | _S_<sub>2</sub> | _S_<sub>1</sub> |     | <td colspan=7>permutations</td> |     |     |     |     |     |     |
-> | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- | --- | ------------------------------- | --- | --- | --- | --- | --- | --- |
-> | 0               | 0               | 0               | 0               | 0               | 0               |     | 0                               | 1   | 2   | 3   | 4   | 5   | 6   |
-> | 3               | 1               | 4               | 1               | 2               | 1               |     | 4                               | 2   | 1   | 6   | 3   | 5   | 0   |
-> | 1               | 2               | 2               | 3               | 1               | 1               |     | 3                               | 1   | 4   | 5   | 2   | 6   | 0   |
-> | 6               | 5               | 4               | 3               | 2               | 1               |     | 6                               | 5   | 4   | 3   | 2   | 1   | 0   |
+> | _S_<sub>6</sub> | _S_<sub>5</sub> | _S_<sub>4</sub> | _S_<sub>3</sub> | _S_<sub>2</sub> | _S_<sub>1</sub> | <td colspan=8>permutations</td> |
+> | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- | ------------------------------- |
+> | 0               | 0               | 0               | 0               | 0               | 0               |                                 | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+> | 3               | 1               | 4               | 1               | 2               | 1               |                                 | 4 | 2 | 1 | 6 | 3 | 5 | 0 |
+> | 1               | 2               | 2               | 3               | 1               | 1               |                                 | 3 | 1 | 4 | 5 | 2 | 6 | 0 |
+> | 6               | 5               | 4               | 3               | 2               | 1               |                                 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
 >
 > The coding of this method is fairly straightforward. The resulting routine
 > is a good deal slower than the Tompkins-Paige method. The parities of
