@@ -3,7 +3,7 @@ const { uniq, uniqWith, isEqual } = require('lodash');
 
 const { hall, radixCounter } = require('../algorithms/1960_hall');
 
-describe.only('Hall (1960)', () => {
+describe('Hall (1960)', () => {
   describe('Radix Counter', () => {
     describe('2 element array', () => {
       it('[0, 0]', () => expect(radixCounter([0, 0])).to.eql([0, 1]));

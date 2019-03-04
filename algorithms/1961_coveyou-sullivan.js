@@ -35,7 +35,7 @@ function coveyouSullivan(array) {
   const outputArrays = [];
   const callback = permutation => outputArrays.push(permutation);
   coveyouSullivanAlgorithm(array.length - 1, callback);
-  console.log(outputArrays);
+  // console.log(outputArrays);
   return outputArrays;
 }
 

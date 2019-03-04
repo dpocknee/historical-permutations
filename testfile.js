@@ -11,3 +11,9 @@ const permutations = require('./index');
 
 const schrackShimratTest = permutations.schrackShimrat([1, 2, 3, 4]); // only numbers
 console.log(schrackShimratTest);
+
+const heapTest = permutations.heap([1, 2, 3, 4]); // only numbers
+console.log(heapTest);
+
+const hallTest = permutations.hall(4); // only numbers
+console.log(hallTest);

@@ -3,7 +3,7 @@ const { uniq, uniqWith, isEqual } = require('lodash');
 
 const { coveyouSullivan } = require('../algorithms/1961_coveyou-sullivan');
 
-describe('Coveyou-Sullivan (1961)', () => {
+describe.skip('Coveyou-Sullivan (1961)', () => {
   describe('5 Elements', () => {
     const startArray = [1, 2, 3, 4, 5];
     const testArrays = coveyouSullivan(startArray);
