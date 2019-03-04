@@ -1,12 +1,12 @@
 const { expect } = require('chai');
 const { uniq, uniqWith, isEqual } = require('lodash');
 
-const { coveyouSullivan } = require('../algorithms/1961_coveyou-sullivan');
+const coveyouSullivan = require('../algorithms/1961_coveyou-sullivan');
 
-describe.skip('Coveyou-Sullivan (1961)', () => {
+describe('Coveyou-Sullivan (1961)', () => {
   describe('5 Elements', () => {
     const startArray = [1, 2, 3, 4, 5];
-    const testArrays = coveyouSullivan(startArray);
+    const testArrays = coveyouSullivan(5);
     it('checks an array of 5 elements outputs 120 permutations', () => {
       expect(testArrays.length).to.equal(120);
     });
@@ -25,7 +25,7 @@ describe.skip('Coveyou-Sullivan (1961)', () => {
   });
   describe('4 Elements', () => {
     const startArray = [1, 2, 3, 4];
-    const testArrays = coveyouSullivan(startArray);
+    const testArrays = coveyouSullivan(4);
     it('checks an array of 4 elements outputs 24 permutations', () => {
       expect(testArrays.length).to.equal(24);
     });
@@ -44,7 +44,7 @@ describe.skip('Coveyou-Sullivan (1961)', () => {
   });
   describe('3 Elements', () => {
     const startArray = [1, 2, 3];
-    const testArrays = coveyouSullivan(startArray);
+    const testArrays = coveyouSullivan(3);
     it('checks an array of 3 elements outputs 6 permutations', () => {
       expect(testArrays.length).to.equal(6);
     });
