@@ -1,4 +1,4 @@
-# historical-permutations (WORK-IN-PROGRESS - DO NOT USE!)
+# historical-permutations (WORK-IN-PROGRESS)
 
 A JavaScript library of historical permutation algorithms from 1956 onwards.  
 I originally started collecting these algorithms together as I was doing some research on early permutation algorithms as part of an ongoing project about the "Permutation Poems" of the poet and artist Brion Gysin. However, I soon found that many of these algorithms were in hard-to-find papers and little documented, often because they were superseded by more efficient algorithms only years later.
@@ -22,7 +22,7 @@ Ticks indicate the algorithm works and has been tested. Information on all of th
 - 1960 - Hall &#9989;
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION) &#9989;
 - 1961 - Wells (ACM115) [Transposition Method] &#9989;
-- 1962 - Peck-Schrack (ACM86: PERMUTE)
+- 1962 - Peck-Schrack (ACM86: PERMUTE) &#9989;
 - 1962 - Howell (ACM87: PERMUTATION)
 - 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic] &#9989;
 - 1962 - Eaves (ACM130: Permute)
@@ -257,7 +257,7 @@ Use arrays containing: **only numbers**
 > 5.6 (June 1962), Vol. 10. Providence, R.I.:
 > American Mathematical Society, 1960, pp. 179-193
 
-## Usage
+### Usage
 
 `hall(4)` will generate all possible permutations of the array `[1, 2, 3, 4]`.
 
@@ -376,6 +376,10 @@ This algorithm was implemented in `ALGOL` by Peck and Schrack in 1962:
 Peck, J. E. L. and G. F. Schrack. "Algorithm 86: Permute". 
 In: Communications of the ACM 5.4 (Apr. 1962), pp. 208-209
 </pre>
+
+## Usage
+
+`peckSchrack(4)` will generate all possible permutations of the array `[1, 2, 3, 4]`.
 
 ---
 
