@@ -22,13 +22,13 @@ const heapTest = permutations.heap([1, 2, 3, 4]); // only numbers
 console.log('Heap');
 console.log(heapTest);
 
-const hallTest = permutations.hall(5); // only numbers
+const hallTest = permutations.hall(4); // only numbers
 console.log('Hall');
 console.log(hallTest);
 
 const poetsDont = permutations.substituteContent(
   hallTest,
-  [1, 2, 3, 4, 5],
-  ['NO', 'POETS', 'DONT', 'OWN', 'WORDS']
+  [1, 2, 3, 4],
+  ['KICK', 'THAT', 'HABIT', 'MAN']
 );
 console.log(poetsDont);
