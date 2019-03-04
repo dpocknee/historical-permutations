@@ -5,6 +5,8 @@ const schrackShimrat = require('./algorithms/1962_schrack-shimrat');
 const heap = require('./algorithms/1963_heap');
 const { hall } = require('./algorithms/1960_hall');
 const coveyouSullivan = require('./algorithms/1961_coveyou-sullivan');
+const myrvoldRuskey = require('./algorithms/2001_myrvold-ruskey');
+
 const { substituteContent } = require('./utils/utils');
 
 module.exports = {
@@ -15,5 +17,6 @@ module.exports = {
   heap,
   hall,
   coveyouSullivan,
+  myrvoldRuskey,
   substituteContent
 };

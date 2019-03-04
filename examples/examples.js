@@ -26,6 +26,10 @@ const hallTest = permutations.hall(4); // only numbers
 console.log('Hall');
 console.log(hallTest);
 
+const coveyouTest = permutations.coveyouSullivan(4); // only numbers
+console.log('Coveyou-Sullivan');
+console.log(coveyouTest);
+
 const poetsDont = permutations.substituteContent(
   hallTest,
   [1, 2, 3, 4],

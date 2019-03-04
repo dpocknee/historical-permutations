@@ -29,6 +29,15 @@ function swapper(inputArray, index1, index2) {
   return inputArray;
 }
 
+function nonMutationSwapper(inputArray, index1, index2) {
+  const swapArray = inputArray.map(x => x);
+  const a = swapArray[index1];
+  const b = swapArray[index2];
+  swapArray[index1] = b;
+  swapArray[index2] = a;
+  return swapArray;
+}
+
 module.exports = {
   substituteContent,
   rotate,

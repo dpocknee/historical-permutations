@@ -34,7 +34,7 @@ Ticks indicate the algorithm works and has been tested. Information on all of th
 - 1967 - Boothroyd (BCJ29/30)
 - 1968 - Ord-Smith (ACM308: perm) [pseudo-lexicographic]
 - 1976 - Ives
-- 2001 - Myrvold and Ruskey [remainder order] **?**
+- 2001 - Myrvold-Ruskey [remainder order] &#9989;
 - 20?? - Cool-lex **?**
 
 ## Ordering Functions Implemented
@@ -256,6 +256,10 @@ Use arrays containing: **only numbers**
 > In: Proceedings of Symposium Applied Mathematics: Combinatorial Analysis.
 > 5.6 (June 1962), Vol. 10. Providence, R.I.:
 > American Mathematical Society, 1960, pp. 179-193
+
+## Usage
+
+`hall(4)` will generate all possible permutations of the array `[1, 2, 3, 4]`.
 
 ---
 
@@ -596,9 +600,6 @@ Mok-Kong Shen's method of enumerating permutations in lexicographic order was fi
           <b>end</b>;
 <i>Rose</i>:
 <b>end</b> <i>PERLE</i>
-
-
-<b>begin</b> 
 </code>
 </pre>
 
@@ -710,6 +711,12 @@ The following implementation comes from Sedgewick's paper:
 </code>
 </pre>
 
+### Usage
+
+```
+permutations.heap([1, 2, 3, 4]);
+```
+
 ---
 
 ## Langdon (1967)
@@ -809,3 +816,9 @@ This is an alternate implementation of Ives' algorithm, given in Sedgewick's pap
 > In this calculation, each successive quotient is used in the next division, and the divisors are in turn 5, 4, 3, 2. The underlined remainders (plus one) imply that the 92nd permutation for n = 5 is obtained from 12345 by successively applying the following transpositions: ( 5 , 3 ), ( 4 , 3 ), ( 3 , 2 ), ( 2 , 2 ) . The resulting permutation is 14253... [the first object has rank 0]... Although this description is somewhat unorthodox, it directly translates into a simple unranking algorithm, which converts an integer _i_ into the object of rank _i_. In remainder order, the unranking and ranking algorithms use O(_n_) arithmetic operations on values that can be as large as _n!_ ."
 >
 > Stephane Durocher, Pak Ching Li, Debajyoti Mondal, Frank Ruskey, Aaron Williams "Cool-lex order and k-ary Catalan structures", _Journal of Discrete Algorithms_, Volume 16, 2012, Pages 287-307,
+
+### Usage
+
+```
+myrvoldRuskey(4);
+```
