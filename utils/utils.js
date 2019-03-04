@@ -1,17 +1,22 @@
-const substituteContent = (originalArray, referenceArray, substituteArray) => {
+const substituteContent = (originalArrayOfArrays, referenceArray, substituteArray) => {
   const referenceObj = referenceArray.reduce((outObject, arrayElement, index) => {
     outObject[String(arrayElement)] = substituteArray[index];
     return outObject;
   }, {});
-  return originalArray.map(permRow => [
+  return originalArrayOfArrays.map(permRow => [
     permRow,
     permRow.map(element => referenceObj[String(element)])
   ]);
 };
 
-function rotate(arrayIn, rotation) {
-  const rotationDirection = rotation * -1;
-  return arrayIn.slice(rotationDirection).concat(arrayIn.slice(0, rotationDirection));
+// function rotateOld(arrayIn, rotation) {
+//   const rotationDirection = rotation * -1;
+//   return arrayIn.slice(rotationDirection).concat(arrayIn.slice(0, rotationDirection));
+// }
+
+function rotate(array, rotation) {
+  const rotateSplit = rotation < 0 ? (rotation - 1) % array.length : (rotation - 1) % array.length;
+  return array.slice(rotateSplit).concat(array.slice(0, rotateSplit));
 }
 
 const arrayShift = (arrayin, amountToShift) => arrayin.map(row => rotate(row, amountToShift % arrayin[0].length));

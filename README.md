@@ -19,7 +19,7 @@ Ticks indicate the algorithm works and has been tested. Information on all of th
 
 - 1956 - Tompkins-Paige &#9989;
 - 1960 - Lehmer [Constant Difference Method] &#9989;
-- 1960 - Hall
+- 1960 - Hall &#9989;
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION)
 - 1961 - Wells (ACM115) [Transposition Method] &#9989;
 - 1962 - Peck-Schrack (ACM86: PERMUTE)
@@ -35,8 +35,7 @@ Ticks indicate the algorithm works and has been tested. Information on all of th
 - 1968 - Ord-Smith (ACM308: perm) [pseudo-lexicographic]
 - 1976 - Ives
 - 2001 - Myrvold and Ruskey [remainder order] **?**
--
-- **ALSO - Remainder and Cool-lex?**
+- 20?? - Cool-lex **?**
 
 ## Ordering Functions Implemented
 
@@ -95,6 +94,10 @@ tompkinsPaige([1,2,3,4], 1);
 ```
 
 Some of these algorithms can work with an array of any type of object, as their algorithm is based on the position of the object in the array, but others will only work with arrays of numbers, as they are dependent upon evaluating the value of each element, not just its position. See the **Usage** section at the bottom of each algorithm description for more information.
+
+### Examples
+
+Examples of usage can be found in the `examples` folder.
 
 ## Built With
 
