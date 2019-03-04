@@ -15,7 +15,7 @@ Along with the algorithms themselves, now translated from ALGOL into JavaScript,
 
 ## Permutation Algorithms Implemented
 
-Ticks indicate the algorithm works and has been tested. Information on all of these algorithms
+Ticks indicate the algorithm works and has been tested. Crosses indicate that algorithm is not and will not be included in the library and is only mentioned below for historical context. Information on all of these algorithms and their original implementations can be found below. I have focused only on including algorithms which give different orderings to each other when run, hence why I have only decided to implement one of the several lexicographic algorithms below.
 
 - 1956 - Tompkins-Paige &#9989;
 - 1960 - Lehmer [Constant Difference Method] &#9989;
@@ -23,9 +23,9 @@ Ticks indicate the algorithm works and has been tested. Information on all of th
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION) &#9989;
 - 1961 - Wells (ACM115) [Transposition Method] &#9989;
 - 1962 - Peck-Schrack (ACM86: PERMUTE) &#9989;
-- 1962 - Howell (ACM87: PERMUTATION)
 - 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic] &#9989;
 - 1962 - Eaves (ACM130: Permute)
+- 1962 - Howell (ACM87: PERMUTATION) [lexicographic]
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic]
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM)
 - 1963 - Heap &#9989;
@@ -35,7 +35,6 @@ Ticks indicate the algorithm works and has been tested. Information on all of th
 - 1968 - Ord-Smith (ACM308: perm) [pseudo-lexicographic]
 - 1976 - Ives
 - 2001 - Myrvold-Ruskey [remainder order] &#9989;
-- 20?? - Cool-lex **?**
 
 ## Ordering Functions Implemented
 
@@ -732,10 +731,10 @@ The following version of Langdon's algorithm is taken from Sedgewick's paper:
 <i>i</i> := 1; <b>loop</b>: Q[<i>i</i>]:=P[<i>i</i>] <b>while</b> <i>i</i><</i>N</i> <i>i</i>:=<i>i</i>+1 <b>repeat</b>,
 <i>process</i>;
 <b>loop</b>:
-    <i>rotate(i)</i>l
+    <i>rotate(i)</i>;
     <b>if</b> P[<i>i</i>] = Q[<i>i</i>] <b>then</b> <i>i</i>:=<i>N</i> <b>else</b> <i>i</i>:=<i>i</i>-1 <b>endif</b>;
     <i>process</i>;
-<b>while</b> <i>i</i>&le;1 <b>repeat</b>;
+<b>while</b> <i>i</i>&ge;1 <b>repeat</b>;
 </code>
 
 </pre>
