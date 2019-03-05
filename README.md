@@ -7,11 +7,15 @@ I thought that this library might be of interest to those looking to learn about
 
 Due to the focus of my own research, nearly all of these algorithms are from the period 1956-65.
 
-I have tried to collect as many of the original papers as possible, and these now reside in the `papers` folder of this repository - this addition does make this repo very large.
+I have tried to collect as many of the original papers as possible, and these now reside in the `papers` folder of this repository - this addition does make this repo very large, however, these pdfs are only included in the git repository, and not in the package available on `npm`.
 
 Many of these algorithms are taken from Robert Sedgewick's 1977 paper _Permutation Generation Methods_.
 
 Along with the algorithms themselves, now translated from ALGOL into JavaScript, there are a series of utilities, designed to make the use of the algorithms easier. These include a small program that allows the easy replacement of the elements within an array of permutations·
+
+## Current Status
+
+The current aim is to implement all of the algorithms mentioned in the following section and release this as version 1.0.0. As of March 2019, around half the algorithms have been implemented.
 
 ## Permutation Algorithms Implemented
 
@@ -64,6 +68,8 @@ If you are running your JavaScript using `node.js`, the easiest way to use this 
 npm i historical-permutations
 ```
 
+**NOTE: THIS IS NOT YET WORKING - IT WILL BE UPON THE RELEASE OF VERSION 1.0.0**
+
 ## Testing
 
 Tests are written in `chai` and `mocha` and can be run through `node.js` using the command `npm test`. The tests are written to ensure that all of the algorithms are implemented correctly and produce all possible permutations without repetition when given an array of a certain length.
@@ -108,11 +114,11 @@ Examples of usage can be found in the `examples` folder.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+Anti-copyright.
 
 ## Acknowledgments
 
-- MENTION STEINHAUS-TROTTER LIBRARY!
+- Special mention should go to the insipring repository at [https://github.com/nodash/steinhaus-johnson-trotter](https://github.com/nodash/steinhaus-johnson-trotter).
 
 # The Algorithms
 
@@ -809,6 +815,8 @@ This is an alternate implementation of Ives' algorithm, given in Sedgewick's pap
 ---
 
 ## Myrvold and Ruskey (2001) [remainder order]
+
+The following algorithm lies much outside the original timescale I set for the project but has been included as it is a useful way of selecting individual permutations by rank and the algorithm itself is novel.
 
 > "The second order, which we call remainder order, was used by Myrvold and Ruskey [15]. Informally, let ( x , y ) denote the swap of the xth and yth symbol of a string. For example, applying ( 4 , 2 ) to 456123 gives 416523. Swaps are also called transpositions. In remainder order, the ith permutation is obtained from the identity permutation by a series of _n_ − 1 transpositions. The first indices of the transpositions are _n_, _n_ − 1 , ... , 2. The second indices are remainders when _i_ is successively divided by _n_, *n*− 1 , ... , 2, plus one. For example, here are the calculations for _i_ = 92 and _n_ = 5
 >
