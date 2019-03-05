@@ -10,9 +10,15 @@
   "keywords": [
     "historical",
     "permutations",
+    "combinatorics",
+    "Gysin",
+    "Tompkins-Paige",
     "Lehmer",
     "Wells",
-    "Heap"
+    "Heap",
+    "Shen",
+    "Schrack",
+    "Shimrat"
   ],
   "author": "David Pocknee",
   "license": "MIT",
