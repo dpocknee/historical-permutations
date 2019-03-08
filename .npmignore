@@ -5,3 +5,4 @@ work-in-progress/
 node_modules/
 spec/
 .eslintrc.json
+notes-for-contributors.md

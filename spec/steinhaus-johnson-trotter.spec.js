@@ -3,7 +3,7 @@ const { uniq, uniqWith, isEqual } = require('lodash');
 
 const steinhausJohnsonTrotter = require('../work-in-progress/improves-steinhaus');
 
-describe.only('Steinhaus-Johnson-Trotter (1962)', () => {
+describe('Steinhaus-Johnson-Trotter (1962)', () => {
   describe('5 Elements', () => {
     const startArray = [1, 2, 3, 4, 5];
     const testArrays = steinhausJohnsonTrotter(startArray);

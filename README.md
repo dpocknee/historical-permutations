@@ -72,7 +72,7 @@ If you are running your JavaScript using `node.js`, the easiest way to use this 
 npm i historical-permutations
 ```
 
-**NOTE: THIS IS NOT YET WORKING - IT WILL BE UPON THE RELEASE OF VERSION 1.0.0**
+NPM address: [https://www.npmjs.com/package/historical-permutations](https://www.npmjs.com/package/historical-permutations)
 
 ## Testing
 
