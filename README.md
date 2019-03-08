@@ -62,7 +62,7 @@ If you just want to use the library and are not bothered about contributing to t
 
 ### Installing
 
-The simples way to use this library is to download or clone the folder from the github repository onto a folder on your hardrive containing the project you want to use it with, then require or import in the files, as mentioned below in the `Deployment` section.
+The simples way to use this library is to download or clone the folder from the github repository onto a folder on your hardrive containing the project you want to use it with, then require or import in the files, as mentioned below in the `Deployment` section. If you are cloning from github
 
 ### With node.js
 
@@ -71,8 +71,6 @@ If you are running your JavaScript using `node.js`, the easiest way to use this 
 ```
 npm i historical-permutations
 ```
-
-NPM address: [https://www.npmjs.com/package/historical-permutations](https://www.npmjs.com/package/historical-permutations)
 
 ## Testing
 
@@ -102,7 +100,7 @@ const { tompkinsPaige } = require('historical-permutations');
 tompkinsPaige([1,2,3,4], 1);
 ```
 
-Some of these algorithms can work with an array of any type of object, as their algorithm is based on the position of the object in the array, but others will only work with arrays of numbers, as they are dependent upon evaluating the value of each element, not just its position. See the **Usage** section at the bottom of each algorithm description for more information.
+Some of these algorithms can work with an array containing any type, as their algorithm is based on the position of the object in the array, but others will only work with arrays of numbers, as they are dependent upon evaluating the value of each element, not just its position. See the **Usage** section at the bottom of each algorithm description for more information.
 
 ### Examples
 
@@ -115,6 +113,11 @@ Examples of usage can be found in the `examples` folder.
 ## Author
 
 - David Pocknee
+
+## Links
+
+- NPM: [https://www.npmjs.com/package/historical-permutations](https://www.npmjs.com/package/historical-permutations)
+- github: [https://github.com/dpocknee/historical-permutations](https://github.com/dpocknee/historical-permutations)
 
 ## License
 
