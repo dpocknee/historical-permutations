@@ -1,4 +1,4 @@
-# historical-permutations (WORK-IN-PROGRESS)
+# historical-permutations
 
 A JavaScript library of historical permutation algorithms from 1956 onwards.  
 I originally started collecting these algorithms together as I was doing some research on early permutation algorithms as part of an ongoing project about the "Permutation Poems" of the poet and artist Brion Gysin. However, I soon found that many of these algorithms were in hard-to-find papers and little documented, often because they were superseded by more efficient algorithms only years later.
@@ -15,7 +15,10 @@ Along with the algorithms themselves, now translated from ALGOL into JavaScript,
 
 ## Current Status
 
-The current aim is to implement all of the algorithms mentioned in the following section and release this as version 1.0.0. As of March 2019, around half the algorithms have been implemented.
+The current aim is to implement all of the algorithms mentioned in the following section and release this as version 1.0.0. As of March 2019, around half the algorithms have been implemented and have been released on `npm` as version 0.1.0.
+
+- 5 March 2019 (v 0.1.0)
+  - Tompkins-Paige, Lehmer CDM, Hall, Coveyou-Sullivan, Wells, Peck-Schrack, Schrack-Shimrat, Heap, Myrvold-Ruskey
 
 ## Permutation Algorithms Implemented
 
