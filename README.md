@@ -17,7 +17,7 @@ Along with the algorithms themselves, now translated from ALGOL into JavaScript,
 
 The current aim is to implement all of the algorithms mentioned in the following section and release this as version 1.0.0. As of March 2019, around half the algorithms have been implemented and have been released on `npm` as version 0.1.0.
 
-- 5 March 2019 (v 0.1.0)
+- 8 March 2019 (v 0.1.0)
   - Tompkins-Paige, Lehmer CDM, Hall, Coveyou-Sullivan, Wells, Peck-Schrack, Schrack-Shimrat, Heap, Myrvold-Ruskey
 
 ## Permutation Algorithms Implemented
@@ -26,6 +26,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 
 - 1956 - Tompkins-Paige &#9989;
 - 1960 - Lehmer [Constant Difference Method] &#9989;
+- 1960 - Walker Backtrack Method
 - 1960 - Hall &#9989;
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION) &#9989;
 - 1961 - Wells (ACM115) [Transposition Method] &#9989;
@@ -229,6 +230,46 @@ lehmer([1, 2, 3, 4]);
 ```
 
 Use arrays containing: **only numbers**
+
+---
+
+## Walker Backtrack Method (1960)
+
+> "There are various ways in which a linear order can be imposed on the
+> elements of **A** so as to reduce this formulation to the general one stated above.
+>
+> One way of constructing a set _A_ is to build it up element by element.
+> Suppose that _a_<sub>1</sub>, ... ,_a_<sub><i>k-1</i></sub> have been chosen. The given restrictions will
+> then require that _a_<sub><i>k</i></sub>; belong to some subset _S_<sub><i>k</i></sub> of _U_. If _S_<sub><i>k</i></sub> is not empty an _a_<sub><i>k</i></sub>, can be chosen and the building-up process continued; if _S_<sub><i>k</i></sub>, is empty one must back-track and change one of the previous _a_’s. To do this systematically we shall assume that the elements of U have been linearly ordered, and shall always choose _a_<sub><i>k</i></sub> to be the least element of _S_<sub><i>k</i></sub>. If _S_<sub><i>k</i></sub> is empty we return to _S_<sub><i>k-1</i></sub> and change _a_<sub><i>k-1</i></sub> to the next larger element of _S_<sub><i>k-1</i></sub>; if this is impossible we back-track still further. The following condensed program contains the essential features of this process as it would be done by an automatic calculator. It is to be assumed that Step _s_ + 1 will follow Step _s_ unless otherwise specified.
+>
+> General program.
+>
+> 1.  Set _k_ = 1.
+> 2.  Set _S_<sub><i>k</i></sub> = _S_<sub>1</sub>.
+> 3.  If _S_<sub><i>k</i></sub> is empty jump to 9.
+> 4.  Set _a_<sub><i>k</i></sub> equal to the smallest element of _S_<sub><i>k</i></sub>.
+> 5.  If _k_ = _n_ jump to 14.
+> 6.  Replace _k_ by _k_ + 1.
+> 7.  Compute _S_<sub><i>k</i></sub>.
+> 8.  Jump to 3.
+> 9.  If _k_ = 1, stop.
+> 10. Replace _k_ by _k_ — 1.
+> 11. Compute _S_<sub><i>k</i></sub>.
+> 12. Replace _S_<sub><i>k</i></sub> by _S_<sub><i>k</i></sub> &cap; {a| _a_ > _a_<sub><i>k</i></sub>}.
+> 13. Jump to 3.
+> 14. Record _A_ = {_a_<sub>1</sub>, ... , _a_<sub><i>n</i></sub>}.
+> 15. Jump to 12.
+>
+> This program is set up to record all possible sets _A_. If, for example, they
+> are merely to be counted, Step 14 may be modified accordingly. Other
+> modifications might involve the use of other criteria than a fixed value of n
+> for determining when a set _A_ is completed (Step 5), or other criteria for
+> stopping the process (Step 9).
+>
+> Walker, R. J. "An Enumerative Technique for a Class Of Combinatorial Problems".
+> In: Proceedings of Symposium Applied Mathematics: Combinatorial Analysis.
+> 5.6 (June 1962), Vol. 10. Providence, R.I.:
+> American Mathematical Society, 1960, pp. 179-193
 
 ---
 
