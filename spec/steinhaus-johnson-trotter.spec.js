@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { uniq, uniqWith, isEqual } = require('lodash');
 
-const steinhausJohnsonTrotter = require('../algorithms/improves-steinhaus');
+const steinhausJohnsonTrotter = require('../work-in-progress/improves-steinhaus');
 
 describe.only('Steinhaus-Johnson-Trotter (1962)', () => {
   describe('5 Elements', () => {

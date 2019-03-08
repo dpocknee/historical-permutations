@@ -1,3 +1,6 @@
 old/
 papers/
 *.pdf
+work-in-progress/
+node_modules/
+spec/
