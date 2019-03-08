@@ -4,3 +4,4 @@ papers/
 work-in-progress/
 node_modules/
 spec/
+.eslintrc.json
