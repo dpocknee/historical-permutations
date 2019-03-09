@@ -7,13 +7,13 @@ describe.only('Superpermutation (2019)', () => {
   describe('n = 4', () => {
     const permLength = 4;
     const superperm = superpermutation(permLength);
-    console.log('superperm', superperm);
+    // console.log('superperm', superperm);
     const allPossiblePermutations = hall(permLength);
     const testArray = [];
     for (let i = 0; i <= superperm.length - permLength; i++) {
       testArray.push(superperm.slice(i, i + permLength));
     }
-    console.log(testArray);
+    // console.log(testArray);
     for (let i = 0; i < allPossiblePermutations.length; i++) {
       it(`checks that permutation ${allPossiblePermutations[i]} is present`, () => {
         expect(testArray).to.deep.include(allPossiblePermutations[i]);
