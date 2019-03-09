@@ -7,7 +7,6 @@ function createClosePerms(startingPerm, loopNo, totalLoops) {
   );
   const arrayCut = miniPerms.length - startingPerm.length;
 
-  const miniAdjusted = [...miniPerms.slice(0, -2), ...rotate(miniPerms.slice(-2), 2)];
   let outputPerms = [];
   if (loopNo !== 0) outputPerms = miniPerms.slice(startingPerm.length);
   else outputPerms = miniPerms.map(x => x);
@@ -21,6 +20,9 @@ function bShape(startingPerm, loopNo, totalLoops) {
   return loopNo !== Math.round(totalLoops / 2) - 1
     ? [[...lastElements, ...newElements], newElements]
     : [[...reversed], reversed.slice(1)];
+  // return loopNo !== 0 && loopNo % 3 === 0
+  //   ? [[...reversed], reversed.slice(1)]
+  //   : [[...lastElements, ...newElements], newElements];
 }
 
 function superpermutation(n) {
@@ -35,16 +37,17 @@ function superpermutation(n) {
       outputArray.push(newValue);
     });
     const navigationPerms = bShape(newPerms[1], i, totalLoops);
-    console.log('newPerms: ', newPerms, 'navigationPerms: ', navigationPerms);
+    // console.log('newPerms: ', newPerms, 'navigationPerms: ', navigationPerms);
     navigationPerms[1].forEach((newValue) => {
       if (i < totalLoops - 1) outputArray.push(newValue);
     });
-    console.log('outputArray', outputArray.join(' '));
+    // console.log('outputArray', outputArray.join(' '));
     currentArray = navigationPerms[0];
   }
-  console.log('Length of superpermutation: ', outputArray.length);
+  // console.log('Length of superpermutation: ', outputArray.length);
   return outputArray;
 }
 
 // superpermutation(4);
+// superpermutation(5);
 module.exports = superpermutation;
