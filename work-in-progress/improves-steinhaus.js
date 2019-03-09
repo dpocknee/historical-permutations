@@ -42,7 +42,7 @@ function trotter(array) {
     outputArrays.push(permutation.slice(1));
   };
   steinhaus([0, ...array], cb);
-  console.log(outputArrays);
+  // console.log(outputArrays);
   return outputArrays;
 }
 
