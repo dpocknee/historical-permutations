@@ -1,7 +1,7 @@
 // const { uniq } = require('lodash');
-const superpermutation = require('../work-in-progress/2019_superpermutation');
+const superpermutation = require('../2019_superpermutation');
 const { expect } = require('chai');
-const { hall } = require('../algorithms/1960_hall');
+const { hall } = require('../../algorithms/1960_hall');
 
 describe('Superpermutation (2019)', () => {
   describe('n = 4', () => {
@@ -20,7 +20,7 @@ describe('Superpermutation (2019)', () => {
       });
     }
   });
-  // describe.skip('n = 5', () => {
+  // describe('n = 5', () => {
   //   const permLength = 5;
   //   const superperm = superpermutation(permLength);
   //   // console.log('superperm', superperm);
