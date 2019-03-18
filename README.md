@@ -43,12 +43,35 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 1968 - Ord-Smith (ACM308: perm) [pseudo-lexicographic]
 - 1976 - Ives
 - 2001 - Myrvold-Ruskey [remainder order] &#9989;
+- 2019 - Superpermutations
 
 ## Ordering Functions Implemented
 
 - 1947 - Gray Code
 - 19?? - Lehmer Linear Congruential Generator [random number generator]
 - 1964 - Durstenfeld (ACM235: SHUFFLE) [random permutation algorithm ]
+
+## All Functions In The Library
+
+- Permutation Algorithms
+  - `tompkinsPaige(["one", 2, 3, "4"], 1)`
+  - `lehmer([1, 2, 3, 4])`
+  - `hall(4)`
+  - `coveyouSullivan(4)`
+  - `wells(["1", 2, "3", 4])`
+  - `peckSchrack(4)`
+  - `schrackShimrat([1, 2, 3, 4])`
+  - `heap([1, 2, 3, 4])`
+  - `myrvoldRuskey(4)`
+- Ordering Algorithms
+  - TO DO
+- Utilities
+  - `rotate([1, 2, 3], 1)`
+  - `rotateArrays([[1, 2, 3], [1, 3, 2], [2, 1, 3]], 1)`
+  - `replace([[1, 2, 3], [1, 3, 2], [2, 1, 3]], [1, 2, 3], ["A", "B", "C"], 1)`
+  - `reverseArrays([[1, 2, 3], [1, 3, 2], [2, 1, 3]])`
+  - `swap([1, 2, 3, 4, 5], 0, 3)`
+  - `mutatedSwap([1, 2, 3, 4, 5], 0, 3)`
 
 ---
 
@@ -770,7 +793,7 @@ The following implementation comes from Sedgewick's paper:
 ### Usage
 
 ```
-permutations.heap([1, 2, 3, 4]);
+heap([1, 2, 3, 4]);
 ```
 
 ---
