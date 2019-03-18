@@ -21,7 +21,7 @@ rotate([1, 2, 3], -2)
 
 */
 
-function substituteContent(
+function replace(
   originalArrayOfArrays,
   referenceArray,
   substituteArray,
@@ -43,25 +43,23 @@ function substituteContent(
 
 function rotate(array, rotation) {
   const rotateSplit =
-    rotation < 0
-      ? (rotation - 1) % array.length
-      : (rotation - 1) % array.length;
+    rotation >= 0 ? rotation % array.length : array.length + rotation;
   return array.slice(rotateSplit).concat(array.slice(0, rotateSplit));
 }
 
-function rotateArrayOfArrays(array) {
-  return array.map(innerArray => rotate(innerArray));
+function rotateArrays(array, rotation) {
+  return array.map(innerArray => rotate(innerArray, rotation));
 }
 
-function reverseContentOfArrays(array) {
+function reverseArrays(array) {
   return array.map(innerArray => reverse(innerArray));
 }
 
-function arrayShift(arrayin, amountToShift) {
+function shiftArrays(arrayin, amountToShift) {
   return arrayin.map(row => rotate(row, amountToShift % arrayin[0].length));
 }
 
-function swapper(inputArray, index1, index2) {
+function swap(inputArray, index1, index2) {
   return (swapArray = inputArray.map((element, index) => {
     if (index === index1) return inputArray[index2];
     if (index === index2) return inputArray[index1];
@@ -70,10 +68,10 @@ function swapper(inputArray, index1, index2) {
 }
 
 module.exports = {
-  substituteContent,
+  replace,
   rotate,
-  rotateArrayOfArrays,
-  reverseContentOfArrays,
-  arrayShift,
-  swapper
+  rotateArrays,
+  reverseArrays,
+  shiftArrays,
+  swap
 };
