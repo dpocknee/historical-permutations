@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint algorithms/*.js",
-    "test": "mocha ./spec/*",
+    "test": "mocha ./spec/*.spec.js",
     "test:wip": "mocha ./work-in-progress/spec/*",
+    "test:algo": "mocha ./spec/*.spec.js --grep UTILITIES --invert -R 'spec'",
     "test:utils": "mocha ./spec/utils.spec.js"
   },
   "keywords": [

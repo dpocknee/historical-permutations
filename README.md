@@ -97,7 +97,18 @@ npm i historical-permutations
 
 ## Testing
 
-Tests are written in `chai` and `mocha` and can be run through `node.js` using the command `npm test`. The tests are written to ensure that all of the algorithms are implemented correctly and produce all possible permutations without repetition when given an array of a certain length.
+Tests are written in `chai` and `mocha` and can be run through `node.js` using the following commands:
+
+- `npm test` runs tests on all functions in the library, including utilities and ordering algorithms but excluding algorithms in the `work-in-progress` folder.
+- `npm run test:utils` only runs tests for the utiliities
+- `npm run test:algo` only runs tests for the finished permutation algorithms, excluding utilities.
+- `npm run test:wip` only runs the tests in the `work-in-progress` folder.
+
+- The tests are written to ensure that all of the algorithms are implemented correctly and produce all possible permutations without repetition when given an array of a certain length.
+
+## Contributions
+
+Contributions to this library are welome and can be made using a pull request. Permutation algorithms that are finished and fully tested are placed in the `algorithms` folder and their tests in the `spec` folder. Utilities are found in the `utils` folder and their tests are also kept in the `spec` folder. Algorithms currently in progress or which have either not been fully tested or are failing current tests are kept in the `work-in-progress` folder, which has its own `spec` folder for tests.
 
 ## Deployment
 
