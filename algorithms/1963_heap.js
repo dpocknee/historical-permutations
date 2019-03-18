@@ -1,4 +1,4 @@
-const { swapper } = require('../utils/utils');
+const { mutatedSwap } = require("../utils/utils");
 
 function heap(numberArray) {
   function heapPermutations(n, inputArray, cb) {
@@ -11,9 +11,9 @@ function heap(numberArray) {
         break;
       }
       if (n % 2) {
-        inputArray = swapper(inputArray, n, 1);
+        inputArray = mutatedSwap(inputArray, n, 1);
       } else {
-        inputArray = swapper(inputArray, n, c);
+        inputArray = mutatedSwap(inputArray, n, c);
       }
       cb(inputArray.slice(1));
       c += 1;

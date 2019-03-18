@@ -1,9 +1,9 @@
 const permutations = require("../index");
 
 // const tompkinsTest = permutations.tompkinsPaige(['NO', 'POETS', 'DONT', 'OWN', 'WORDS'], 1); // any type of array
-const tompkinsTest = permutations.tompkinsPaige([1, 2, 3, 4], -1);
-console.log("Tompkins-Paige");
-console.log(tompkinsTest);
+// const tompkinsTest = permutations.tompkinsPaige([1, 2, 3, 4], -1);
+// console.log("Tompkins-Paige");
+// console.log(tompkinsTest);
 
 // const tompkinsTest = permutations.tompkinsPaige([1, 2, 3, 4], 1);
 // console.log("Tompkins-Paige");
@@ -40,3 +40,20 @@ console.log(tompkinsTest);
 //   ["KICK", "THAT", "HABIT", "MAN"]
 // );
 // console.log(poetsDont);
+
+const testArray = [
+  [1, 2, 3],
+  [1, 3, 2],
+  [2, 1, 3],
+  [2, 3, 1],
+  [3, 1, 2],
+  [3, 2, 1]
+];
+
+const replaceTest = permutations.replace(
+  testArray,
+  [1, 2, 3],
+  ["A", "B", "C"],
+  0
+);
+console.log(replaceTest);

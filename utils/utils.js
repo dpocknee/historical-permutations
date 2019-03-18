@@ -1,26 +1,3 @@
-/* 
-Examples:
-const exampleArrayOfArrays = [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]];
-substituteContent(exampleArrayOfArrays, [1, 2, 3], ["A", "B", "C"], 1);
--> [
-    [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1],
-    ["A", "B", "C"], ["A", "C", "B"], ["B", "A", "C"], ["B", "C", "A"], ["C", "A", "B"], ["C", "B", "A"]
-  ]
-
-substituteContent(exampleArrayOfArrays, [1, 2, 3], ["A", "B", "C"], 0);
-->["A", "B", "C"], ["A", "C", "B"], ["B", "A", "C"], ["B", "C", "A"], ["C", "A", "B"], ["C", "B", "A"];
-
-rotate([1, 2, 3], 1)
--> [1, 2, 3]
-
-rotate([1, 2, 3], 2)
--> [2, 3, 1]
-
-rotate([1, 2, 3], -2)
--> [3, 1, 2]
-
-*/
-
 function replace(
   originalArrayOfArrays,
   referenceArray,
@@ -52,12 +29,12 @@ function rotateArrays(array, rotation) {
 }
 
 function reverseArrays(array) {
-  return array.map(innerArray => reverse(innerArray));
+  return array.map(innerArray => innerArray.reverse());
 }
 
-function shiftArrays(arrayin, amountToShift) {
-  return arrayin.map(row => rotate(row, amountToShift % arrayin[0].length));
-}
+// function shiftArrays(arrayin, amountToShift) {
+//   return arrayin.map(row => rotate(row, amountToShift % arrayin[0].length));
+// }
 
 function swap(inputArray, index1, index2) {
   return (swapArray = inputArray.map((element, index) => {
@@ -67,11 +44,19 @@ function swap(inputArray, index1, index2) {
   }));
 }
 
+function mutatedSwap(inputArray, index1, index2) {
+  const a = inputArray[index1];
+  const b = inputArray[index2];
+  inputArray[index1] = b;
+  inputArray[index2] = a;
+  return inputArray;
+}
+
 module.exports = {
   replace,
   rotate,
   rotateArrays,
   reverseArrays,
-  shiftArrays,
-  swap
+  swap,
+  mutatedSwap
 };

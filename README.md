@@ -880,3 +880,111 @@ The following algorithm lies much outside the original timescale I set for the p
 ```
 myrvoldRuskey(4);
 ```
+
+---
+
+# The Utilities
+
+This is a series of utilities that are useful for manipulating the output of the permutation algorithms.
+
+## rotate()
+
+This rotates an array either left or right by a given number of elements. The direction of the rotation depends upon whether the second argument is more than or less than 0.
+
+```JavaScript
+rotate([1, 2, 3], 0);
+// -> [1, 2, 3]
+
+rotate([1, 2, 3], 1);
+// -> [2, 3, 1]
+
+rotate([1, 2, 3], 2);
+// -> [3, 1, 2]
+
+rotate([1, 2, 3], 3);
+// -> [1, 2, 3]
+
+rotate([1, 2, 3], -1);
+// -> [3, 1, 2]
+
+rotate([1, 2, 3], -2);
+// -> [2, 3, 1]
+
+rotate([1, 2, 3], -3);
+// -> [1, 2, 3]
+```
+
+## rotateArrays()
+
+Applies the above `rotate()` function to every array within an array.
+
+```JavaScript
+const testArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+
+rotateArrays(testArray, 1);
+// -> [[2, 3, 1], [3, 2, 1], [1, 3, 2]];
+
+rotateArrays(testArray, -2);
+// -> [[2, 3, 1], [3, 2, 1], [1, 3, 2]]
+```
+
+## reverseArrays()
+
+Reverses every array within an array.
+
+```JavaScript
+reverseArrays([[1, 2, 3], [1, 3, 2], [2, 1, 3]]);
+// -> [[3, 2, 1], [2, 3, 1], [3, 1, 2]];
+
+```
+
+## swap()
+
+Swaps the position of two elements within an array. First argument is the array this function to be applied to and the following two arguments are the indexes of the two arrays to swap. This is function does not mutate the original array, but returns a new shallow copy.
+
+```JavaScript
+swap([1, 2, 3, 4, 5], 0, 3);
+// -> [4, 2, 3, 1, 5];
+```
+
+## mutatedSwap
+
+Swaps the position of two elements within an array. First argument is the array this function to be applied to and the following two arguments are the indexes of the two arrays to swap. This is function **does** mutate the original array and is used in the Heap and Wells permutations.
+
+```JavaScript
+mutatedSwap([1, 2, 3, 4, 5], 0, 3);
+// -> [4, 2, 3, 1, 5];
+```
+
+## replace()
+
+Replaces all of the elements in an array of arrays with different elements. This is useful as many of the algorithms can only return permutations of sequential numbers and this allows the transformation of these arrays such that they can contain other elements.
+
+The first argument is the array of permutaions to transform, the second is the elements contained in the original permutation, the third is an array of elements to replace those in argument 2 with and the last is either `0`/`false` or `1`/`true` indicating whether the output should contain the original array as well as the transformed version.
+
+```Javascript
+const testArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]];
+
+replace(testArray, [1, 2, 3], ["A", "B", "C"], 1);
+/* -> [
+        ["A", "B", "C"],
+        ["A", "C", "B"],
+        ["B", "A", "C"],
+        ["B", "C", "A"],
+        ["C", "A", "B"],
+        ["C", "B", "A"]
+      ];
+*/
+
+replace(testArray, [1, 2, 3], ["A", "B", "C"], 0);
+/* -> [
+        [ [ 1, 2, 3 ], [ 'A', 'B', 'C' ] ],
+        [ [ 1, 3, 2 ], [ 'A', 'C', 'B' ] ],
+        [ [ 2, 1, 3 ], [ 'B', 'A', 'C' ] ],
+        [ [ 2, 3, 1 ], [ 'B', 'C', 'A' ] ],
+        [ [ 3, 1, 2 ], [ 'C', 'A', 'B' ] ],
+        [ [ 3, 2, 1 ], [ 'C', 'B', 'A' ] ]
+      ]
+*/
+
+```
