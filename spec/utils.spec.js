@@ -156,6 +156,20 @@ describe("UTILITIES", () => {
       ];
       expect(replace(array, [1, 2, 3], ["a", "b", "c"], 1)).to.eql(expected);
     });
+    it("checks a small array of arrays has all content substituted and outputs input and output but in separate arrays", () => {
+      const expected = [
+        [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]],
+        [
+          ["a", "b", "c"],
+          ["a", "c", "b"],
+          ["b", "a", "c"],
+          ["b", "c", "a"],
+          ["c", "a", "b"],
+          ["c", "b", "a"]
+        ]
+      ];
+      expect(replace(array, [1, 2, 3], ["a", "b", "c"])).to.eql(expected);
+    });
   });
   describe("rotate()", () => {
     describe("checks that array was correctly rotated by 0.", () => {
