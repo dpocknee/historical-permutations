@@ -14,8 +14,8 @@ function replace(
   if (inputOutput === 0 || inputOutput === 1) {
     return originalArrayOfArrays.map(permRow => {
       return inputOutput
-        ? permRow.map(element => referenceObj[String(element)])
-        : [permRow, permRow.map(element => referenceObj[String(element)])];
+        ? [permRow, permRow.map(element => referenceObj[String(element)])]
+        : permRow.map(element => referenceObj[String(element)]);
     });
   }
   return originalArrayOfArrays.reduce(
@@ -41,7 +41,10 @@ function rotateArrays(array, rotation) {
 }
 
 function reverseArrays(array) {
-  return array.map(innerArray => innerArray.reverse());
+  return array.map(innerArray => {
+    const nonMutate = innerArray.map(x => x);
+    return nonMutate.reverse();
+  });
 }
 
 function swap(inputArray, index1, index2) {

@@ -143,7 +143,7 @@ describe("UTILITIES", () => {
         [[3, 1, 2], ["c", "a", "b"]],
         [[3, 2, 1], ["c", "b", "a"]]
       ];
-      expect(replace(array, [1, 2, 3], ["a", "b", "c"], 0)).to.eql(expected);
+      expect(replace(array, [1, 2, 3], ["a", "b", "c"], 1)).to.eql(expected);
     });
     it("checks a small array of arrays has all content substituted and outputs ONLY output", () => {
       const expected = [
@@ -154,7 +154,7 @@ describe("UTILITIES", () => {
         ["c", "a", "b"],
         ["c", "b", "a"]
       ];
-      expect(replace(array, [1, 2, 3], ["a", "b", "c"], 1)).to.eql(expected);
+      expect(replace(array, [1, 2, 3], ["a", "b", "c"], 0)).to.eql(expected);
     });
     it("checks a small array of arrays has all content substituted and outputs input and output but in separate arrays", () => {
       const expected = [
@@ -168,7 +168,26 @@ describe("UTILITIES", () => {
           ["c", "b", "a"]
         ]
       ];
-      expect(replace(array, [1, 2, 3], ["a", "b", "c"])).to.eql(expected);
+      expect(replace(array, [1, 2, 3], ["a", "b", "c"]), 2).to.eql(expected);
+    });
+    it("checks function does not mutate array", () => {
+      const testArray = [
+        [1, 2, 3],
+        [1, 3, 2],
+        [2, 1, 3],
+        [2, 3, 1],
+        [3, 1, 2],
+        [3, 2, 1]
+      ];
+      expect(testArray).to.not.equal(
+        replace(testArray, [1, 2, 3], ["a", "b", "c"], 0)
+      );
+    });
+    it("checks function does not change original array.", () => {
+      const originalArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      const testArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      replace(testArray, [1, 2, 3], ["a", "b", "c"], 0);
+      expect(originalArray).to.deep.eql(testArray);
     });
   });
   describe("rotate()", () => {
@@ -294,6 +313,16 @@ describe("UTILITIES", () => {
       const actual = rotateArrays(testArray, -2);
       expect(actual).to.deep.eql(expected);
     });
+    it("checks function does not mutate array", () => {
+      const mutateTestArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      expect(mutateTestArray).to.not.equal(rotateArrays(mutateTestArray, 2));
+    });
+    it("checks function does not change original array.", () => {
+      const originalArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      const mutateTestArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      rotateArrays(mutateTestArray, 2);
+      expect(originalArray).to.deep.eql(mutateTestArray);
+    });
   });
   describe("reverseArrays()", () => {
     it("checks all arrays are reversed", () => {
@@ -301,6 +330,16 @@ describe("UTILITIES", () => {
       const actual = reverseArrays(testArray);
       const expected = [[3, 2, 1], [2, 3, 1], [3, 1, 2]];
       expect(actual).to.deep.eql(expected);
+    });
+    it("checks function does not mutate array", () => {
+      const testArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      expect(testArray).to.not.equal(reverseArrays(testArray));
+    });
+    it("checks function does not change original array.", () => {
+      const originalArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      const testArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      reverseArrays(testArray);
+      expect(originalArray).to.deep.eql(testArray);
     });
   });
 });
