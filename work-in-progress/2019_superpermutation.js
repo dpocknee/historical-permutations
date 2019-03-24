@@ -81,30 +81,14 @@ function superpermutation(n) {
     newPerms[0].forEach(newValue => {
       outputArray.push(newValue);
     });
-    // const navigationPerms = bShape(newPerms[1], i, totalLoops);
     const navigationPerms = bShape2(newPerms[1], i, n, totalLoops, hierarchy);
-    console.log("newPerms: ", newPerms, "navigationPerms: ", navigationPerms);
     navigationPerms[1].forEach(newValue => {
       if (i < totalLoops - 1) outputArray.push(newValue);
     });
-    // console.log("outputArray", outputArray.join(" "));
     currentArray = navigationPerms[0];
   }
   console.log("Length of superpermutation: ", outputArray.length);
   return outputArray;
 }
 
-// superpermutation(4);
-// superpermutation(5);
 module.exports = superpermutation;
-
-// const factCountArray = Array.from({ length: 24 }, (value, index) => index);
-
-// console.log(recursiveCounter(factCountArray, 5));
-
-// const hierarchy = swapPositions(5);
-// console.log(hierarchy);
-
-// for (let i = 0; i < 24; i++) {
-//   console.log(selectSwapPositions(i, hierarchy));
-// }
