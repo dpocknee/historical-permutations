@@ -1,8 +1,11 @@
-const { rotate } = require('../utils/utils');
+const { rotate, reverseNonMutate } = require("../utils/utils");
 
 function createClosePerms(startingPerm, loopNo, totalLoops) {
   const miniPerms = startingPerm.reduce(
-    (outputArray, element, index) => (index !== startingPerm.length - 1 ? [...outputArray, element] : outputArray),
+    (outputArray, element, index) =>
+      index !== startingPerm.length - 1
+        ? [...outputArray, element]
+        : outputArray,
     startingPerm
   );
   const arrayCut = miniPerms.length - startingPerm.length;
@@ -14,51 +17,94 @@ function createClosePerms(startingPerm, loopNo, totalLoops) {
 }
 
 function bShape(startingPerm, loopNo, totalLoops) {
-  const newElements = rotate(startingPerm.slice(0, 2), 2);
+  const newElements = rotate(startingPerm.slice(0, 2), 1);
   const lastElements = startingPerm.slice(2);
-  const reversed = startingPerm.reverse();
+  const reversed = reverseNonMutate(startingPerm);
+  console.log("loopedaround", loopNo, startingPerm);
   return loopNo !== Math.round(totalLoops / 2) - 1
     ? [[...lastElements, ...newElements], newElements]
     : [[...reversed], reversed.slice(1)];
 }
 
-function bShape2(startingPerm, loopNo, n, totalLoops) {
-  const newElements = rotate(startingPerm.slice(0, 2), 2);
-  const lastElements = startingPerm.slice(2);
-  const reversed = startingPerm.reverse();
-  console.log('loop mod:', loopNo % (n - 1) === 0 && loopNo !== 0);
-  if (loopNo % (n - 1) === n - 1) {
-    return loopNo !== 0
-      ? [[...reversed], reversed.slice(1)]
-      : [[...lastElements, ...newElements], newElements];
-  }
+function bShape2(startingPerm, loopNo, n, totalLoops, hierarchy) {
+  const amountToReverse = selectSwapPositions(loopNo, hierarchy);
+  const newElements = reverseNonMutate(startingPerm.slice(0, amountToReverse));
+  const lastElements = startingPerm.slice(amountToReverse);
   return [[...lastElements, ...newElements], newElements];
 }
 
+function recursiveCounter(arrayIn, n) {
+  return arrayIn.reduce((output, value, index) => {
+    if (index % (n - 1) === n - 2) return [...output, value];
+    return output;
+  }, []);
+}
+
+function swapPositions(n) {
+  const factArray = Array.from({ length: n - 1 }, (value, index) => index + 1);
+  const factorial = factArray.reduce((output, value, index) => {
+    return output * value;
+  }, 1);
+  const factCountArray = Array.from(
+    { length: factorial },
+    (value, index) => index
+  );
+  const arrayOfPositions = [[2, factCountArray]];
+  for (let i = n; i > 2; i--) {
+    arrayOfPositions.push([
+      n - i + 3,
+      recursiveCounter(arrayOfPositions[arrayOfPositions.length - 1][1], i)
+    ]);
+  }
+  return arrayOfPositions.reverse();
+}
+
+function selectSwapPositions(currentLoopNo, arrayOfSwaps) {
+  const levelFound = arrayOfSwaps.findIndex(innerArray => {
+    return innerArray[1].includes(currentLoopNo);
+  });
+  return arrayOfSwaps[levelFound][0];
+}
+
 function superpermutation(n) {
+  const hierarchy = swapPositions(n);
   const startingArray = Array.from({ length: n }, (value, index) => index + 1);
   const outputArray = [];
-  let currentArray = startingArray;
-  const factorial = startingArray.reduce((total, number, index) => number * total, 1);
+  let currentArray = startingArray.map(x => x);
+  const factorial = startingArray.reduce(
+    (total, number, index) => number * total,
+    1
+  );
   const totalLoops = factorial / n;
   for (let i = 0; i < totalLoops; i++) {
     const newPerms = createClosePerms(currentArray, i, totalLoops);
-    newPerms[0].forEach((newValue) => {
+    newPerms[0].forEach(newValue => {
       outputArray.push(newValue);
     });
-    const navigationPerms = bShape(newPerms[1], i, totalLoops);
-    // const navigationPerms = bShape2(newPerms[1], i, n, totalLoops);
-    console.log('newPerms: ', newPerms, 'navigationPerms: ', navigationPerms);
-    navigationPerms[1].forEach((newValue) => {
+    // const navigationPerms = bShape(newPerms[1], i, totalLoops);
+    const navigationPerms = bShape2(newPerms[1], i, n, totalLoops, hierarchy);
+    console.log("newPerms: ", newPerms, "navigationPerms: ", navigationPerms);
+    navigationPerms[1].forEach(newValue => {
       if (i < totalLoops - 1) outputArray.push(newValue);
     });
-    console.log('outputArray', outputArray.join(' '));
+    // console.log("outputArray", outputArray.join(" "));
     currentArray = navigationPerms[0];
   }
-  console.log('Length of superpermutation: ', outputArray.length);
+  console.log("Length of superpermutation: ", outputArray.length);
   return outputArray;
 }
 
 // superpermutation(4);
 // superpermutation(5);
 module.exports = superpermutation;
+
+// const factCountArray = Array.from({ length: 24 }, (value, index) => index);
+
+// console.log(recursiveCounter(factCountArray, 5));
+
+// const hierarchy = swapPositions(5);
+// console.log(hierarchy);
+
+// for (let i = 0; i < 24; i++) {
+//   console.log(selectSwapPositions(i, hierarchy));
+// }

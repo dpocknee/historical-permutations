@@ -12,6 +12,7 @@ const {
   replace,
   rotate,
   rotateArrays,
+  reverseNonMutate,
   reverseArrays,
   swap,
   mutatedSwap
@@ -32,5 +33,6 @@ module.exports = {
   rotateArrays,
   reverseArrays,
   swap,
-  mutatedSwap
+  mutatedSwap,
+  reverseNonMutate
 };

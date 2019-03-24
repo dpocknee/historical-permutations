@@ -63,11 +63,26 @@ function mutatedSwap(inputArray, index1, index2) {
   return inputArray;
 }
 
+function deepEquals(array1, array2) {
+  array1.every((value, index) => {
+    return value === array2[index];
+  });
+}
+
+function reverseNonMutate(array) {
+  const maxIndex = array.length - 1;
+  return array.map((value, index) => {
+    return array[maxIndex - index];
+  });
+}
+
 module.exports = {
   replace,
   rotate,
   rotateArrays,
+  reverseNonMutate,
   reverseArrays,
   swap,
-  mutatedSwap
+  mutatedSwap,
+  deepEquals
 };
