@@ -43,7 +43,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 1968 - Ord-Smith (ACM308: perm) [pseudo-lexicographic]
 - 1976 - Ives
 - 2001 - Myrvold-Ruskey [remainder order] &#9989;
-- 2019 - Superpermutations
+- 2019 - Superpermutations &#9989;
 
 ## Ordering Functions Implemented
 
@@ -63,6 +63,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
   - `schrackShimrat([1, 2, 3, 4])`
   - `heap([1, 2, 3, 4])`
   - `myrvoldRuskey(4)`
+  - `superpermutation(4)`
 - Ordering Algorithms
   - TO DO
 - Utilities
@@ -72,6 +73,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
   - `reverseArrays([[1, 2, 3], [1, 3, 2], [2, 1, 3]])`
   - `swap([1, 2, 3, 4, 5], 0, 3)`
   - `mutatedSwap([1, 2, 3, 4, 5], 0, 3)`
+  - `reverseNonMutate([1, 2, 3, 4, 5])`
 
 ---
 
@@ -108,7 +110,7 @@ Tests are written in `chai` and `mocha` and can be run through `node.js` using t
 
 ## Contributions
 
-Contributions to this library are welome and can be made using a pull request. Permutation algorithms that are finished and fully tested are placed in the `algorithms` folder and their tests in the `spec` folder. Utilities are found in the `utils` folder and their tests are also kept in the `spec` folder. Algorithms currently in progress or which have either not been fully tested or are failing current tests are kept in the `work-in-progress` folder, which has its own `spec` folder for tests.
+Contributions to this library are welome and can be made using a pull request to the github repository. Permutation algorithms that are finished and fully tested are placed in the `algorithms` folder and their tests in the `spec` folder. Utilities are found in the `utils` folder and their tests are also kept in the `spec` folder. Algorithms currently in progress or which have either not been fully tested or are failing current tests are kept in the `work-in-progress` folder, which has its own `spec` folder for tests.
 
 ## Deployment
 
@@ -917,6 +919,38 @@ myrvoldRuskey(4);
 
 ---
 
+## Superpermutation (2019)
+
+"A superpermutation[1] is a string formed from a set of n symbols such that every one of the n! permutations of those symbols appears exactly once as a contiguous block of n characters in the string." - [Greg Egan](http://www.gregegan.net/SCIENCE/Superpermutations/Superpermutations.html)
+
+This is my own implementation of a superpermutation algorithm that should give string lengths equivalent to:
+
+> _L_ (_n_) = 1! + 2! + ... + _n_!
+
+This gives a result where:
+
+- _L_(2) = 3
+- _L_(3) = 9
+- _L_(4) = 33
+- _L_(5) = 153
+- _L_(6) = 873
+- _L_(7) = 5913
+- _L_(8) = 46,233
+- _L_(9) = 409, 133
+
+The algorithm takes a graph-based approach to creating small weight-1-cycle graphs (e.g. `[1, 2, 3, 4, 1, 2, 3]`) that contain all possible permutations that can be created through rotation (i.e. `[1, 2, 3, 4], [2, 3, 4, 1], [3, 4, 1, 2], [4, 1, 2, 3]`) that are then connected via reversing different-sized segments of each permutation.
+
+More information on superpermutations can be found at [Greg Egan's site](http://www.gregegan.net/SCIENCE/Superpermutations/Superpermutations.html)
+
+### Usage
+
+```JavaScript
+superpermutation(4);
+// -> [1, 2, 3, 4, 1, 2, 3, 1, 4, 2, 3, 1, 2, 4, 3, 1, 2, 1, 3, 4, 2, 1, 3, 2, 4, 1, 3, 2, 1, 4, 3, 2, 1]
+```
+
+---
+
 # The Utilities
 
 This is a series of utilities that are useful for manipulating the output of the permutation algorithms.
@@ -1021,4 +1055,14 @@ replace(testArray, [1, 2, 3], ["A", "B", "C"], 0);
       ]
 */
 
+```
+
+## reverseNonMutate()
+
+Creates the same result as JavaScript's built-in `Array.prototype.reverse()` function, but without mutating the original array it is operating upon.
+
+```JavaScript
+reverseNonMutate([1, 2, 3, 4, 5])
+
+// -> [5, 4, 3, 2, 1]
 ```
