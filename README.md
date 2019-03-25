@@ -19,7 +19,7 @@ The current aim is to implement all of the algorithms mentioned in the following
 
 - 8 March 2019 (v 0.1.0)
   - Tompkins-Paige, Lehmer CDM, Hall, Coveyou-Sullivan, Wells, Peck-Schrack, Schrack-Shimrat, Heap, Myrvold-Ruskey
-- 25 March 2019 (v 0.2.0)
+- 25 March 2019 (v 0.3.0)
   - Superpermutation algorithm added.
 
 ## Permutation Algorithms Implemented
@@ -37,7 +37,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 1962 - Eaves (ACM130: Permute)
 - 1962 - Howell (ACM87: PERMUTATION) [lexicographic]
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic]
-- 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM)
+- 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM) &#9989;
 - 1963 - Heap &#9989;
 - 1967 - Langdon
 - 1967 - Phillips (BCJ28)
@@ -782,6 +782,38 @@ it generates are alternately odd and even;
 Trotter, H. F. "Algorithm 115: Perm". In:
 <i>Communications of the ACM</i> 5.8 (Aug. 1962), pp. 434-435.
 </pre>
+
+These versions, and the one implemented in the library do not use "Even's speedup" which results in a different ordering, in which the highest, rather than lowest number zig-zags across the permutations. This improvement changes the algorithm to a **loopless** algorithm, illustrated by Sedgewick as:
+
+<pre>
+<code>
+<i>i</i>:=0;
+<b>loop while</b> <i>i</i>&le;<i>N</i>; <i>i</i>:=<i>i</i>+1; <i>c[i]</i>:=1; <i>d[i]</i>:= <b>true</b>;
+                <i>s[i]</i>:= <i>i</i>-1; <i>x</i>[<i>i</i>]:=0 <b>repeat</b>;
+<i>process</i>;
+<b>loop</b>:
+  <i>s</i>[<i>N</i>+1]:=<i>N</i>; <i>x</i>[<i>i</i>]:=0;
+  <b>if</b> <i>c</i>[<i>i</i>] = <i>i</i> <b>then</b>
+    <b>if not</b> <i>d[i]</i> 
+        <b>then</b> <i>x</i>[<i>s</i>[<i>i</i>]]:=<i>x</i>[<i>s</i>[<i>i</i>]]+1; <b>endif</b>;
+    <i>d[i]</i>:=<b>not</b> <i>d[i]</i>; <i>c[i]</i>:=1; <i>s</i>[<i>i</i>+1]:= <i>s</i>[<i>i</i>]:=<i>i</i>-1;
+  <b>endif</b>;
+  <i>i</i>:=<i>s</i>[<i>N</i>+1];
+<b>while</b> <i>i</i>>1;
+  <b>if</b> <i>d[i]</i> <b>then</b> <i>k</i>:=<i>c[i]</i>+<i>x</i>[<i>i</i>]
+        <b>else</b> <i>k</i>:=<i>i</i>-<i>c[i]</i>+<i>x</i>[<i>i</i>] <b>endif</b>;
+  P[<i>k</i>]:=:P[<i>k</i>+1];
+  <i>process</i>;
+  <i>c[i]</i>:=:<i>c[i]</i>+1;
+<b>repeat</b>;
+</code>
+</pre>
+
+### Usage
+
+```JavaScript
+steinhausJohnsonTrotter(4)
+```
 
 ---
 
