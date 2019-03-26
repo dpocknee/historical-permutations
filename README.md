@@ -42,6 +42,9 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 1962 - Howell (ACM87: PERMUTATION) [lexicographic]
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic]
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM) &#9989;
+  - original &#9989;
+  - loopless &#9989;
+  - Even's speedup &#9989;
 - 1963 - Heap &#9989;
 - 1967 - Langdon
 - 1967 - Phillips (BCJ28)
