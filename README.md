@@ -21,7 +21,7 @@ The current aim is to implement all of the algorithms mentioned in the following
   - Tompkins-Paige, Lehmer CDM, Hall, Coveyou-Sullivan, Wells, Peck-Schrack, Schrack-Shimrat, Heap, Myrvold-Ruskey
 - 25 March 2019 (v 0.3.0)
   - Superpermutation algorithm added.
-- 26 March 2019 (v 0.3.1)
+- 26 March 2019 (v 0.4.0)
   - Steinhaus-Johnson-Trotter added.
 
 ## Permutation Algorithms Implemented
