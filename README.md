@@ -21,6 +21,8 @@ The current aim is to implement all of the algorithms mentioned in the following
   - Tompkins-Paige, Lehmer CDM, Hall, Coveyou-Sullivan, Wells, Peck-Schrack, Schrack-Shimrat, Heap, Myrvold-Ruskey
 - 25 March 2019 (v 0.3.0)
   - Superpermutation algorithm added.
+- 26 March 2019 (v 0.3.1)
+  - Steinhaus-Johnson-Trotter added.
 
 ## Permutation Algorithms Implemented
 
@@ -50,7 +52,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 ## Ordering Functions Implemented
 
 - 1947 - Gray Code
-- 19?? - Lehmer Linear Congruential Generator [random number generator]
+- 1951 - Lehmer Linear Congruential Generator [random number generator]
 - 1964 - Durstenfeld (ACM235: SHUFFLE) [random permutation algorithm ]
 
 ## All Functions In The Library
@@ -61,6 +63,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
   - `hall(4)`
   - `coveyouSullivan(4)`
   - `wells(["1", 2, "3", 4])`
+  - `steinhausJohnsonTrotter(4, "even")`
   - `peckSchrack(4)`
   - `schrackShimrat([1, 2, 3, 4])`
   - `heap([1, 2, 3, 4])`
@@ -783,7 +786,7 @@ Trotter, H. F. "Algorithm 115: Perm". In:
 <i>Communications of the ACM</i> 5.8 (Aug. 1962), pp. 434-435.
 </pre>
 
-These versions, and the one implemented in the library do not use "Even's speedup" which results in a different ordering, in which the highest, rather than lowest number zig-zags across the permutations. This improvement changes the algorithm to a **loopless** algorithm, illustrated by Sedgewick as:
+This algorithm can also be implemented as a **loopless** algorithm, which gives the same result but runs slightly slower. It is described by Sedgewick as:
 
 <pre>
 <code>
@@ -796,7 +799,8 @@ These versions, and the one implemented in the library do not use "Even's speedu
   <b>if</b> <i>c</i>[<i>i</i>] = <i>i</i> <b>then</b>
     <b>if not</b> <i>d[i]</i> 
         <b>then</b> <i>x</i>[<i>s</i>[<i>i</i>]]:=<i>x</i>[<i>s</i>[<i>i</i>]]+1; <b>endif</b>;
-    <i>d[i]</i>:=<b>not</b> <i>d[i]</i>; <i>c[i]</i>:=1; <i>s</i>[<i>i</i>+1]:= <i>s</i>[<i>i</i>]:=<i>i</i>-1;
+    <i>d[i]</i>:=<b>not</b> <i>d[i]</i>; <i>c[i]</i>:=1; 
+    <i>s</i>[<i>i</i>+1]:= <i>s</i>[<i>i</i>]; <i>s</i>[<i>i</i>]:=<i>i</i>-1;
   <b>endif</b>;
   <i>i</i>:=<i>s</i>[<i>N</i>+1];
 <b>while</b> <i>i</i>>1;
@@ -809,10 +813,40 @@ These versions, and the one implemented in the library do not use "Even's speedu
 </code>
 </pre>
 
+A slightly different ordering can be found using a version popularised by Shimon Even in his 1973 book **Algorithmic Combinatorics**, commonly referred to as **Even's Speedup**. This results in a different ordering, in which the highest, rather than lowest number zig-zags across the permutations. This works by assigning each mark a direction of left or right. All marks start with a left-wards direction.
+
+> Let us denote by an arrow above each integer its _direction_, namely, the direction in which it tends to o. We start with all the directions pointing from right to left. Thus, if _n_ = 4, our initial data are as follows:
+>
+> ```
+> < < < <
+> 1 2 3 4
+> ```
+>
+> An integer _k_ is _mobile_ if there exists an integer smaller than _k_ adjacent to _k_ on the side where the direction of _k_ points to. For our example, in our initial position described above, the integers 2, 3, and 4 are mobile. In the case
+>
+> ```
+> < < < <
+> 2 3 4 1
+> ```
+>
+> only 4 is mobile.
+> **Algorithm 1.1**
+> (1) If there are no mobile integers, stop.
+> (2) Call the largest mobile integer _m_.
+> (3) Let _m_ switch places with the adjacent integer to which _m_th direction points to.
+> (4) Switch the direction of all integers \_k_ for which _k_ > _m_. Return to step (1).
+>
+> \- Shimon Even _Algorithmic Combinatorics_ (1973), Macmillan, New York, pp. 2-3.
+
 ### Usage
+
+The **loopless** and **Even's Speedup** algorithms can be used by passing in a second argument into the function:
 
 ```JavaScript
 steinhausJohnsonTrotter(4)
+steinhausJohnsonTrotter(4, "loopless")
+steinhausJohnsonTrotter(4, "even")
+
 ```
 
 ---

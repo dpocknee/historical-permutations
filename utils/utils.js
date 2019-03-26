@@ -47,12 +47,13 @@ function reverseArrays(array) {
   });
 }
 
-function swap(inputArray, index1, index2) {
-  return (swapArray = inputArray.map((element, index) => {
-    if (index === index1) return inputArray[index2];
-    if (index === index2) return inputArray[index1];
+function swap(array, element1, element2) {
+  const copiedArray = array.map(x => x);
+  return copiedArray.map((element, index) => {
+    if (index === element1) return array[element2];
+    if (index === element2) return array[element1];
     return element;
-  }));
+  });
 }
 
 function mutatedSwap(inputArray, index1, index2) {
