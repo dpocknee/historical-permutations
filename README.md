@@ -118,7 +118,7 @@ Tests are written in `chai` and `mocha` and can be run through `node.js` using t
 - `npm run test:algo` only runs tests for the finished permutation algorithms, excluding utilities.
 - `npm run test:wip` only runs the tests in the `work-in-progress` folder.
 
-- The tests are written to ensure that all of the algorithms are implemented correctly and produce all possible permutations without repetition when given an array of a certain length. Tests are only included in the github repository, not in the npm release.
+The tests are written to ensure that all of the algorithms are implemented correctly and produce all possible permutations without repetition when given an array of a certain length. Tests are only included in the github repository, not in the npm release. On github, these tests are run through `travis-ci`.
 
 ## Contributions
 
@@ -157,6 +157,12 @@ Examples of usage can be found in the `examples` folder.
 ## Built With
 
 - `node.js`
+- `mocha`
+- `chai`
+- `lodash`
+- `eslint`
+- `prettier`
+- `travis-ci`
 
 ## Author
 
@@ -169,7 +175,7 @@ Examples of usage can be found in the `examples` folder.
 
 ## License
 
-Anti-copyright.
+MIT
 
 ## Acknowledgments
 

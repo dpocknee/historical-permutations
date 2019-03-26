@@ -61,7 +61,7 @@ describe("UTILITIES", () => {
       const expected = [1, 2, 3, 5, 4];
       expect(actual).to.eql(expected);
     });
-    it("checks that output array is the not same as input array.", () => {
+    it("checks that output array is not the same as input array.", () => {
       const actual = swap(testArray, 3, 4);
       expect(actual).to.not.equal(testArray);
     });
@@ -119,7 +119,7 @@ describe("UTILITIES", () => {
       const expected = [1, 2, 3, 5, 4];
       expect(actual).to.eql(expected);
     });
-    it("checks that output array is the not same as input array.", () => {
+    it("checks that output array is the same as input array.", () => {
       const actual = mutatedSwap(testArray, 3, 4);
       expect(actual).to.equal(testArray);
     });
