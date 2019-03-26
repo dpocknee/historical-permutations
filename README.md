@@ -49,6 +49,8 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 2001 - Myrvold-Ruskey [remainder order] &#9989;
 - 2019 - Superpermutations &#9989;
 
+**CURRENT PROGRESS: 11/ 20 Algorithms Complete**
+
 ## Ordering Functions Implemented
 
 - 1947 - Gray Code
@@ -88,11 +90,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-If you just want to use the library and are not bothered about contributing to the project or running the testing suite that accompanies it, then there are no prequesites needed for running the library, as it does not need the use of any external libraries. If you are planning on running the testing suite you will need to be running `node.js` and install the devDependencies mentioned in the `package.json` file (these include `lodash`, `chai` and `mocha`).
+If you just want to use the library and are not bothered about contributing to the project or running the testing suite that accompanies it, then there are no prerequisites needed for running the library, as it does not need the use of any external libraries. If you are planning on running the testing suite you will need to be running `node.js` and install the devDependencies mentioned in the `package.json` file (these include `lodash`, `chai` and `mocha`).
 
 ### Installing
 
-The simples way to use this library is to download or clone the folder from the github repository onto a folder on your hardrive containing the project you want to use it with, then require or import in the files, as mentioned below in the `Deployment` section. If you are cloning from github
+The simplest way to use this library is to download or clone the folder from the github repository onto a folder on your hardrive containing the project you want to use it with, then require or import in the files, as mentioned below in the `Deployment` section. If you are cloning from github
 
 ### With node.js
 
@@ -111,7 +113,7 @@ Tests are written in `chai` and `mocha` and can be run through `node.js` using t
 - `npm run test:algo` only runs tests for the finished permutation algorithms, excluding utilities.
 - `npm run test:wip` only runs the tests in the `work-in-progress` folder.
 
-- The tests are written to ensure that all of the algorithms are implemented correctly and produce all possible permutations without repetition when given an array of a certain length.
+- The tests are written to ensure that all of the algorithms are implemented correctly and produce all possible permutations without repetition when given an array of a certain length. Tests are only included in the github repository, not in the npm release.
 
 ## Contributions
 
@@ -825,16 +827,43 @@ A slightly different ordering can be found using a version popularised by Shimon
 > An integer _k_ is _mobile_ if there exists an integer smaller than _k_ adjacent to _k_ on the side where the direction of _k_ points to. For our example, in our initial position described above, the integers 2, 3, and 4 are mobile. In the case
 >
 > ```
-> < < < <
+> < > < <
 > 2 3 4 1
 > ```
 >
 > only 4 is mobile.
 > **Algorithm 1.1**
-> (1) If there are no mobile integers, stop.
-> (2) Call the largest mobile integer _m_.
-> (3) Let _m_ switch places with the adjacent integer to which _m_th direction points to.
-> (4) Switch the direction of all integers \_k_ for which _k_ > _m_. Return to step (1).
+>
+> - (1) If there are no mobile integers, stop.
+> - (2) Call the largest mobile integer _m_.
+> - (3) Let _m_ switch places with the adjacent integer to which \_m_th direction points to.
+> - (4) Switch the direction of all integers \_k* for which \_k* > _m_. Return to step (1).
+>
+> Let us demonstrate the algorithm for _n_ = 4:
+>
+> ```
+> < < < <
+> 1 2 3 4
+> < < < <
+> 1 2 4 3
+> < < < <
+> 1 4 2 3
+> < < < <
+> 4 1 2 3
+> > < < <
+> 4 1 3 2
+> < > < <
+> 1 4 3 2
+> < < > <
+> 1 3 4 2
+> < < < >
+> 1 3 2 4
+> < < < <
+> 3 1 2 4
+> < < < <
+> 3 1 4 2
+> ...
+> ```
 >
 > \- Shimon Even _Algorithmic Combinatorics_ (1973), Macmillan, New York, pp. 2-3.
 
