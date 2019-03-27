@@ -33,7 +33,8 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 
 - 1956 - Tompkins-Paige &#9989;
 - 1960 - Lehmer [Constant Difference Method] &#9989;
-- 1960 - Walker Backtrack Method
+- 1960 - Walker Backtrack Method [lexicographic] &#10060;
+- 1960 - D. N. Lehmer Lexicographic [lexicographic] &#10060;
 - 1960 - Hall &#9989;
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION) &#9989;
 - 1961 - Wells (ACM115) [Transposition Method] &#9989;
@@ -293,6 +294,8 @@ Use arrays containing: **only numbers**
 
 ## Walker Backtrack Method (1960)
 
+The Walker Backtrack method was first proposed by R. J. Walker in "An Enumerative Technique for a Class Of Combinatorial Problems".
+
 > "There are various ways in which a linear order can be imposed on the
 > elements of **A** so as to reduce this formulation to the general one stated above.
 >
@@ -328,6 +331,65 @@ Use arrays containing: **only numbers**
 > In: Proceedings of Symposium Applied Mathematics: Combinatorial Analysis.
 > 5.6 (June 1962), Vol. 10. Providence, R.I.:
 > American Mathematical Society, 1960, pp. 179-193
+
+although the following is not a permutation algorithm but _the basis of a technique_ which could be used for solving combinatorial problems, it is included here as Lehmer states that it was used for generating permutations and gives a verbal description:
+
+> The Walker Backtrack Method, given elsewhere in this volume in more general form, is described by him as “‘completely unsophisticated.” One regards a permutation of the marks 0, 1, 2, ... ,(_n_ — 1) as simply a vector whose components are taken from the non-negative integers < _n_ but are all distinct. One proceeds to construct such vectors starting from 0, 0, 0, 0, ... , 0, 0 filling in at each opportunity the least available mark. When a
+> permutation is completed the last two marks are removed and the penultimate address is filled by the next largest mark available. If there is no next largest element available one more mark is removed and replaced by the next larger available mark, etc. The result is a complete set of permutations in lexicographical order. This process was coded by Walker, for a general _n_, for the SWAC using only twenty-two commands. The program is slower than the Tompkins routine by a factor of two. I believe it could be altered to give random permutation and to skip over blocks of unwanted permutations. A similar program was devised by the writer to meet requirement (d) in 1955. Such programs are difficult to describe except in very general terms. In brief the machine keeps a sort of registry which shows at a glance which marks have been assigned to the permutation under construction and thereby avoids placing two marks in the same place and provides an automatic waiting list of marks as yet unassigned.
+>
+> Lehmer, D.H. "Teaching combinatorial tricks to a computer".
+> In: Proceedings of Symposium Applied Mathematics: Combinatorial Analysis.
+> 5.6 (June 1962), Vol. 10. Providence, R.I.:
+> American Mathematical Society, 1960, pp. 179-193
+
+---
+
+## D. N. Lehmer Lexicographic (1960)
+
+> A third way of setting up correspondence was, in effect, suggested by D. N. Lehmer as long ago as 1906. It may be called the lexicographic method since it generates permutations in this order.
+>
+> If in any permutation
+> _a_<sub>1</sub>, _a_<sub>2</sub>, ..., _a_<sub>_n_</sub>
+>
+> of the numbers 0(1)_n_ — 1 we strike out a; and reduce by unity all the marks which exceed _a_<sub>1</sub>, we get a new permutation
+>
+> &alpha;<sub>1</sub>, &alpha;<sub>2</sub>, ..., &alpha;<sub>_n_-1</sub>
+>
+> of the numbers 0(1)_n_ — 2, which we may denote by
+>
+> _M_ (_a_<sub>1</sub>, _a_<sub>2</sub>, ..., _a_<sub>_n_</sub>).
+>
+> If we now define a rank function > _R_ (_a_<sub>1</sub>, _a_<sub>2</sub>, ..., _a_<sub>_n_</sub>) recursively by
+>
+> _R_(0) = 0,
+>
+> R(> _M_ (_a_<sub>1</sub>, _a_<sub>2</sub>, ..., _a_<sub>_n_</sub>).) = _a_<sub>1</sub>(_n_ — 1)! + _R_(_M_ (_a_<sub>1</sub>, _a_<sub>2</sub>, ..., _a_<sub>_n_</sub>))
+>
+> it is seen that _R_ is nothing but the rank or serial number of the permutation (_a_<sub>1</sub>, _a_<sub>3</sub>, ..., _a_<sub>_n_</sub>) in the lexicographical list of all permutations. In fact, in this list the first (_n_ — 1)! permutations have 0 as their first mark, the next (_n_ — 1)! permutations have 1 as their first mark, and so on. Since our permutation has a, as its first mark it is preceded by _a_<sub>1</sub>(_n_ — 1)! permutations whose first mark is less than _a_<sub>1</sub>. Among those permutations which begin with _a_<sub>1</sub>, ours has rank _R_(_M_ (_a_<sub>1</sub>, _a_<sub>2</sub>, ..., _a_<sub>_n_</sub>)). If one successively applies the operation M we get a sequence of » — 1 permutations whose first elements are the factorial digits of the rank of the original permutation. Thus for example, for n = 7, the permutation 1 4 2 0 5 6 3 gives rise to
+
+```
+1 4 2 0 5 6 3
+  3 1 0 4 5 2
+    1 0 3 4 2
+      0 2 3 1
+        1 2 0
+          1 0
+            0
+```
+
+> Hence the rank of 1 4 2 0 5 6 3 is
+>
+> 1, 3, 1, 0, 1, 1 = 6! + 3-5! + 4! 4+ 2! 4 1! = 1107.
+>
+> Conversely given the rank and its factorial digits
+>
+> _S_<sub>_n_—1</sub>, S<sub>n-2</sub>, ..., S<sub>2</sub>, S<sub>1</sub>
+>
+> we may reconstruct the permutation having this rank. Beginning with 0 we affix S<sub>1</sub> and in case S<sub>1</sub> is 0, we increase the original 0 to 1. Thus we get
+>
+> O 1 if S<sub>1</sub> = 0,
+>
+> 1 0 if S<sub>1</sub> = 1.
 
 ---
 
