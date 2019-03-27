@@ -1,8 +1,9 @@
 # historical-permutations
 
+## A JavaScript library of historical permutation algorithms from 1956 to the present day.
+
 [![Build Status](https://travis-ci.com/dpocknee/historical-permutations.svg?branch=master)](https://travis-ci.com/dpocknee/historical-permutations) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/dpocknee/historical-permutations/graphs/commit-activity) [![Generic badge](https://img.shields.io/badge/Contributions-Welcome-green.svg)](https://shields.io/)
 
-A JavaScript library of historical permutation algorithms from 1956 onwards.  
 I originally started collecting these algorithms together as I was doing some research on early permutation algorithms as part of an ongoing project about the "Permutation Poems" of the poet and artist Brion Gysin. However, I soon found that many of these algorithms were in hard-to-find papers and little documented, often because they were superseded by more efficient algorithms only years later.
 
 I thought that this library might be of interest to those looking to learn about permutations or the history of early computing - especially those who are trying to find out more about the technology used to write early computational poetry.

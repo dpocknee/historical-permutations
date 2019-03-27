@@ -9,21 +9,29 @@ function langdonRotate(array, rotationSection, rotationAmount) {
 }
 
 function langdon(n, cb) {
-  const p = Array.from({ length: n + 1 }, (v, i) => i);
-  const q = p.map(x => x);
+  let p = [];
+  const q = [];
+
+  for (let i = 0; i <= n; i++) {
+    p[i] = i;
+    q[i] = i;
+  }
+
   cb(p);
-  let newArray = p.map(x => x);
   let i = n;
   while (i >= 1) {
-    newArray = [0, ...langdonRotate(newArray.slice(1), i, 1)];
-    if (newArray[i] === q[i]) i = n;
-    else i -= 1;
-    cb(newArray);
+    p = [0, ...langdonRotate(p.slice(1).map(x => x), i, 1)];
+    if (p[i] === q[i]) {
+      i = n;
+    } else {
+      i -= 1;
+    }
+    cb(p);
     if (i < 1) break;
   }
 }
 
-const cb = (permutation) => {
+const cb = permutation => {
   console.log(permutation);
   // outputArrays.push(permutation.slice(1));
 };
