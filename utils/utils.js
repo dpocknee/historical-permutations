@@ -77,6 +77,22 @@ function reverseNonMutate(array) {
   });
 }
 
+function compareArrays(array1, array2) {
+  const array2First = array2[0];
+  const referenceArray = array1[0].reduce((refObj, element, index) => {
+    const arrayLink = { [String(element)]: array2First[index] };
+    return { ...refObj, ...arrayLink };
+  }, {});
+  return array1.every((permutation, permutationIndex) => {
+    return permutation.every((element, elementIndex) => {
+      return (
+        referenceArray[String(element)] ===
+        array2[permutationIndex][elementIndex]
+      );
+    });
+  });
+}
+
 module.exports = {
   replace,
   rotate,
@@ -85,5 +101,6 @@ module.exports = {
   reverseArrays,
   swap,
   mutatedSwap,
-  deepEquals
+  deepEquals,
+  compareArrays
 };

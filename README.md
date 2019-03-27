@@ -36,7 +36,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 1960 - Hall &#9989;
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION) &#9989;
 - 1961 - Wells (ACM115) [Transposition Method] &#9989;
-- 1962 - Peck-Schrack (ACM86: PERMUTE) &#9989;
+- 1962 - Peck-Schrack (ACM86: PERMUTE) [Tompkins-Paige w/ leftwise rotation] &#9989;
 - 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic] &#9989;
 - 1962 - Eaves (ACM130: Permute)
 - 1962 - Howell (ACM87: PERMUTATION) [lexicographic]
@@ -451,7 +451,7 @@ Use arrays containing: **anything**
 
 ## Peck-Schrack (1962)
 
-This algorithm was implemented in `ALGOL` by Peck and Schrack in 1962:
+This algorithm was implemented in `ALGOL` by Peck and Schrack in 1962. It gives the same result as the Tompkins-Paige algorithm with a left-wards rotation. i.e. in this library `peckSchrack(4)` gives the same result as `tompkinsPaige([1, 2, 3, 4], 1)` but not `tompkinsPaige([1, 2, 3, 4], -1)`.
 
 <pre>
 <code>

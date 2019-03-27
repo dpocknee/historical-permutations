@@ -5,7 +5,8 @@ const {
   rotateArrays,
   reverseArrays,
   swap,
-  mutatedSwap
+  mutatedSwap,
+  compareArrays
 } = require("../utils/utils");
 
 describe("UTILITIES", () => {
@@ -340,6 +341,18 @@ describe("UTILITIES", () => {
       const testArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
       reverseArrays(testArray);
       expect(originalArray).to.deep.eql(testArray);
+    });
+  });
+  describe("compareArrays()", () => {
+    it("checks two identical arrays of length 3", () => {
+      const array1 = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      const array2 = [["A", "B", "C"], ["A", "C", "B"], ["B", "A", "C"]];
+      expect(compareArrays(array1, array2)).to.equal(true);
+    });
+    it("checks two non-identical arrays of length 3", () => {
+      const array1 = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
+      const array2 = [["A", "B", "C"], ["A", "C", "C"], ["B", "A", "C"]];
+      expect(compareArrays(array1, array2)).to.equal(false);
     });
   });
 });
