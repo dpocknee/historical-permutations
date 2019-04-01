@@ -2,6 +2,7 @@ const { expect } = require("chai");
 const {
   replace,
   rotate,
+  rotateInverted,
   rotateArrays,
   reverseArrays,
   swap,
@@ -278,6 +279,7 @@ describe("UTILITIES", () => {
       });
     });
   });
+
   describe("rotateArrays()", () => {
     const testArray = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
     it("checks all arrays in an array are rotated by 0", () => {
@@ -353,6 +355,93 @@ describe("UTILITIES", () => {
       const array1 = [[1, 2, 3], [1, 3, 2], [2, 1, 3]];
       const array2 = [["A", "B", "C"], ["A", "C", "C"], ["B", "A", "C"]];
       expect(compareArrays(array1, array2)).to.equal(false);
+    });
+  });
+  describe("rotateInverted()", () => {
+    describe("checks that array was correctly rotated by 0.", () => {
+      it("checks an array length of 1", () => {
+        expect(rotateInverted([1], 0)).to.eql([1]);
+      });
+      it("checks an array length of 2", () => {
+        expect(rotateInverted([1, 2], 0)).to.eql([1, 2]);
+      });
+      it("checks an array length of 3", () => {
+        expect(rotateInverted([1, 2, 3], 0)).to.eql([1, 2, 3]);
+      });
+      it("checks an array length of 4", () => {
+        expect(rotateInverted([1, 2, 3, 4], 0)).to.eql([1, 2, 3, 4]);
+      });
+      it("checks an array length of 5", () => {
+        expect(rotateInverted([1, 2, 3, 4, 5], 0)).to.eql([1, 2, 3, 4, 5]);
+      });
+    });
+    describe("checks that array was correctly inversely rotated by -1.", () => {
+      it("checks an array length of 1", () => {
+        expect(rotateInverted([1], -1)).to.eql([1]);
+      });
+      it("checks an array length of 2", () => {
+        expect(rotateInverted([1, 2], -1)).to.eql([2, 1]);
+      });
+      it("checks an array length of 3", () => {
+        expect(rotateInverted([1, 2, 3], -1)).to.eql([2, 3, 1]);
+      });
+      it("checks an array length of 4", () => {
+        expect(rotateInverted([1, 2, 3, 4], -1)).to.eql([2, 3, 4, 1]);
+      });
+      it("checks an array length of 5", () => {
+        expect(rotateInverted([1, 2, 3, 4, 5], -1)).to.eql([2, 3, 4, 5, 1]);
+      });
+    });
+    describe("checks that array was correctly rotateInverted by 1.", () => {
+      it("checks an array length of 1", () => {
+        expect(rotateInverted([1], 1)).to.eql([1]);
+      });
+      it("checks an array length of 2", () => {
+        expect(rotateInverted([1, 2], 1)).to.eql([2, 1]);
+      });
+      it("checks an array length of 3", () => {
+        expect(rotateInverted([1, 2, 3], 1)).to.eql([3, 1, 2]);
+      });
+      it("checks an array length of 4", () => {
+        expect(rotateInverted([1, 2, 3, 4], 1)).to.eql([4, 1, 2, 3]);
+      });
+      it("checks an array length of 5", () => {
+        expect(rotateInverted([1, 2, 3, 4, 5], 1)).to.eql([5, 1, 2, 3, 4]);
+      });
+    });
+    describe("checks that array was correctly inversely rotated by -2.", () => {
+      it("checks an array length of 1", () => {
+        expect(rotateInverted([1], -2)).to.eql([1]);
+      });
+      it("checks an array length of 2", () => {
+        expect(rotateInverted([1, 2], -2)).to.eql([1, 2]);
+      });
+      it("checks an array length of 3", () => {
+        expect(rotateInverted([1, 2, 3], -2)).to.eql([3, 1, 2]);
+      });
+      it("checks an array length of 4", () => {
+        expect(rotateInverted([1, 2, 3, 4], -2)).to.eql([3, 4, 1, 2]);
+      });
+      it("checks an array length of 5", () => {
+        expect(rotateInverted([1, 2, 3, 4, 5], -2)).to.eql([3, 4, 5, 1, 2]);
+      });
+    });
+    describe("checks that array was correctly inversely rotated by 2.", () => {
+      it("checks an array length of 1", () => {
+        expect(rotateInverted([1], 2)).to.eql([1]);
+      });
+      it("checks an array length of 2", () => {
+        expect(rotateInverted([1, 2], 2)).to.eql([1, 2]);
+      });
+      it("checks an array length of 3", () => {
+        expect(rotateInverted([1, 2, 3], 2)).to.eql([2, 3, 1]);
+      });
+      it("checks an array length of 4", () => {
+        expect(rotateInverted([1, 2, 3, 4], 2)).to.eql([3, 4, 1, 2]);
+      });
+      it("checks an array length of 5", () => {
+        expect(rotateInverted([1, 2, 3, 4, 5], 2)).to.eql([4, 5, 1, 2, 3]);
+      });
     });
   });
 });

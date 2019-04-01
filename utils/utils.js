@@ -36,6 +36,13 @@ function rotate(array, rotation) {
   return array.slice(rotateSplit).concat(array.slice(0, rotateSplit));
 }
 
+function rotateInverted(array, rotation) {
+  const rotationInverted = rotation * -1;
+  const rotateSplit =
+    rotation >= 0 ? rotationInverted % array.length : rotationInverted;
+  return array.slice(rotateSplit).concat(array.slice(0, rotateSplit));
+}
+
 function rotateArrays(array, rotation) {
   return array.map(innerArray => rotate(innerArray, rotation));
 }
@@ -97,6 +104,7 @@ module.exports = {
   replace,
   rotate,
   rotateArrays,
+  rotateInverted,
   reverseNonMutate,
   reverseArrays,
   swap,
