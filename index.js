@@ -5,6 +5,7 @@ const schrackShimrat = require("./algorithms/1962_schrack-shimrat");
 const steinhausJohnsonTrotter = require("./algorithms/1962_steinhaus-johnson-trotter");
 const heap = require("./algorithms/1963_heap");
 const { hall } = require("./algorithms/1960_hall");
+const { gysinSommerville } = require("./algorithms/1960_gysinSommerville");
 const coveyouSullivan = require("./algorithms/1961_coveyou-sullivan");
 const myrvoldRuskey = require("./algorithms/2001_myrvold-ruskey");
 const peckSchrack = require("./algorithms/1962_peck-schrack");
@@ -28,6 +29,7 @@ module.exports = {
   steinhausJohnsonTrotter,
   heap,
   hall,
+  gysinSommerville,
   coveyouSullivan,
   myrvoldRuskey,
   peckSchrack,

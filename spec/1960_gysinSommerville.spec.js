@@ -4,7 +4,7 @@ const { uniq, uniqWith, isEqual } = require("lodash");
 const {
   sommervilleRotater,
   gysinSommerville
-} = require("../1960_gysinSommerville");
+} = require("../algorithms/1960_gysinSommerville");
 
 describe("Gysin-Sommerville (1960)", () => {
   describe("sommervilleRotater", () => {
