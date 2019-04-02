@@ -1,4 +1,4 @@
-const { rotate, rotateInverted, cyclicModulo } = require("../utils/utils");
+const { cyclicModulo, reverseNonMutate } = require("../utils/utils");
 /* eslint no-loop-func: 0 */
 
 function factorial(n) {
@@ -24,19 +24,6 @@ function sommervilleRotater(array, sizeToRotate, direction, position = -1) {
     return array[indexToExhangeWith];
   });
 }
-
-// V 1
-// [1, 2, 3]
-// 2^ > 1
-// [2, 1, 3]
-// 3^ > 1
-// [3, 2, 1]
-// 3^ > 1
-// [1, 3, 2]
-// 2^ < 1 / 3^ < 1
-// [2, 3, 1]
-// 3^ < 1
-// [3, 1, 2]
 
 function sommerville1(n, startingDirection, cb) {
   let permutation = Array.from({ length: n }, (value, index) => index + 1);
@@ -80,21 +67,45 @@ function sommerville1(n, startingDirection, cb) {
   }
 }
 
-// V2
-
-// [1, 2, 3]
-
-// [2, 3, 1]
-
-// [3, 2, 1]
-
-// [1, 3, 2]
-
-// [2, 1, 3]
-
-// [3, 1, 2]
-
-// V3
+function sommerville2(n, direction, cb) {
+  let permutation = Array.from({ length: n }, (value, index) => index + 1);
+  const radixReference = Array.from({ length: n }, (value, index) => {
+    if (index === 0) return 2;
+    if (index === 1) return 3;
+    return factorial(index + 1);
+  });
+  let radixArray = Array.from({ length: n }, () => 0);
+  let radixChecker = false;
+  let initializer = true;
+  let i = 0;
+  let currentDirection = direction;
+  while (radixChecker === false) {
+    radixArray = radixArray.map((value, index) => i % radixReference[index]);
+    radixArray.forEach((radixValue, radixIndex) => {
+      if (radixIndex === 1 && i > 0) {
+        if (radixValue === 0) currentDirection *= -1;
+        permutation = sommervilleRotater(permutation, 3, currentDirection);
+        if (radixValue === 2) {
+          permutation = sommervilleRotater(permutation, 2, currentDirection);
+        }
+      }
+      if (radixIndex > 1 && i > 0 && radixValue === 0) {
+        const amountToRotate = radixIndex + 2;
+        permutation = sommervilleRotater(
+          permutation,
+          amountToRotate,
+          currentDirection
+        );
+      }
+    });
+    i += 1;
+    radixChecker = radixArray.every(
+      radix => radix === 0 && initializer === false
+    );
+    if (radixChecker === false) cb(permutation);
+    if (initializer === true) initializer = false;
+  }
+}
 
 function sommerville3(n, direction, cb) {
   let permutation = Array.from({ length: n }, (value, index) => index + 1);
@@ -113,9 +124,7 @@ function sommerville3(n, direction, cb) {
         permutation = sommervilleRotater(
           permutation,
           amountToRotate,
-          // 1,
-          direction * -1,
-          n - 1 - amountToRotate
+          direction * -1
         );
       }
       if (radixIndex === 0 && i > 0) {
@@ -134,39 +143,17 @@ function sommerville3(n, direction, cb) {
   }
 }
 
-// sommerville1(4, 1, perm => console.log(perm));
-// console.log(" ---");
-// sommerville1(4, -1, perm => console.log(perm));
-// console.log(" ---");
-sommerville3(4, 1, perm => console.log(perm));
-console.log(" ---");
-sommerville3(5, -1, perm => console.log(perm));
-
-// console.log(gysinRotater([2, 1, 3], 2, -1));
-
-// [1, 2, 3]
-// ^2 < 1
-// [2, 1, 3]
-// 3 < 1 / ^2 < 1
-// [3, 1, 2]
-// ^2 < 1
-// [1, 3, 2]
-// 3 < 1 / ^2 < 1
-// [2, 3, 1]
-// ^2 < 1
-// [3, 2, 1]
-// ^4 < 1 / ^3 < 1 / ^2 < 1
-// [1, ]
+// sommerville3(5, -1, perm => console.log(perm));
 
 // V4
 // [1, 2, 3]
-
+// 3 < 1
 // [2, 3, 1]
-
+// 3 < 1
 // [3, 1, 2]
-
+// 3 < 1
 // [1, 3, 2]
-
+//
 // [2, 1, 3]
 
 // [3, 2, 1]
@@ -175,6 +162,14 @@ function gysinSommerville(n, algorithm, variable) {
   const outputArrays = [];
   if (algorithm === 1)
     sommerville1(n, variable, finishedArray =>
+      outputArrays.push(finishedArray)
+    );
+  if (algorithm === 2)
+    sommerville2(n, variable, finishedArray =>
+      outputArrays.push(finishedArray)
+    );
+  if (algorithm === 3)
+    sommerville3(n, variable, finishedArray =>
       outputArrays.push(finishedArray)
     );
   return outputArrays;
