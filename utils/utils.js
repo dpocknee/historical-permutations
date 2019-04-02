@@ -100,6 +100,12 @@ function compareArrays(array1, array2) {
   });
 }
 
+function cyclicModulo(number, modulo) {
+  const moduloLessOne = modulo - 1;
+  const negative = moduloLessOne - (Math.abs(number + 1) % modulo);
+  return number >= 0 ? number % modulo : negative;
+}
+
 module.exports = {
   replace,
   rotate,
@@ -110,5 +116,6 @@ module.exports = {
   swap,
   mutatedSwap,
   deepEquals,
-  compareArrays
+  compareArrays,
+  cyclicModulo
 };

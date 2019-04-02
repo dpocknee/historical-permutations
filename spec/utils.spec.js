@@ -7,7 +7,8 @@ const {
   reverseArrays,
   swap,
   mutatedSwap,
-  compareArrays
+  compareArrays,
+  cyclicModulo
 } = require("../utils/utils");
 
 describe("UTILITIES", () => {
@@ -441,6 +442,65 @@ describe("UTILITIES", () => {
       });
       it("checks an array length of 5", () => {
         expect(rotateInverted([1, 2, 3, 4, 5], 2)).to.eql([4, 5, 1, 2, 3]);
+      });
+    });
+  });
+  describe("cyclicModulo", () => {
+    it("checks that positive numbers give the correct result (mod 2)", () => {
+      expect(cyclicModulo(0, 2)).to.equal(0);
+      expect(cyclicModulo(1, 2)).to.equal(1);
+      expect(cyclicModulo(2, 2)).to.equal(0);
+      expect(cyclicModulo(3, 2)).to.equal(1);
+      expect(cyclicModulo(4, 2)).to.equal(0);
+      expect(cyclicModulo(5, 2)).to.equal(1);
+      expect(cyclicModulo(6, 2)).to.equal(0);
+    });
+    it("checks that negative numbers give the correct result (mod 2)", () => {
+      expect(cyclicModulo(0, 2)).to.equal(0);
+      expect(cyclicModulo(-1, 2)).to.equal(1);
+      expect(cyclicModulo(-2, 2)).to.equal(0);
+      expect(cyclicModulo(-3, 2)).to.equal(1);
+      expect(cyclicModulo(-4, 2)).to.equal(0);
+      expect(cyclicModulo(-5, 2)).to.equal(1);
+      expect(cyclicModulo(-6, 2)).to.equal(0);
+    });
+    it("checks that positive numbers give the correct result (mod 3)", () => {
+      expect(cyclicModulo(0, 3)).to.equal(0);
+      expect(cyclicModulo(1, 3)).to.equal(1);
+      expect(cyclicModulo(2, 3)).to.equal(2);
+      expect(cyclicModulo(3, 3)).to.equal(0);
+      expect(cyclicModulo(4, 3)).to.equal(1);
+      expect(cyclicModulo(5, 3)).to.equal(2);
+      expect(cyclicModulo(6, 3)).to.equal(0);
+    });
+    describe("checks that positive numbers give the correct result (mod 3)", () => {
+      it("(-1, 3)", () => {
+        const actual = cyclicModulo(-1, 3);
+        expect(actual).to.equal(2);
+      });
+      it("(-2, 3)", () => {
+        const actual = cyclicModulo(-2, 3);
+        expect(actual).to.equal(1);
+      });
+      it("(-3, 3)", () => {
+        const actual = cyclicModulo(-3, 3);
+        expect(actual).to.equal(0);
+      });
+      it("(-4, 3)", () => {
+        const actual = cyclicModulo(-4, 3);
+        expect(actual).to.equal(2);
+      });
+      it("(-5, 3)", () => {
+        const actual = cyclicModulo(-5, 3);
+        expect(actual).to.equal(1);
+      });
+      it("(-6, 3)", () => {
+        const actual = cyclicModulo(-6, 3);
+        expect(actual).to.equal(0);
+      });
+      it("(-7, 3)", () => {
+        const actual = cyclicModulo(-7, 3);
+        expect(actual).to.equal(2);
       });
     });
   });

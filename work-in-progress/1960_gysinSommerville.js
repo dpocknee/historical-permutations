@@ -1,4 +1,4 @@
-const { rotate, rotateInverted } = require("../utils/utils");
+const { rotate, rotateInverted, cyclicModulo } = require("../utils/utils");
 
 function gysinSommerville(n) {
   const startingPerm = Array.from({ length: n }, (value, index) => index + 1);
@@ -22,15 +22,15 @@ function gysinSommerville(n) {
 
 // [1, 2, 3, 4][(1, 3, 2, 4)][(1, 4, 2, 3)];
 
-function sommervilleRotater(referenceArray, i, currentRadixCounter) {
-  let counter = 0;
-  const radixOfTheRadix = currentRadixCounter - 1;
-  const radixOfTheRadixCounter = 0;
-  counter = Math.floor(
-    (i % (currentRadixCounter * radixOfTheRadix)) / currentRadixCounter
-  );
-  return counter;
-}
+// function sommervilleRotater(referenceArray, i, currentRadixCounter) {
+//   let counter = 0;
+//   const radixOfTheRadix = currentRadixCounter - 1;
+//   const radixOfTheRadixCounter = 0;
+//   counter = Math.floor(
+//     (i % (currentRadixCounter * radixOfTheRadix)) / currentRadixCounter
+//   );
+//   return counter;
+// }
 // for (let j = 0; j < 24; j++) {
 //   console.log(sommervilleRotater([0, 0, 0, 0], j, 4));
 // }
@@ -45,6 +45,23 @@ function gysinRotater(array, amount, direction, position = 0) {
       : rotateInverted(array.slice(position, position + amount), direction);
   const endSection = position === 0 ? [] : array.slice(position + amount);
   return [...beginningSection, ...midSection, ...endSection];
+}
+
+function sommervilleRotater(array, sizeToRotate, direction, position = -1) {
+  const arrayCopy = array.map(x => x);
+  const startOfRotation =
+    position === -1 ? array.length - sizeToRotate : position;
+  const endOfRotation =
+    position === -1 ? array.length - 1 : position + sizeToRotate - 1;
+  return arrayCopy.map((value, index) => {
+    if (index < startOfRotation || index > endOfRotation) {
+      return value;
+    }
+    const indexToExhangeWith =
+      startOfRotation +
+      cyclicModulo(index - startOfRotation + direction, sizeToRotate);
+    return array[indexToExhangeWith];
+  });
 }
 
 // V 1
@@ -83,25 +100,48 @@ function factorial(n) {
   }, 1);
 }
 
-function sommervilleV3(n) {
+function sommervilleV3(n, cb) {
+  /* eslint no-loop-func: 0 */
   let permutation = Array.from({ length: n }, (value, index) => index + 1);
-  const radixReference = Array.from({ length: n }, (value, index) =>
-    factorial(index + 2)
-  );
-  let radixArray = Array.from({ length: n }, (value, index) => 0);
-  for (let i = 0; i < 24; i++) {
+  const radixReference = Array.from({ length: n }, (value, index) => {
+    return index === 0 ? 2 : factorial(index + 2);
+  });
+  let radixArray = Array.from({ length: n - 1 }, () => 0);
+  // cb(permutation);
+  let radixChecker = false;
+  let initializer = true;
+  let i = 0;
+  while (radixChecker === false) {
     radixArray = radixArray.map((value, index) => i % radixReference[index]);
-    radixArray.forEach((value, index) => {
-      if (index === 0) {
-        if (value === 0) permutation = gysinRotater(permutation);
-      } else if (!i === 0 && index > 0) {
+    radixArray.forEach((radixValue, radixIndex) => {
+      if (radixIndex > 0 && i > 0 && radixValue === 0) {
+        const amountToRotate = radixIndex + 2;
+        permutation = sommervilleRotater(
+          permutation,
+          amountToRotate,
+          1,
+          n - 1 - amountToRotate
+        );
+      }
+      if (radixIndex === 0 && i > 0) {
+        permutation = sommervilleRotater(permutation, 2, -1, n - 3);
+        if (radixValue === 0) {
+          permutation = sommervilleRotater(permutation, 3, -1, n - 3);
+        }
       }
     });
-    console.log(radixArray);
+    i += 1;
+    cb(permutation);
+    radixChecker = radixArray.every(
+      radix => radix === 0 && initializer === false
+    );
+    if (initializer === true) initializer = false;
   }
 }
 
-// sommervilleV3(3);
+sommervilleV3(4, perm => console.log(perm));
+
+// console.log(gysinRotater([2, 1, 3], 2, -1));
 
 // [1, 2, 3]
 // ^2 < 1
@@ -130,4 +170,4 @@ function sommervilleV3(n) {
 
 // [3, 2, 1]
 
-module.exports = { gysinRotater };
+module.exports = { sommervilleRotater };
