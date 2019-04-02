@@ -1,4 +1,4 @@
-const { cyclicModulo, reverseNonMutate } = require("../utils/utils");
+const { cyclicModulo } = require("../utils/utils");
 /* eslint no-loop-func: 0 */
 
 function factorial(n) {
@@ -143,20 +143,52 @@ function sommerville3(n, direction, cb) {
   }
 }
 
-// sommerville3(5, -1, perm => console.log(perm));
-
-// V4
-// [1, 2, 3]
-// 3 < 1
-// [2, 3, 1]
-// 3 < 1
-// [3, 1, 2]
-// 3 < 1
-// [1, 3, 2]
-//
-// [2, 1, 3]
-
-// [3, 2, 1]
+function sommerville4(n, direction, cb) {
+  let permutation = Array.from({ length: n }, (value, index) => index + 1);
+  const radixReference = Array.from({ length: n }, (value, index) => {
+    if (index === 0) return 2;
+    if (index === 1) return 3;
+    return factorial(index + 1);
+  });
+  let radixArray = Array.from({ length: n }, () => 0);
+  let radixChecker = false;
+  let initializer = true;
+  let i = 0;
+  let currentDirection = direction;
+  cb(permutation);
+  while (radixChecker === false) {
+    radixArray = radixArray.map((value, index) => i % radixReference[index]);
+    radixChecker = radixArray.every(
+      (radix, checkerIndex) =>
+        radix === radixReference[checkerIndex] - 1 && initializer === false
+    );
+    if (radixChecker === true) break;
+    radixArray.forEach((radixValue, radixIndex) => {
+      if (radixIndex === 1) {
+        permutation = sommervilleRotater(permutation, 3, currentDirection);
+        if (radixValue === 0) {
+          permutation = sommervilleRotater(permutation, 2, currentDirection);
+          currentDirection *= -1;
+        }
+      }
+      if (
+        radixIndex > 1 &&
+        i > 0 &&
+        radixValue === radixReference[radixIndex] - 1
+      ) {
+        const amountToRotate = radixIndex + 2;
+        permutation = sommervilleRotater(
+          permutation,
+          amountToRotate,
+          currentDirection
+        );
+      }
+    });
+    i += 1;
+    if (radixChecker === false) cb(permutation);
+    if (initializer === true) initializer = false;
+  }
+}
 
 function gysinSommerville(n, algorithm, variable) {
   const outputArrays = [];
@@ -170,6 +202,10 @@ function gysinSommerville(n, algorithm, variable) {
     );
   if (algorithm === 3)
     sommerville3(n, variable, finishedArray =>
+      outputArrays.push(finishedArray)
+    );
+  if (algorithm === 4)
+    sommerville4(n, variable, finishedArray =>
       outputArrays.push(finishedArray)
     );
   return outputArrays;
