@@ -10,6 +10,7 @@ const coveyouSullivan = require("./algorithms/1961_coveyou-sullivan");
 const myrvoldRuskey = require("./algorithms/2001_myrvold-ruskey");
 const peckSchrack = require("./algorithms/1962_peck-schrack");
 const superpermutation = require("./algorithms/2019_superpermutation");
+const pandita = require("./algorithms/1500_pandita");
 
 const {
   replace,
@@ -27,6 +28,7 @@ module.exports = {
   wells,
   schrackShimrat,
   steinhausJohnsonTrotter,
+  pandita,
   heap,
   hall,
   gysinSommerville,

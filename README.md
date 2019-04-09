@@ -46,6 +46,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 1962 - Eaves (ACM130: Permute)
 - 1962 - Howell (ACM87: PERMUTATION) [lexicographic]
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic]
+  - Pandita [lexicographic] &#9989;
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM) &#9989;
   - original &#9989;
   - loopless &#9989;
@@ -816,10 +817,24 @@ Mok-Kong Shen's method of enumerating permutations in lexicographic order was fi
 </code>
 </pre>
 
+### Pandita
+
+An alternative lexicographic approach has been implemented as the function `pandita()`, taken from the wikipedia article on permutations:
+
+> There are many ways to systematically generate all permutations of a given sequence.[43] One classic, simple, and flexible algorithm is based upon finding the next permutation in lexicographic ordering, if it exists. It can handle repeated values, for which case it generates each distinct multiset permutation once. Even for ordinary permutations it is significantly more efficient than generating values for the Lehmer code in lexicographic order (possibly using the factorial number system) and converting those to permutations. It begins by sorting the sequence in (weakly) increasing order (which gives its lexicographically minimal permutation), and then repeats advancing to the next permutation as long as one is found. The method goes back to Narayana Pandita in 14th century India, and has been rediscovered frequently.[44]
+>
+> The following algorithm generates the next permutation lexicographically after a given permutation. It changes the given permutation in-place.
+>
+> 1.  Find the largest index _k_ such that _a[k]_ < _a[k + 1]_. If no such index exists, the permutation is the last permutation.
+> 2.  Find the largest index _l_ greater than _k_ such that _a[k]_ < _a[l]_.
+> 3.  Swap the value of _a[k]_ with that of _a[l]_.
+> 4.  Reverse the sequence from _a[k + 1]_ up to and including the final element _a[n]_.
+
 ### Usage
 
 ```javaScript
 shen([1, 2, 3, 4]);
+pandita(4);
 ```
 
 Use arrays containing: **only numbers**
