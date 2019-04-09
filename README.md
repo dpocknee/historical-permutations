@@ -28,6 +28,8 @@ The current aim is to implement all of the algorithms mentioned in the following
   - Steinhaus-Johnson-Trotter added.
 - 2 April 2019 (v 0.5.0)
   - Gysin-Sommerville added.
+- 9 April 2019 (v 0.6.0)
+  - Pandita added.
 
 ## Permutation Algorithms Implemented
 
