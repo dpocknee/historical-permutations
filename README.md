@@ -46,7 +46,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 1962 - Eaves (ACM130: Permute)
 - 1962 - Howell (ACM87: PERMUTATION) [lexicographic]
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic]
-  - Pandita [lexicographic] &#9989;
+  - Pandita (15th Century) [lexicographic] &#9989;
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM) &#9989;
   - original &#9989;
   - loopless &#9989;
@@ -80,6 +80,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
   - `steinhausJohnsonTrotter(4, "even")`
   - `peckSchrack(4)`
   - `schrackShimrat([1, 2, 3, 4])`
+  - `pandita(4)`
   - `heap([1, 2, 3, 4])`
   - `myrvoldRuskey(4)`
   - `superpermutation(4)`
