@@ -106,6 +106,17 @@ function cyclicModulo(number, modulo) {
   return number >= 0 ? number % modulo : negative;
 }
 
+function poemParser(text) {
+  const splitText = text.split("\n");
+  const toArray = [];
+  const title = splitText[0].split(/# /);
+  splitText.forEach(line => {
+    const splitLine = line.split(" ");
+    if (!/#*/.test(splitLine[0]) && splitLine.length === title.length)
+      toArray.push(splitLine);
+  });
+}
+
 module.exports = {
   replace,
   rotate,
@@ -117,5 +128,6 @@ module.exports = {
   mutatedSwap,
   deepEquals,
   compareArrays,
-  cyclicModulo
+  cyclicModulo,
+  poemParser
 };
