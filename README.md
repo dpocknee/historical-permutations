@@ -603,8 +603,8 @@ In: Communications of the ACM 5.4 (Apr. 1962), pp. 208-209
 <b>procedure</b> PERMUTATION (N, K);
 <b>value</b> K, N; <b>integer</b> K; <b>integer array</b> N;
 <b>comment</b> This procedure generates the next permutation in
-  lexicographic order from a given permutation of the K marks
-  0, 1, ---, (K-—1) by the repeaicd addition of (K—1) radix K.
+  lexicographic order from a given permutation of the <i>K</i> marks
+  0, 1, ..., (K-1) by the repeated addition of (K—1) radix K.
   The radix K arithmetic is simulated by the addition of 9 radix
   1O and a test to determine if the sum consists of only the original
   K digits. Before each entry into the <b>procedure</b> the K marks
@@ -1051,7 +1051,7 @@ The following version of Langdon's algorithm is partly taken from Sedgewick's pa
 <b>loop</b>:
     <i>rotate(i)</i>;
     <b>if</b> P[<i>i</i>] = <i>i</i> <b>then</b> <i>i</i>:=<i>i</i>-1  <b>else</b> <i>i</i>:=<i>N</i> <b>endif</b> ;
-    <b>if</b> P <b>not</b> Q <b>and</b> <i>i</i> = n <b>then</b> <i>process</i>; <b>endif</b> ;
+    <b>if</b> P &ne; Q <b>and</b> <i>i</i> = n <b>then</b> <i>process</i>; <b>endif</b> ;
 <b>while</b> <i>i</i>&ge;1 <b>repeat</b>;
 </code>
 </pre>
