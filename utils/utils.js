@@ -107,14 +107,46 @@ function cyclicModulo(number, modulo) {
 }
 
 function poemParser(text) {
-  const splitText = text.split("\n");
+  const splitText = text.split("\\n");
   const toArray = [];
-  const title = splitText[0].split(/# /);
+  let stanza = [];
   splitText.forEach(line => {
-    const splitLine = line.split(" ");
-    if (!/#*/.test(splitLine[0]) && splitLine.length === title.length)
-      toArray.push(splitLine);
+    const splitLine = line.split(/\s/);
+    if (splitLine.length === 1) {
+      if (stanza.length > 0) toArray.push(stanza);
+      stanza = [];
+    } else {
+      const filteredLine = splitLine.filter(word => {
+        return word.length > 0;
+      });
+      stanza.push(filteredLine);
+    }
   });
+  return toArray;
+}
+
+function onlyPermutatedStanzas(arrayOfPoem) {
+  const poemTitle = arrayOfPoem[0][0].length - 1;
+  return arrayOfPoem.filter(stanza => {
+    return stanza.every(line => line.length === poemTitle);
+  });
+}
+
+function poemAnalysis(poemArray) {
+  const titleArray = poemArray[0][0];
+  return poemArray.reduce((outputString, stanzaArray, index) => {
+    const indexArray = stanzaArray.map(line => {
+      const lineArray = line.map(word => {
+        if (word === "THEE") return titleArray.findIndex(x => x === "THE") + 1;
+        if (word === "EYE") return titleArray.findIndex(x => x === "I") + 1;
+        return titleArray.findIndex(x => x === word) + 1;
+      });
+      return `${lineArray.join("")}`;
+    });
+    return index > 0
+      ? `${outputString}|${indexArray.join("/")}`
+      : `${titleArray.join(" ")}: ${indexArray.join("/")}`;
+  }, "");
 }
 
 module.exports = {
@@ -129,5 +161,7 @@ module.exports = {
   deepEquals,
   compareArrays,
   cyclicModulo,
-  poemParser
+  poemParser,
+  onlyPermutatedStanzas,
+  poemAnalysis
 };

@@ -7,6 +7,7 @@ const heap = require("./algorithms/1963_heap");
 const { hall } = require("./algorithms/1960_hall");
 const { gysinSommerville } = require("./algorithms/1960_gysinSommerville");
 const coveyouSullivan = require("./algorithms/1961_coveyou-sullivan");
+const langdon = require("./algorithms/1967_langdon");
 const myrvoldRuskey = require("./algorithms/2001_myrvold-ruskey");
 const peckSchrack = require("./algorithms/1962_peck-schrack");
 const superpermutation = require("./algorithms/2019_superpermutation");
@@ -33,6 +34,7 @@ module.exports = {
   hall,
   gysinSommerville,
   coveyouSullivan,
+  langdon,
   myrvoldRuskey,
   peckSchrack,
   superpermutation,

@@ -770,7 +770,7 @@ Use arrays containing: **only numbers**
 <i>comp</i>:  <b>if</b> <i>A</i>[<i>i</i>] > <i>A</i>[<i>i</i> + <i>m</i>] <b>then</b>
         <b>begin</b> <i>r</i> := <i>A</i>[<i>i</i> + <i>m</i>]; <i>A</i>[<i>i</i> + <i>m</i>] := <i>A</i>[<i>i</i>];
         <i>A</i>[<i>i</i>] := <i>r</i>; <i>i</i> := <i>i</i> — <i>m</i>;
-        <b>if</b> <i>i</i> &#2267; <i>p</i> + 1 <b>then go to</b> <i>comp</i>;
+        <b>if</b> <i>i</i> &ge; <i>p</i> + 1 <b>then go to</b> <i>comp</i>;
         <b>end end end</b> <i>schell</i>;
 <i>exit</i>:  <b>end</b> <i>PERMUTE</i>
 </code>
@@ -1042,20 +1042,25 @@ heap([1, 2, 3, 4]);
 
 ## Langdon (1967)
 
-The following version of Langdon's algorithm is taken from Sedgewick's paper:
+The following version of Langdon's algorithm is partly taken from Sedgewick's paper, although his version mixes up the conditions in the first `IF` statement and misses out a piece of conditional logic that prevents duplicates. My implementation is:
 
 <pre>
 <code>
-<i>i</i> := 1; <b>loop</b>: Q[<i>i</i>]:=P[<i>i</i>] <b>while</b> <i>i</i><</i>N</i> <i>i</i>:=<i>i</i>+1 <b>repeat</b>,
+<i>i</i> := 1; <b>loop</b>: P[<i>i</i>]:=Q[i] <b>while</b> <i>i</i><</i>N</i> <i>i</i>:=<i>i</i>+1 <b>repeat</b>,
 <i>process</i>;
 <b>loop</b>:
     <i>rotate(i)</i>;
-    <b>if</b> P[<i>i</i>] = Q[<i>i</i>] <b>then</b> <i>i</i>:=<i>N</i> <b>else</b> <i>i</i>:=<i>i</i>-1 <b>endif</b>;
-    <i>process</i>;
+    <b>if</b> P[<i>i</i>] = <i>i</i> <b>then</b> <i>i</i>:=<i>i</i>-1  <b>else</b> <i>i</i>:=<i>N</i> <b>endif</b> ;
+    <b>if</b> P <b>not</b> Q <b>and</b> <i>i</i> = n <b>then</b> <i>process</i>; <b>endif</b> ;
 <b>while</b> <i>i</i>&ge;1 <b>repeat</b>;
 </code>
-
 </pre>
+
+### Usage
+
+```
+langdon(4);
+```
 
 ---
 
