@@ -30,6 +30,8 @@ The current aim is to implement all of the algorithms mentioned in the following
   - Gysin-Sommerville added.
 - 9 April 2019 (v 0.6.0)
   - Pandita added.
+- 22 April 2019 (v 0.7.0)
+  - Langdon added.
 
 ## Permutation Algorithms Implemented
 
@@ -54,7 +56,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
   - loopless &#9989;
   - Even's speedup &#9989;
 - 1963 - Heap &#9989;
-- 1967 - Langdon
+- 1967 - Langdon &#9989;
 - 1967 - Phillips (BCJ28)
 - 1967 - Boothroyd (BCJ29/30)
 - 1968 - Ord-Smith (ACM308: perm) [pseudo-lexicographic]
@@ -84,6 +86,7 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
   - `schrackShimrat([1, 2, 3, 4])`
   - `pandita(4)`
   - `heap([1, 2, 3, 4])`
+  - `langdon(4)`
   - `myrvoldRuskey(4)`
   - `superpermutation(4)`
 - Ordering Algorithms
