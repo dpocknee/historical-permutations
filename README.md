@@ -37,6 +37,8 @@ The current aim is to implement all of the algorithms mentioned in the following
 
 Ticks indicate the algorithm works and has been tested. Crosses indicate that algorithm is not and will not be included in the library and is only mentioned below for historical context. Information on all of these algorithms and their original implementations can be found below. I have focused only on including algorithms which give different orderings to each other when run, hence why I have only decided to implement one of the several lexicographic algorithms below.
 
+Currently, the two algorithms lacking are Eaves, Boothroyd (BCJ30) and Ives.
+
 - 1400 - Pandita [lexicographic] &#9989;
   - `pandita(4)`
 - 1956 - Tompkins-Paige &#9989;
@@ -67,10 +69,11 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - 1967 - Langdon &#9989;
   - `langdon(4)`
 - 1967 - Phillips (BCJ28) [lexicographic] &#10060;
-- 1967 - Boothroyd (BCJ29/30)
+- 1967 - Boothroyd (BCJ29) [Wells] &#10060;
+- 1967 - Boothroyd (BCJ30) [for _n_>=5]
 - 1967 - Ord-Smith (ACM308: perm) [pseudo-lexicographic] &#9989;
   - `ordSmith(4)` &#9989;
-  - `ordSmith(4, "pseudo")` &#9989;
+  - `ordSmith(4, "sedgewick")` &#9989;
 - 1968 - Ord-Smith (ACM323: BESTLEX) [reverse lexicographic] &#9989;
   - `ordSmithRevLex([1, 2, 3, 4])`
 - 1976 - Ives
@@ -92,6 +95,9 @@ Ticks indicate the algorithm works and has been tested. Crosses indicate that al
 - `swap([1, 2, 3, 4, 5], 0, 3)`
 - `mutatedSwap([1, 2, 3, 4, 5], 0, 3)`
 - `reverseNonMutate([1, 2, 3, 4, 5])`
+- `compareArrays([[1, 2, 3, 4], [1, 3, 2, 4], [1, 2, 3, 4], [1, 3, 2, 4]])`
+- `cyclicModulo(-2, 5)`
+- `factorial(4)`
 
 ---
 
@@ -1066,11 +1072,13 @@ R. J. Ord-Smith "Generation of permutation sequences: Part 1", <i>The Computer J
   (1970), 13.2, pp. 152-155
 </pre>
 
+This is slightly odd. The implementation is from Sedgewick's paper where he gives two versions of the algorithm - one recursive and one loopless, but the loopless one generates a different output. This can be run by passing in the argument `sedgewick`.
+
 ### Usage
 
 ```javaScript
 ordSmith(4)
-ordSmith(4, "pseudo")
+ordSmith(4, "sedgewick")
 ```
 
 ---
@@ -1311,4 +1319,33 @@ Creates the same result as JavaScript's built-in `Array.prototype.reverse()` fun
 reverseNonMutate([1, 2, 3, 4, 5])
 
 // -> [5, 4, 3, 2, 1]
+```
+
+## compareArrays()
+
+Checks if two arrays of arrays are the same.
+
+```javaScript
+compareArrays([[1, 2, 3, 4], [1, 3, 2, 4], [1, 2, 3, 4], [1, 3, 2, 4]])
+// -> true`
+```
+
+## cyclicModulo()
+
+A modulo function that wraps minus numbers back into a range between 0 and the modulo
+
+```javaScript
+cyclicModulo(-2, 5)
+// -> 3`
+cyclicModulo(7, 5)
+// -> 2
+```
+
+## factorial()
+
+Calcuates factorials.
+
+```javaScript
+factorial(4)
+// -> 24`
 ```

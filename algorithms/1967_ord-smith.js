@@ -16,7 +16,7 @@ function lexperms(n, cb, algoType) {
   cb(p.map(x => x));
   while (i <= n) {
     if (c[i] < i) {
-      if (algoType === "normal") {
+      if (algoType === "sedgewick") {
         const swap1 = p[i];
         const swap2 = p[c[i]];
         p[i] = swap2;

@@ -1,6 +1,7 @@
 node_modules/
 spec/
 examples/
+examples/*
 work-in-progress/
 papers/
 *.pdf
