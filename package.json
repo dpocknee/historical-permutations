@@ -1,6 +1,6 @@
 {
   "name": "historical-permutations",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A library of historical permutation algorithms from 1950s-present implemented in JavaScript.",
   "main": "index.js",
   "scripts": {
