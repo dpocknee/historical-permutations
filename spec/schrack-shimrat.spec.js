@@ -3,10 +3,10 @@ const { uniq, uniqWith, isEqual } = require("lodash");
 
 const { schrackShimrat } = require("../index");
 
-describe("Schrack-Shimrat Reverse Lexicographic Order (1962)", () => {
+describe("Schrack-Shimrat (1962)", () => {
   describe("5 Elements", () => {
     const startArray = [1, 2, 3, 4, 5];
-    const testArrays = schrackShimrat(startArray);
+    const testArrays = schrackShimrat(5);
     it("checks an array of 5 elements outputs 120 permutations", () => {
       expect(testArrays.length).to.equal(120);
     });
@@ -29,7 +29,7 @@ describe("Schrack-Shimrat Reverse Lexicographic Order (1962)", () => {
   });
   describe("4 Elements", () => {
     const startArray = [1, 2, 3, 4];
-    const testArrays = schrackShimrat(startArray);
+    const testArrays = schrackShimrat(4);
     it("checks an array of 4 elements outputs 24 permutations", () => {
       expect(testArrays.length).to.equal(24);
     });
@@ -52,7 +52,7 @@ describe("Schrack-Shimrat Reverse Lexicographic Order (1962)", () => {
   });
   describe("3 Elements", () => {
     const startArray = [1, 2, 3];
-    const testArrays = schrackShimrat(startArray);
+    const testArrays = schrackShimrat(3);
     it("checks an array of 3 elements outputs 6 permutations", () => {
       expect(testArrays.length).to.equal(6);
     });

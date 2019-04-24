@@ -2,6 +2,8 @@ const { tompkinsPaige } = require("./algorithms/1956_tompkins-paige");
 const lehmer = require("./algorithms/1960_lehmer");
 const wells = require("./algorithms/1961_wells");
 const schrackShimrat = require("./algorithms/1962_schrack-shimrat");
+const ordSmith = require("./algorithms/1967_ord-smith");
+const ordSmithRevLex = require("./algorithms/1968_ord-smith-rev-lex");
 const steinhausJohnsonTrotter = require("./algorithms/1962_steinhaus-johnson-trotter");
 const heap = require("./algorithms/1963_heap");
 const { hall } = require("./algorithms/1960_hall");
@@ -37,6 +39,8 @@ module.exports = {
   langdon,
   myrvoldRuskey,
   peckSchrack,
+  ordSmith,
+  ordSmithRevLex,
   superpermutation,
   replace,
   rotate,

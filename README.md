@@ -37,68 +37,61 @@ The current aim is to implement all of the algorithms mentioned in the following
 
 Ticks indicate the algorithm works and has been tested. Crosses indicate that algorithm is not and will not be included in the library and is only mentioned below for historical context. Information on all of these algorithms and their original implementations can be found below. I have focused only on including algorithms which give different orderings to each other when run, hence why I have only decided to implement one of the several lexicographic algorithms below.
 
+- 1400 - Pandita [lexicographic] &#9989;
+  - `pandita(4)`
 - 1956 - Tompkins-Paige &#9989;
+  - `tompkinsPaige(["one", 2, 3, "4"], 1)`
 - 1960 - Lehmer [Constant Difference Method] &#9989;
+  - `lehmer([1, 2, 3, 4])`
 - 1960 - Walker Backtrack Method [lexicographic] &#10060;
 - 1960 - D. N. Lehmer Lexicographic [lexicographic] &#10060;
 - 1960 - Hall &#9989;
-- 1960 - Gysin-Sommerville [8 different orderings] &#9989;
+  - `hall(4)`
 - 1961 - Coveyou-Sullivan (ACM71: PERMUTATION) &#9989;
+  - `coveyouSullivan(4)`
 - 1961 - Wells (ACM115) [Transposition Method] &#9989;
+  - `wells(["1", 2, "3", 4])`
 - 1962 - Peck-Schrack (ACM86: PERMUTE) [Tompkins-Paige w/ leftwise rotation] &#9989;
-- 1962 - Schrack-Shimrat (ACM102: PERMULEX) [reverse lexicographic] &#9989;
+  - `peckSchrack(4)`
+- 1962 - Schrack-Shimrat (ACM102: PERMULEX) [lexicographic] &#9989;
+  - `schrackShimrat(4)`
 - 1962 - Eaves (ACM130: Permute)
-- 1962 - Howell (ACM87: PERMUTATION) [lexicographic]
-- 1962/63 - Shen (ACM202: PERLE) [lexicographic]
-  - Pandita (15th Century) [lexicographic] &#9989;
+- 1962 - Howell (ACM87: PERMUTATION) [lexicographic] &#10060;
+- 1962/63 - Shen (ACM202: PERLE) [lexicographic] &#10060;
 - 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM) &#9989;
-  - original &#9989;
-  - loopless &#9989;
-  - Even's speedup &#9989;
+  - original &#9989; `steinhausJohnsonTrotter(4)`
+  - loopless &#9989; `steinhausJohnsonTrotter(4, "loopless")`
+  - Even's speedup &#9989; `steinhausJohnsonTrotter(4, "even")`
 - 1963 - Heap &#9989;
+  - `heap([1, 2, 3, 4])`
 - 1967 - Langdon &#9989;
-- 1967 - Phillips (BCJ28)
+  - `langdon(4)`
+- 1967 - Phillips (BCJ28) [lexicographic] &#10060;
 - 1967 - Boothroyd (BCJ29/30)
-- 1968 - Ord-Smith (ACM308: perm) [pseudo-lexicographic]
+- 1967 - Ord-Smith (ACM308: perm) [pseudo-lexicographic] &#9989;
+  - `ordSmith(4)` &#9989;
+  - `ordSmith(4, "pseudo")` &#9989;
+- 1968 - Ord-Smith (ACM323: BESTLEX) [reverse lexicographic] &#9989;
+  - `ordSmithRevLex([1, 2, 3, 4])`
 - 1976 - Ives
 - 2001 - Myrvold-Ruskey [remainder order] &#9989;
-- 2019 - Superpermutations &#9989;
-
-**CURRENT PROGRESS: 14/ 22 Algorithms Complete**
-
-## Ordering Functions Implemented
-
-- 1947 - Gray Code
-- 1951 - Lehmer Linear Congruential Generator [random number generator]
-- 1964 - Durstenfeld (ACM235: SHUFFLE) [random permutation algorithm ]
-
-## All Functions In The Library
-
-- Permutation Algorithms
-  - `tompkinsPaige(["one", 2, 3, "4"], 1)`
-  - `lehmer([1, 2, 3, 4])`
-  - `hall(4)`
-  - `gysinSommerville(4, 1, -1)`
-  - `coveyouSullivan(4)`
-  - `wells(["1", 2, "3", 4])`
-  - `steinhausJohnsonTrotter(4, "even")`
-  - `peckSchrack(4)`
-  - `schrackShimrat([1, 2, 3, 4])`
-  - `pandita(4)`
-  - `heap([1, 2, 3, 4])`
-  - `langdon(4)`
   - `myrvoldRuskey(4)`
+- 2018 - Superpermutations &#9989;
   - `superpermutation(4)`
-- Ordering Algorithms
-  - TO DO
-- Utilities
-  - `rotate([1, 2, 3], 1)`
-  - `rotateArrays([[1, 2, 3], [1, 3, 2], [2, 1, 3]], 1)`
-  - `replace([[1, 2, 3], [1, 3, 2], [2, 1, 3]], [1, 2, 3], ["A", "B", "C"], 1)`
-  - `reverseArrays([[1, 2, 3], [1, 3, 2], [2, 1, 3]])`
-  - `swap([1, 2, 3, 4, 5], 0, 3)`
-  - `mutatedSwap([1, 2, 3, 4, 5], 0, 3)`
-  - `reverseNonMutate([1, 2, 3, 4, 5])`
+- 2019 - Pocknee-Gysin-Sommerville [8 different orderings] &#9989;
+  - `gysinSommerville(4, 1, -1)`
+
+**CURRENT PROGRESS: 19 / 22 Algorithms Complete**
+
+## Utilities
+
+- `rotate([1, 2, 3], 1)`
+- `rotateArrays([[1, 2, 3], [1, 3, 2], [2, 1, 3]], 1)`
+- `replace([[1, 2, 3], [1, 3, 2], [2, 1, 3]], [1, 2, 3], ["A", "B", "C"], 1)`
+- `reverseArrays([[1, 2, 3], [1, 3, 2], [2, 1, 3]])`
+- `swap([1, 2, 3, 4, 5], 0, 3)`
+- `mutatedSwap([1, 2, 3, 4, 5], 0, 3)`
+- `reverseNonMutate([1, 2, 3, 4, 5])`
 
 ---
 
@@ -203,6 +196,27 @@ Most of the algorithms below are taken from journals and articles from the 1950s
 Additionally, unlike many languages today, it was common not to use zero-based numbering for array elements; meaning that arrays are numbered starting from 1, not from 0. This means that for several of the modern JavaScript implementations an initial dummy element is added to the beginning of the arrays before feeding them into the algorithm, which is then removed upon termination.
 
 For those algorithms from Sedgewick's paper, `process` is where each resultant permutation is output. Any filtering of results can happen here. In the JavaScript implementations, this is replaced by the callback function `cb()`.
+
+---
+
+## Pandita Algorithm (1400s)
+
+A lexicographic approach has been implemented as the function `pandita()`, taken from the wikipedia article on permutations:
+
+> There are many ways to systematically generate all permutations of a given sequence. One classic, simple, and flexible algorithm is based upon finding the next permutation in lexicographic ordering, if it exists. It can handle repeated values, for which case it generates each distinct multiset permutation once. Even for ordinary permutations it is significantly more efficient than generating values for the Lehmer code in lexicographic order (possibly using the factorial number system) and converting those to permutations. It begins by sorting the sequence in (weakly) increasing order (which gives its lexicographically minimal permutation), and then repeats advancing to the next permutation as long as one is found. The method goes back to Narayana Pandita in 14th century India, and has been rediscovered frequently.[44]
+>
+> The following algorithm generates the next permutation lexicographically after a given permutation. It changes the given permutation in-place.
+>
+> 1.  Find the largest index _k_ such that _a[k]_ < _a[k + 1]_. If no such index exists, the permutation is the last permutation.
+> 2.  Find the largest index _l_ greater than _k_ such that _a[k]_ < _a[l]_.
+> 3.  Swap the value of _a[k]_ with that of _a[l]_.
+> 4.  Reverse the sequence from _a[k + 1]_ up to and including the final element _a[n]_.
+
+### Usage
+
+```javaScript
+pandita(4);
+```
 
 ---
 
@@ -443,42 +457,6 @@ although the following is not a permutation algorithm but _the basis of a techni
 
 ---
 
-## Gysin-Sommerville (1960)
-
-This is a unique collection of algorithms inspired by Brion Gysin and Ian Sommerville's pre-1965 _Permutation Poems_. Although many sources claim that these early poems were generated by computer, there seems to be little evidence to support this. Given the fact that none of these poems use permutation algorithms known at the time, the only other possibility is that they were either written by hand or used a unique algorithm designed by Ian Sommerville that is not found anywhere in the existing literature. I have attempted to create the type of algorithm that would have been needed to create these poems. Due to the large variety of orderings within these poems, this function contains 8 possible permutation options. These are examples of what I refer to as Gysin's "Magic Square"-esque approach to creating _Permutation Poems_. I want to stress that there is no evidence that Gysin or Sommerville actually used these algorithms and the implementation is my own creation.
-
-The differnce between the 8 algorithms can be most easily seen by enumerating the permutations of n=3, seen below. The numbers in brackets above each set of permutations indicate the three arguments needed to be fed into the `gysinSommerville()` function to get these results.:
-
-|              |              |              |              |
-| ------------ | ------------ | ------------ | ------------ |
-| `(3, 1, 1)`  | `(3, 2, 1)`  | `(3, 3, -1)` | `(3, 4, 1)`  |
-| 1 2 3        | 1 2 3        | 1 2 3        | 1 2 3        |
-| 2 3 1        | 2 3 1        | 2 1 3        | 2 1 3        |
-| 3 1 2        | 3 2 1        | 3 1 2        | 3 2 1        |
-| 1 3 2        | 1 3 2        | 1 3 2        | 1 3 2        |
-| 2 1 3        | 2 1 3        | 2 3 1        | 2 3 1        |
-| 3 2 1        | 3 1 2        | 3 1 2        | 3 1 2        |
-|              |              |              |              |
-| `(3, 1, -1)` | `(3, 1, -1)` | `(3, 3, 1)`  | `(3, 4, -1)` |
-| 1 2 3        | 1 2 3        | 1 2 3        | 1 2 3        |
-| 3 1 2        | 3 1 2        | 2 1 3        | 3 2 1        |
-| 2 3 1        | 2 1 3        | 2 3 1        | 2 1 3        |
-| 1 3 2        | 1 3 2        | 3 2 1        | 1 3 2        |
-| 3 2 1        | 3 2 1        | 3 1 2        | 3 1 2        |
-| 2 1 3        | 2 3 1        | 1 3 2        | 2 3 1        |
-
-### Usage
-
-The three arguments in this function are: `length of array`, `type of algorithm (1, 2, 3 or 4)`, `direction of rotation (1 or -1)`. There are four possible algorithms to choose from and each one can run using either a leftwise or rightwise rotation.
-
-As an example, to create all permutations for n=4, using algorithm #3 with leftwise rotation, you would type:
-
-```JavaScript
-gysinSommerville(4, 3, -1)
-```
-
----
-
 ## Coveyou-Sullivan (1961) [Algorithm ACM71]
 
 This algorithm, named `PERMUTATION`, was originally published by R. R. Coveyou and J. G. Sullivan in the November 1961 issue of _Communications of the ACM_ as algorithm ACM71.
@@ -645,7 +623,7 @@ Communications of the ACM 5.4 (Apr. 1962), p. 209.
 
 ---
 
-## Schrack-Shimrat (1962) [ACM102: PERMULEX / reverse lexicographic]
+## Schrack-Shimrat (1962) [ACM102: PERMULEX lexicographic]
 
 The algorithm below is also known as the <i>Fischer-Krause</i> algorithm, and has been known since 1812. This is how it is presented in Sedgewick's paper:
 
@@ -718,7 +696,7 @@ In: Communications of the ACM 5.6 (June 1962), p. 346.
 ### Usage
 
 ```javaScript
-schrackShimrat([1, 2, 3, 4]);
+schrackShimrat(4);
 ```
 
 Use arrays containing: **only numbers**
@@ -822,28 +800,6 @@ Mok-Kong Shen's method of enumerating permutations in lexicographic order was fi
 <b>end</b> <i>PERLE</i>
 </code>
 </pre>
-
-### Pandita
-
-An alternative lexicographic approach has been implemented as the function `pandita()`, taken from the wikipedia article on permutations:
-
-> There are many ways to systematically generate all permutations of a given sequence.[43] One classic, simple, and flexible algorithm is based upon finding the next permutation in lexicographic ordering, if it exists. It can handle repeated values, for which case it generates each distinct multiset permutation once. Even for ordinary permutations it is significantly more efficient than generating values for the Lehmer code in lexicographic order (possibly using the factorial number system) and converting those to permutations. It begins by sorting the sequence in (weakly) increasing order (which gives its lexicographically minimal permutation), and then repeats advancing to the next permutation as long as one is found. The method goes back to Narayana Pandita in 14th century India, and has been rediscovered frequently.[44]
->
-> The following algorithm generates the next permutation lexicographically after a given permutation. It changes the given permutation in-place.
->
-> 1.  Find the largest index _k_ such that _a[k]_ < _a[k + 1]_. If no such index exists, the permutation is the last permutation.
-> 2.  Find the largest index _l_ greater than _k_ such that _a[k]_ < _a[l]_.
-> 3.  Swap the value of _a[k]_ with that of _a[l]_.
-> 4.  Reverse the sequence from _a[k + 1]_ up to and including the final element _a[n]_.
-
-### Usage
-
-```javaScript
-shen([1, 2, 3, 4]);
-pandita(4);
-```
-
-Use arrays containing: **only numbers**
 
 ---
 
@@ -1110,6 +1066,23 @@ R. J. Ord-Smith "Generation of permutation sequences: Part 1", <i>The Computer J
   (1970), 13.2, pp. 152-155
 </pre>
 
+### Usage
+
+```javaScript
+ordSmith(4)
+ordSmith(4, "pseudo")
+```
+
+---
+
+## Ord-Smith (1968) [ACM323][reverse lexicographic]
+
+### Usage
+
+```javaScript
+ordSmithRevLex([1, 2, 3, 4])
+```
+
 ---
 
 ## Ives (1976)
@@ -1156,7 +1129,7 @@ myrvoldRuskey(4);
 
 ---
 
-## Superpermutation (2019)
+## Superpermutations (2018)
 
 "A superpermutation[1] is a string formed from a set of n symbols such that every one of the n! permutations of those symbols appears exactly once as a contiguous block of n characters in the string." - [Greg Egan](http://www.gregegan.net/SCIENCE/Superpermutations/Superpermutations.html)
 
@@ -1184,6 +1157,42 @@ More information on superpermutations can be found at [Greg Egan's site](http://
 ```JavaScript
 superpermutation(4);
 // -> [1, 2, 3, 4, 1, 2, 3, 1, 4, 2, 3, 1, 2, 4, 3, 1, 2, 1, 3, 4, 2, 1, 3, 2, 4, 1, 3, 2, 1, 4, 3, 2, 1]
+```
+
+---
+
+## Pocknee-Gysin-Sommerville (2019)
+
+This is a unique collection of algorithms inspired by Brion Gysin and Ian Sommerville's pre-1965 _Permutation Poems_. Although many sources claim that these early poems were generated by computer, there seems to be little evidence to support this. Given the fact that none of these poems use permutation algorithms known at the time, the only other possibility is that they were either written by hand or used a unique algorithm designed by Ian Sommerville that is not found anywhere in the existing literature. I have attempted to create the type of algorithm that would have been needed to create these poems. Due to the large variety of orderings within these poems, this function contains 8 possible permutation options. These are examples of what I refer to as Gysin's "Magic Square"-esque approach to creating _Permutation Poems_. I want to stress that there is no evidence that Gysin or Sommerville actually used these algorithms and the implementation is my own creation.
+
+The differnce between the 8 algorithms can be most easily seen by enumerating the permutations of n=3, seen below. The numbers in brackets above each set of permutations indicate the three arguments needed to be fed into the `gysinSommerville()` function to get these results.:
+
+|              |              |              |              |
+| ------------ | ------------ | ------------ | ------------ |
+| `(3, 1, 1)`  | `(3, 2, 1)`  | `(3, 3, -1)` | `(3, 4, 1)`  |
+| 1 2 3        | 1 2 3        | 1 2 3        | 1 2 3        |
+| 2 3 1        | 2 3 1        | 2 1 3        | 2 1 3        |
+| 3 1 2        | 3 2 1        | 3 1 2        | 3 2 1        |
+| 1 3 2        | 1 3 2        | 1 3 2        | 1 3 2        |
+| 2 1 3        | 2 1 3        | 2 3 1        | 2 3 1        |
+| 3 2 1        | 3 1 2        | 3 1 2        | 3 1 2        |
+|              |              |              |              |
+| `(3, 1, -1)` | `(3, 1, -1)` | `(3, 3, 1)`  | `(3, 4, -1)` |
+| 1 2 3        | 1 2 3        | 1 2 3        | 1 2 3        |
+| 3 1 2        | 3 1 2        | 2 1 3        | 3 2 1        |
+| 2 3 1        | 2 1 3        | 2 3 1        | 2 1 3        |
+| 1 3 2        | 1 3 2        | 3 2 1        | 1 3 2        |
+| 3 2 1        | 3 2 1        | 3 1 2        | 3 1 2        |
+| 2 1 3        | 2 3 1        | 1 3 2        | 2 3 1        |
+
+### Usage
+
+The three arguments in this function are: `length of array`, `type of algorithm (1, 2, 3 or 4)`, `direction of rotation (1 or -1)`. There are four possible algorithms to choose from and each one can run using either a leftwise or rightwise rotation.
+
+As an example, to create all permutations for n=4, using algorithm #3 with leftwise rotation, you would type:
+
+```JavaScript
+gysinSommerville(4, 3, -1)
 ```
 
 ---

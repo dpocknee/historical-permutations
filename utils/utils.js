@@ -149,6 +149,13 @@ function poemAnalysis(poemArray) {
   }, "");
 }
 
+function factorial(n) {
+  const factorialArray = Array.from({ length: n }, (value, index) => index + 1);
+  return factorialArray.reduce((factorialAccum, value) => {
+    return factorialAccum * value;
+  }, 1);
+}
+
 module.exports = {
   replace,
   rotate,
@@ -163,5 +170,6 @@ module.exports = {
   cyclicModulo,
   poemParser,
   onlyPermutatedStanzas,
-  poemAnalysis
+  poemAnalysis,
+  factorial
 };
