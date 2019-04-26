@@ -32,6 +32,8 @@ The current aim is to implement all of the algorithms mentioned in the following
   - Pandita added.
 - 22 April 2019 (v 0.7.0)
   - Langdon added.
+- 24 April 2019 (v 0.8.0)
+  - Ord-Smith added.
 
 ## Permutation Algorithms Implemented
 
@@ -57,26 +59,27 @@ Currently, the two algorithms lacking are Eaves, Boothroyd (BCJ30) and Ives.
   - `peckSchrack(4)`
 - 1962 - Schrack-Shimrat (ACM102: PERMULEX) [lexicographic] &#9989;
   - `schrackShimrat(4)`
-- 1962 - Eaves (ACM130: Permute)
+- 1962 - Eaves (ACM130: Permute) **for release in 2.0.0**
 - 1962 - Howell (ACM87: PERMUTATION) [lexicographic] &#10060;
 - 1962/63 - Shen (ACM202: PERLE) [lexicographic] &#10060;
-- 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM) &#9989;
+- 1962/63 - Steinhaus-Trotter-Johnson (ACM115: PERM)
   - original &#9989; `steinhausJohnsonTrotter(4)`
   - loopless &#9989; `steinhausJohnsonTrotter(4, "loopless")`
   - Even's speedup &#9989; `steinhausJohnsonTrotter(4, "even")`
 - 1963 - Heap &#9989;
   - `heap([1, 2, 3, 4])`
+- 1964 - Sag [permutation with repetitions] (ACM242) 
 - 1967 - Langdon &#9989;
   - `langdon(4)`
 - 1967 - Phillips (BCJ28) [lexicographic] &#10060;
 - 1967 - Boothroyd (BCJ29) [Wells] &#10060;
-- 1967 - Boothroyd (BCJ30) [for _n_>=5]
+- 1967 - Boothroyd (BCJ30) [for _n_>=5] **for release in 2.0.0**
 - 1967 - Ord-Smith (ACM308: perm) [pseudo-lexicographic] &#9989;
   - `ordSmith(4)` &#9989;
   - `ordSmith(4, "sedgewick")` &#9989;
 - 1968 - Ord-Smith (ACM323: BESTLEX) [reverse lexicographic] &#9989;
   - `ordSmithRevLex([1, 2, 3, 4])`
-- 1976 - Ives
+- 1976 - Ives **for release in 2.0.0**
 - 2001 - Myrvold-Ruskey [remainder order] &#9989;
   - `myrvoldRuskey(4)`
 - 2018 - Superpermutations &#9989;
