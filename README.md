@@ -18,7 +18,7 @@ Along with the algorithms themselves, now translated from ALGOL into JavaScript,
 
 ## Current Status
 
-The current aim is to implement as many of the algorithms mentioned in the following section and release this as version 1.0.0. As of the end of April 2019, 19 of the 22 algorithms planned have been implemented and have been released on `npm` as version 1.0.0.
+The current aim is to implement as many of the algorithms mentioned in the following section and release this as version 1.0.0. As of the end of April 2019, 18 of the 22 algorithms planned have been implemented and have been released on `npm` as version 1.0.0.
 
 - 8 March 2019 (v 0.1.0)
   - Tompkins-Paige, Lehmer CDM, Hall, Coveyou-Sullivan, Wells, Peck-Schrack, Schrack-Shimrat, Heap, Myrvold-Ruskey
@@ -76,9 +76,7 @@ Currently, the two algorithms lacking are Eaves, Boothroyd (BCJ30) and Ives.
 - 1967 - Phillips (BCJ28) [lexicographic] &#10060;
 - 1967 - Boothroyd (BCJ29) [Wells] &#10060;
 - 1967 - Boothroyd (BCJ30) [for _n_>=5] **for release in 2.0.0**
-- 1967 - Ord-Smith (ACM308: perm) [pseudo-lexicographic] &#9989;
-  - `ordSmith(4)` &#9989;
-  - `ordSmith(4, "sedgewick")` &#9989;
+- 1967 - Ord-Smith (ACM308: perm) [pseudo-lexicographic] &#10060;
 - 1968 - Ord-Smith (ACM323: BESTLEX) [reverse lexicographic] &#9989;
   - `ordSmithRevLex([1, 2, 3, 4])`
 - 1976 - Ives **for release in 2.0.0**
@@ -89,7 +87,23 @@ Currently, the two algorithms lacking are Eaves, Boothroyd (BCJ30) and Ives.
 - 2019 - Pocknee-Gysin-Sommerville [8 different orderings] &#9989;
   - `gysinSommerville(4, 1, -1)`
 
-**CURRENT PROGRESS: 19 / 22 Algorithms Complete**
+**CURRENT PROGRESS: 18 / 22 Algorithms Complete**
+
+### Types Of Algorithm:
+
+**Lexicographic:** `pandita()`, `schrackShimrat()`\
+**Tompkins-Paige:** `tompkinsPaige()`, `peckSchrack()`\
+**Lehmer Constant Difference:** `lehmer()`\
+**Hall:** `hall()`\
+**Coveyou-Sullivan:** `coveyouSullivan()`\
+**Wells:** `wells()`\
+**Steinhaus-Johnson-Trotter:** `stenhausJohnsonTrotter()`\
+**Heap:** `heap()`\
+**Langdon:** `langdon()`\
+**Reverse Lexicographic:** `ordSmithRevLex()`\
+**Myrvold-Ruskey:** `myrvoldRuskey()`\
+**Superpermutations:** `superpermutation()`\
+**Pocknee-Gysin-Sommerville:** `gysinSommerville()`
 
 ## Utilities
 
@@ -1073,14 +1087,7 @@ R. J. Ord-Smith "Generation of permutation sequences: Part 1", <i>The Computer J
   (1970), 13.2, pp. 152-155
 </pre>
 
-This is slightly odd. The implementation is from Sedgewick's paper where he gives two versions of the algorithm - one recursive and one loopless, but the loopless one generates a different output. This can be run by passing in the argument `sedgewick`.
-
-### Usage
-
-```javaScript
-ordSmith(4)
-ordSmith(4, "sedgewick")
-```
+Ord-Smith's pseudo-lexicographic algorithm can be seen above, but as was proved in the 1991 paper "Ord-Smith's pseudo-lexicographical permuta-tion procedure is the Tompkins-Paige algorithm" in _The Computer Journal_ - this algorithm gives out the same result as reversing the rotation direction in the Tompkins-Paige algorithm, so has not been implemented.
 
 ---
 

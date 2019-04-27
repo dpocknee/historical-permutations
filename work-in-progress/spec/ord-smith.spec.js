@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { uniq, uniqWith, isEqual } = require("lodash");
 
-const { ordSmith } = require("../index");
+const { ordSmith } = require("../../index");
 // const ordSmith = require("../algorithms/1967_ord-smith");
 
 describe("Ord-Smith (1968)", () => {
