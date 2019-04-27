@@ -18,7 +18,7 @@ Along with the algorithms themselves, now translated from ALGOL into JavaScript,
 
 ## Current Status
 
-The current aim is to implement all of the algorithms mentioned in the following section and release this as version 1.0.0. As of March 2019, around half the algorithms have been implemented and have been released on `npm` as version 0.1.0.
+The current aim is to implement as many of the algorithms mentioned in the following section and release this as version 1.0.0. As of the end of April 2019, 19 of the 22 algorithms planned have been implemented and have been released on `npm` as version 1.0.0.
 
 - 8 March 2019 (v 0.1.0)
   - Tompkins-Paige, Lehmer CDM, Hall, Coveyou-Sullivan, Wells, Peck-Schrack, Schrack-Shimrat, Heap, Myrvold-Ruskey
@@ -34,6 +34,8 @@ The current aim is to implement all of the algorithms mentioned in the following
   - Langdon added.
 - 24 April 2019 (v 0.8.0)
   - Ord-Smith added.
+- 24 April 2019 (v 1.0.0)
+  - Version 1.0.0 released.
 
 ## Permutation Algorithms Implemented
 
@@ -68,7 +70,7 @@ Currently, the two algorithms lacking are Eaves, Boothroyd (BCJ30) and Ives.
   - Even's speedup &#9989; `steinhausJohnsonTrotter(4, "even")`
 - 1963 - Heap &#9989;
   - `heap([1, 2, 3, 4])`
-- 1964 - Sag [permutation with repetitions] (ACM242) 
+- 1964 - Sag (ACM242) [permutation with repetitions] &#10060;
 - 1967 - Langdon &#9989;
   - `langdon(4)`
 - 1967 - Phillips (BCJ28) [lexicographic] &#10060;
@@ -1032,11 +1034,7 @@ langdon(4);
 
 ---
 
-## Phillips (1967) [BCJ28]
-
----
-
-## Boothroyd (1967) [BCJ29/30]
+## Boothroyd (1967) [BCJ30]
 
 ---
 
